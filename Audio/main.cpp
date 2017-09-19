@@ -14,5 +14,7 @@ int main() {
     buffer = codec->AudioEncode(audio->getAudioFrames());
     frame = codec->AudioDecode(buffer);
     audio->sendAudioFrames(frame);
+    delete buffer;
+    delete frame;
   }
 }

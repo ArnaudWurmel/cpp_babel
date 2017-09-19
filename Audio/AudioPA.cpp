@@ -84,7 +84,7 @@ static int Pa_callBack(const void *inputBuffer, void *outputBuffer,
 }
 bool AudioPA::startAudio() {
   Pa_OpenStream(&this->stream, &this->inputParameters, &this->outputParameters,
-                SAMPLE_RATE, 240, paClipOff, Pa_callBack, this);
+                SAMPLE_RATE, 480, paClipOff, Pa_callBack, this);
   Pa_StartStream(this->stream);
   this->state = PA_ON;
   return (true);

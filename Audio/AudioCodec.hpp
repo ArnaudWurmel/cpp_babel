@@ -13,6 +13,7 @@ private:
   int num_channels;
   int error;
   int data_size;
+    int ret;
 
 public:
   float *AudioDecode(unsigned char *data);
