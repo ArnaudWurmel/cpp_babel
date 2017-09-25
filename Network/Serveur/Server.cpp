@@ -10,7 +10,17 @@ babel::Server::Server(boost::asio::io_service& io_service, boost::asio::ip::tcp:
 }
 
 void    babel::Server::start_accept() {
-    _acceptor.async_accept()
+    std::shared_ptr<Session>    new_session(new Session(_io_service));
+
+    _acceptor.async_accept(new_session->getSocket(),
+                            boost::bind(&))
+}
+
+void    babel::Server::handle_accept(std::shared_ptr<Session> new_session, const boost::system::error_code &error) {
+    if (!error) {
+        new_session->startSession();
+    }
+    start_accept();
 }
 
 babel::Server::~Server() {}
