@@ -34,6 +34,7 @@ namespace babel {
         void const* getBody() const;
         void    *data();
         bool    validateData() const;
+        unsigned int getBodySize() const;
 
     private:
         AMessage    _message;

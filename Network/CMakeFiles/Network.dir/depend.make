@@ -7,6 +7,8 @@ CMakeFiles/Network.dir/Logger/Logger.cpp.o: Logger/Logger.h
 CMakeFiles/Network.dir/Serveur/Server.cpp.o: Logger/Logger.h
 CMakeFiles/Network.dir/Serveur/Server.cpp.o: Serveur/Server.cpp
 CMakeFiles/Network.dir/Serveur/Server.cpp.o: Serveur/Server.h
+CMakeFiles/Network.dir/Serveur/Server.cpp.o: Session/Message/Message.h
+CMakeFiles/Network.dir/Serveur/Server.cpp.o: Session/Session.h
 
 CMakeFiles/Network.dir/Session/Message/Message.cpp.o: Session/Message/Message.cpp
 CMakeFiles/Network.dir/Session/Message/Message.cpp.o: Session/Message/Message.h
@@ -18,5 +20,7 @@ CMakeFiles/Network.dir/Session/Session.cpp.o: Session/Session.h
 
 CMakeFiles/Network.dir/main.cpp.o: Logger/Logger.h
 CMakeFiles/Network.dir/main.cpp.o: Serveur/Server.h
+CMakeFiles/Network.dir/main.cpp.o: Session/Message/Message.h
+CMakeFiles/Network.dir/main.cpp.o: Session/Session.h
 CMakeFiles/Network.dir/main.cpp.o: main.cpp
 

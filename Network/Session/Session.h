@@ -21,6 +21,7 @@ namespace babel {
 
     public:
         void    handleReadHeader(const boost::system::error_code& error);
+        void    handleReadBody(const boost::system::error_code& error);
 
     private:
         boost::asio::ip::tcp::socket    _socket;

@@ -31,6 +31,8 @@ boost/asio.hpp
 -
 ../Logger/Logger.h
 /home/wurmel_a/rendu/cpp_babel/Network/Logger/Logger.h
+../Session/Session.h
+/home/wurmel_a/rendu/cpp_babel/Network/Session/Session.h
 
 /home/wurmel_a/rendu/cpp_babel/Network/Session/Message/Message.cpp
 Message.h
@@ -40,6 +42,8 @@ Message.h
 
 /home/wurmel_a/rendu/cpp_babel/Network/Session/Session.cpp
 boost/bind.hpp
+-
+iostream
 -
 Session.h
 /home/wurmel_a/rendu/cpp_babel/Network/Session/Session.h
@@ -53,8 +57,12 @@ Message/Message.h
 /home/wurmel_a/rendu/cpp_babel/Network/Logger/Logger.h
 
 /home/wurmel_a/rendu/cpp_babel/Network/main.cpp
-iostream
--
 Serveur/Server.h
 /home/wurmel_a/rendu/cpp_babel/Network/Serveur/Server.h
+sstream
+-
+cstdlib
+-
+iostream
+-
 

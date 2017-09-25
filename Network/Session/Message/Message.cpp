@@ -34,4 +34,8 @@ bool    babel::Message::validateData() const {
     return _message.magicNumber == magic_number;
 }
 
+unsigned int    babel::Message::getBodySize() const {
+    return _message.bodySize;
+}
+
 babel::Message::~Message() {}
