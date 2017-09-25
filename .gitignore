@@ -5,6 +5,7 @@ cmake-build-debug/
 *CMakeCache.txt*
 Network/CMakeFiles/
 Network/CMakeCache.txt
+Network/Makefile
 server/CMakeFiles/
 *~
 *cmake_install.cmake
