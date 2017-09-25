@@ -5,7 +5,7 @@
 // Login   <victorien.fischer@epitech.eu>
 // 
 // Started on  Mon Sep 25 06:33:17 2017 Victorien Fischer
-// Last update Mon Sep 25 07:16:07 2017 Victorien Fischer
+// Last update Mon Sep 25 13:21:06 2017 Victorien Fischer
 //
 
 #include "Serveur/Server.h"
@@ -29,7 +29,7 @@ static std::string	getUsage(std::string binary)
 /*
 ** IsValidPort
 */
-int	isValidPort(unsigned short port)
+bool	isValidPort(unsigned short port)
 {
   return (port > 1000);
 }

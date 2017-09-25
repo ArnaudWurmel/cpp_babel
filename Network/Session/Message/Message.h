@@ -13,11 +13,11 @@ namespace babel {
         enum { magic_number = 0x424D };
 
         enum    MessageType {
-            Unknow,
+            Unknown,
             Connect
         };
 
-        struct __attribute__((__PACKED__)) AMessage {
+        struct __attribute__((packed)) AMessage {
             unsigned short magicNumber;
             MessageType type;
             unsigned int bodySize;

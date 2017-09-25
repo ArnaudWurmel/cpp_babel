@@ -6,7 +6,7 @@
 #include <iostream>
 #include "Session.h"
 
-babel::Session::Session(boost::asio::io_service& io_service) : Logger("Session"), _socket(io_service), _readM(Message::MessageType::Unknow) {
+babel::Session::Session(boost::asio::io_service& io_service) : Logger("Session"), _socket(io_service), _readM(Message::MessageType::Unknown) {
 
 }
 
