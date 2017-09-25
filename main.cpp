@@ -1,261 +1,116 @@
-//
-// Created by wurmel_a on 19/09/17.
-//
-
-#include <iostream>
-#include <portaudio.h>
+#include <stdlib.h>
+#include <errno.h>
+#include <string.h>
 #include <opus/opus.h>
-
-int main() {
-    int opusErr;
-    PaError paErr;
-    std::string s;
-
-    int const channels = 2;
-    int const bufferSize = 480;
-    int const sampleRate = 48000;
-    int const durationSeconds = 5;
-
-    opus_int32 enc_bytes;
-    opus_int32 dec_bytes;
-    int framesProcessed = 0;
-
-    std::vector<unsigned short> captured(bufferSize * channels);
-    std::vector<unsigned short> decoded(bufferSize * channels);
-// * 2: byte count, 16 bit samples
-    std::vector<unsigned char> encoded(bufferSize * channels * 2);
-
-// initialize opus
-    OpusEncoder* enc = opus_encoder_create(
-            sampleRate, channels, OPUS_APPLICATION_AUDIO, &opusErr);
-    if (opusErr != OPUS_OK)
-    {
-        std::cout << "opus_encoder_create failed: " << opusErr << "\n";
-        std::getline(std::cin, s);
-        return 1;
-    }
-
-    OpusDecoder* dec = opus_decoder_create(
-            sampleRate, channels, &opusErr);
-    if (opusErr != OPUS_OK)
-    {
-        std::cout << "opus_decoder_create failed: " << opusErr << "\n";
-        std::getline(std::cin, s);
-        return 1;
-    }
-
-// initialize portaudio
-    if ((paErr = Pa_Initialize()) != paNoError)
-    {
-        std::cout << "Pa_Initialize failed: " << Pa_GetErrorText(paErr) << "\n";
-        std::getline(std::cin, s);
-        return 1;
-    }
-
-    PaStream* stream = nullptr;
-    if ((paErr = Pa_OpenDefaultStream(&stream,
-                                      channels, channels, paInt16, sampleRate,
-                                      bufferSize, nullptr, nullptr)) != paNoError)
-    {
-        std::cout << "Pa_OpenDefaultStream failed: " << Pa_GetErrorText(paErr) << "\n";
-        std::getline(std::cin, s);
-        return 1;
-    }
-
-// start stream
-    if ((paErr = Pa_StartStream(stream)) != paNoError)
-    {
-        std::cout << "Pa_StartStream failed: " << Pa_GetErrorText(paErr) << "\n";
-        std::getline(std::cin, s);
-        return 1;
-    }
-int opusErr;
-PaError paErr;
-std::string s;
-
-int const channels = 2;
-int const bufferSize = 480;
-int const sampleRate = 48000;
-int const durationSeconds = 5;
-
-opus_int32 enc_bytes;
-opus_int32 dec_bytes;
-int framesProcessed = 0;
-
-std::vector<unsigned short> captured(bufferSize * channels);
-std::vector<unsigned short> decoded(bufferSize * channels);
-// * 2: byte count, 16 bit samples
-std::vector<unsigned char> encoded(bufferSize * channels * 2);
-
-// initialize opus
-OpusEncoder* enc = opus_encoder_create(
-    sampleRate, channels, OPUS_APPLICATION_AUDIO, &opusErr);
-if (opusErr != OPUS_OK)
+#include <stdio.h>
+/*The frame size is hardcoded for this sample code but it doesn't have to be*/
+#define FRAME_SIZE 960
+#define SAMPLE_RATE 48000
+#define CHANNELS 2
+#define APPLICATION OPUS_APPLICATION_AUDIO
+#define BITRATE 64000
+#define MAX_FRAME_SIZE 6*960
+#define MAX_PACKET_SIZE (3*1276)
+int main(int argc, char **argv)
 {
-    std::cout << "opus_encoder_create failed: " << opusErr << "\n";
-    std::getline(std::cin, s);
-    return 1;
-}
-
-OpusDecoder* dec = opus_decoder_create(
-    sampleRate, channels, &opusErr);
-if (opusErr != OPUS_OK)
-{
-    std::cout << "opus_decoder_create failed: " << opusErr << "\n";
-    std::getline(std::cin, s);
-    return 1;
-}
-
-// initialize portaudio
-if ((paErr = Pa_Initialize()) != paNoError)
-{
-    std::cout << "Pa_Initialize failed: " << Pa_GetErrorText(paErr) << "\n";
-    std::getline(std::cin, s);
-    return 1;
-}
-
-PaStream* stream = nullptr;
-if ((paErr = Pa_OpenDefaultStream(&stream,
-      channels, channels, paInt16, sampleRate,
-      bufferSize, nullptr, nullptr)) != paNoError)
-{
-    std::cout << "Pa_OpenDefaultStream failed: " << Pa_GetErrorText(paErr) << "\n";
-    std::getline(std::cin, s);
-    return 1;
-}
-
-// start stream
-if ((paErr = Pa_StartStream(stream)) != paNoError)
-{
-    std::cout << "Pa_StartStream failed: " << Pa_GetErrorText(paErr) << "\n";
-    std::getline(std::cin, s);
-    return 1;
-}
-
-// capture, encode, decode & render durationSeconds of audio
-while (framesProcessed < sampleRate * durationSeconds)
-{
-    if ((paErr = Pa_ReadStream(stream,
-        captured.data(), bufferSize)) != paNoError)
+    char *inFile;
+    FILE *fin;
+    char *outFile;
+    FILE *fout;
+    opus_int16 in[FRAME_SIZE*CHANNELS];
+    opus_int16 out[MAX_FRAME_SIZE*CHANNELS];
+    unsigned char cbits[MAX_PACKET_SIZE];
+    int nbBytes;
+    /*Holds the state of the encoder and decoder */
+    OpusEncoder *encoder;
+    OpusDecoder *decoder;
+    int err;
+    if (argc != 3)
     {
-        std::cout << "Pa_ReadStream failed: " << Pa_GetErrorText(paErr) << "\n";
-        std::getline(std::cin, s);
-        return 1;
+        fprintf(stderr, "usage: trivial_example input.pcm output.pcm\n");
+        fprintf(stderr, "input and output are 16-bit little-endian raw files\n");
+        return EXIT_FAILURE;
     }
-
-    if ((enc_bytes = opus_encode(enc, reinterpret_cast<opus_int16 const*>(
-        captured.data()), 480, encoded.data(), encoded.size())) < 0)
+    /*Create a new encoder state */
+    encoder = opus_encoder_create(SAMPLE_RATE, CHANNELS, APPLICATION, &err);
+    if (err<0)
     {
-        std::cout << "opus_encode failed: " << enc_bytes << "\n";
-        std::getline(std::cin, s);
-        return 1;
+        fprintf(stderr, "failed to create an encoder: %s\n", opus_strerror(err));
+        return EXIT_FAILURE;
     }
-
-    if ((dec_bytes = opus_decode(dec, encoded.data(), enc_bytes,
-        reinterpret_cast<opus_int16*>(decoded.data()), 480, 0)) < 0)
+    /* Set the desired bit-rate. You can also set other parameters if needed.
+       The Opus library is designed to have good defaults, so only set
+       parameters you know you need. Doing otherwise is likely to result
+       in worse quality, but better. */
+    err = opus_encoder_ctl(encoder, OPUS_SET_BITRATE(BITRATE));
+    if (err<0)
     {
-        std::cout << "opus_decode failed: " << dec_bytes << "\n";
-        std::getline(std::cin, s);
-        return 1;
+        fprintf(stderr, "failed to set bitrate: %s\n", opus_strerror(err));
+        return EXIT_FAILURE;
     }
-
-    if ((paErr = Pa_WriteStream(stream, decoded.data(), bufferSize)) != paNoError)
+    inFile = argv[1];
+    fin = fopen(inFile, "r");
+    if (fin==NULL)
     {
-        std::cout << "Pa_WriteStream failed: " << Pa_GetErrorText(paErr) << "\n";
-        std::getline(std::cin, s);
-        return 1;
+        fprintf(stderr, "failed to open input file: %s\n", strerror(errno));
+        return EXIT_FAILURE;
     }
-
-    framesProcessed += bufferSize;
-}
-
-// stop stream
-if ((paErr = Pa_StopStream(stream)) != paNoError)
-{
-    std::cout << "Pa_StopStream failed: " << Pa_GetErrorText(paErr) << "\n";
-    std::getline(std::cin, s);
-    return 1;
-}
-
-// cleanup portaudio
-if ((paErr = Pa_CloseStream(stream)) != paNoError)
-{
-    std::cout << "Pa_CloseStream failed: " << Pa_GetErrorText(paErr) << "\n";
-    std::getline(std::cin, s);
-    return 1;
-}
-
-if ((paErr = Pa_Terminate()) != paNoError)
-{
-    std::cout << "Pa_Terminate failed: " << Pa_GetErrorText(paErr) << "\n";
-    std::getline(std::cin, s);
-    return 1;
-}
-
-// cleanup opus
-opus_decoder_destroy(dec);
-opus_encoder_destroy(enc);
-// capture, encode, decode & render durationSeconds of audio
-    while (framesProcessed < sampleRate * durationSeconds)
+    /* Create a new decoder state. */
+    decoder = opus_decoder_create(SAMPLE_RATE, CHANNELS, &err);
+    if (err<0)
     {
-        if ((paErr = Pa_ReadStream(stream,
-                                   captured.data(), bufferSize)) != paNoError)
+        fprintf(stderr, "failed to create decoder: %s\n", opus_strerror(err));
+        return EXIT_FAILURE;
+    }
+    outFile = argv[2];
+    fout = fopen(outFile, "w");
+    if (fout==NULL)
+    {
+        fprintf(stderr, "failed to open output file: %s\n", strerror(errno));
+        return EXIT_FAILURE;
+    }
+    while (1)
+    {
+        int i;
+        unsigned char pcm_bytes[MAX_FRAME_SIZE*CHANNELS*2];
+        int frame_size;
+        /* Read a 16 bits/sample audio frame. */
+        fread(pcm_bytes, sizeof(short)*CHANNELS, FRAME_SIZE, fin);
+        if (feof(fin))
+            break;
+        /* Convert from little-endian ordering. */
+        for (i=0;i<CHANNELS*FRAME_SIZE;i++)
+            in[i]=pcm_bytes[2*i+1]<<8|pcm_bytes[2*i];
+        /* Encode the frame. */
+        nbBytes = opus_encode(encoder, in, FRAME_SIZE, cbits, MAX_PACKET_SIZE);
+        if (nbBytes<0)
         {
-            std::cout << "Pa_ReadStream failed: " << Pa_GetErrorText(paErr) << "\n";
-            std::getline(std::cin, s);
-            return 1;
+            fprintf(stderr, "encode failed: %s\n", opus_strerror(nbBytes));
+            return EXIT_FAILURE;
         }
-
-        if ((enc_bytes = opus_encode(enc, reinterpret_cast<opus_int16 const*>(
-                captured.data()), 480, encoded.data(), encoded.size())) < 0)
+        /* Decode the data. In this example, frame_size will be constant because
+           the encoder is using a constant frame size. However, that may not
+           be the case for all encoders, so the decoder must always check
+           the frame size returned. */
+        frame_size = opus_decode(decoder, cbits, nbBytes, out, MAX_FRAME_SIZE, 0);
+        if (frame_size<0)
         {
-            std::cout << "opus_encode failed: " << enc_bytes << "\n";
-            std::getline(std::cin, s);
-            return 1;
+            fprintf(stderr, "decoder failed: %s\n", opus_strerror(frame_size));
+            return EXIT_FAILURE;
         }
-
-        if ((dec_bytes = opus_decode(dec, encoded.data(), enc_bytes,
-                                     reinterpret_cast<opus_int16*>(decoded.data()), 480, 0)) < 0)
+        /* Convert to little-endian ordering. */
+        for(i=0;i<CHANNELS*frame_size;i++)
         {
-            std::cout << "opus_decode failed: " << dec_bytes << "\n";
-            std::getline(std::cin, s);
-            return 1;
+            pcm_bytes[2*i]=out[i]&0xFF;
+            pcm_bytes[2*i+1]=(out[i]>>8)&0xFF;
         }
-
-        if ((paErr = Pa_WriteStream(stream, decoded.data(), bufferSize)) != paNoError)
-        {
-            std::cout << "Pa_WriteStream failed: " << Pa_GetErrorText(paErr) << "\n";
-            std::getline(std::cin, s);
-            return 1;
-        }
-
-        framesProcessed += bufferSize;
+        /* Write the decoded audio to file. */
+        fwrite(pcm_bytes, sizeof(short), frame_size*CHANNELS, fout);
     }
-
-// stop stream
-    if ((paErr = Pa_StopStream(stream)) != paNoError)
-    {
-        std::cout << "Pa_StopStream failed: " << Pa_GetErrorText(paErr) << "\n";
-        std::getline(std::cin, s);
-        return 1;
-    }
-
-// cleanup portaudio
-    if ((paErr = Pa_CloseStream(stream)) != paNoError)
-    {
-        std::cout << "Pa_CloseStream failed: " << Pa_GetErrorText(paErr) << "\n";
-        std::getline(std::cin, s);
-        return 1;
-    }
-
-    if ((paErr = Pa_Terminate()) != paNoError)
-    {
-        std::cout << "Pa_Terminate failed: " << Pa_GetErrorText(paErr) << "\n";
-        std::getline(std::cin, s);
-        return 1;
-    }
-
-// cleanup opus
-    opus_decoder_destroy(dec);
-    opus_encoder_destroy(enc);
+    /*Destroy the encoder state*/
+    opus_encoder_destroy(encoder);
+    opus_decoder_destroy(decoder);
+    fclose(fin);
+    fclose(fout);
+    return EXIT_SUCCESS;
 }

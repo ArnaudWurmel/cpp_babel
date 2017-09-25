@@ -11,10 +11,10 @@ int main() {
   audio->startAudio();
   while (Pa_IsStreamActive(audio->stream) == 1) {
     i++;
-    buffer = codec->AudioEncode(audio->getAudioFrames());
-    frame = codec->AudioDecode(buffer);
-    audio->sendAudioFrames(frame);
-    delete buffer;
-    delete frame;
+/*    buffer = codec->AudioEncode(audio->getAudioFrames());
+    frame = codec->AudioDecode(buffer);*/
+    audio->sendAudioFrames(audio->getAudioFrames());
+    /*delete buffer;
+    delete frame;*/
   }
 }
