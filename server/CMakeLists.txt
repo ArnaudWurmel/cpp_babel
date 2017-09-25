@@ -3,6 +3,7 @@ cmake_minimum_required(VERSION 2.6)
 # Project Configuration
 project(cpp_babel C CXX)
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BUILD_TYPE})
+set(CMAKE_CXX_STANDARD 11)
 
 # Files sources
 file(
@@ -10,6 +11,7 @@ file(
   source_files
   sources/main.cpp
   sources/Server.cpp
+  sources/Client.cpp
   )
 
 include_directories(

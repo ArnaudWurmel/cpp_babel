@@ -5,7 +5,7 @@
 // Login   <victorien.fischer@epitech.eu>
 // 
 // Started on  Mon Sep 25 06:40:28 2017 Victorien Fischer
-// Last update Mon Sep 25 08:35:50 2017 Victorien Fischer
+// Last update Mon Sep 25 08:46:53 2017 Victorien Fischer
 //
 
 #ifndef __BABEL_SERVER__
@@ -14,8 +14,16 @@
 class Server
 {
 private:
+  enum e_instruction
+    {
+      LIST = 0,
+      CALL,
+      HANGUP
+    };
+    
+private:
   unsigned short	_port;
-  char			_running;
+  bool			_running;
 
 public:
   Server();

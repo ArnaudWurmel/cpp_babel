@@ -5,7 +5,7 @@
 // Login   <victorien.fischer@epitech.eu>
 // 
 // Started on  Mon Sep 25 06:58:39 2017 Victorien Fischer
-// Last update Mon Sep 25 08:27:14 2017 Victorien Fischer
+// Last update Mon Sep 25 08:47:08 2017 Victorien Fischer
 //
 
 #include "Server.hh"
@@ -57,7 +57,7 @@ unsigned short	Server::getPort() const
 */
 int	Server::run()
 {
-  _running = 1;
+  _running = true;
   while (_running)
     {
     }
