@@ -3,7 +3,7 @@
 cmake-build-debug/
 .idea/*
 *CMakeCache.txt*
-Network/CMakeFiles/
+Network/CMakeFiles/*
 Network/CMakeCache.txt
 Network/Makefile
 server/CMakeFiles/
