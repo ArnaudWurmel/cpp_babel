@@ -1,3 +1,0 @@
-/home/wurmel_a/rendu/cpp_babel/Network/CMakeFiles/rebuild_cache.dir
-/home/wurmel_a/rendu/cpp_babel/Network/CMakeFiles/edit_cache.dir
-/home/wurmel_a/rendu/cpp_babel/Network/CMakeFiles/Network.dir
