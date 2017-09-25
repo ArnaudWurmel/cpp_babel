@@ -1,0 +1,1 @@
+/usr/bin/c++   -g   CMakeFiles/Network.dir/main.cpp.o CMakeFiles/Network.dir/Serveur/Server.cpp.o CMakeFiles/Network.dir/Logger/Logger.cpp.o CMakeFiles/Network.dir/Session/Session.cpp.o CMakeFiles/Network.dir/Session/Message/Message.cpp.o  -o Network -lboost_system -lboost_thread 
