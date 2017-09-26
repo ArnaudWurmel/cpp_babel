@@ -21,21 +21,29 @@ void    babel::Session::startSession() {
 }
 
 void    babel::Session::handleReadHeader(const boost::system::error_code &error) {
-    std::cout << error.message() << std::endl;
-    if (!error && _readM.validateData()) {
-        std::cout << "here" << std::endl;
-        boost::asio::async_read(_socket,
-                                boost::asio::buffer(_readM.getBody(), _readM.getBodySize()),
-                                boost::bind(&babel::Session::handleReadBody, this, boost::asio::placeholders::error));
+    if (!error) {
+        if (_readM.decodeHeader()) {
+            std::cout << _readM.getBodySize() << std::endl;
+            boost::asio::async_read(_socket,
+                                    boost::asio::buffer((_readM.getBody()), _readM.getBodySize()),
+                                    boost::bind(&babel::Session::handleReadBody, this, boost::asio::placeholders::error));
+        }
+        else {
+            Logger::say("Can't validate header");
+        }
     }
     else {
-        Logger::say("Can't validate header");
+        Logger::say(error.message());
     }
 }
 
 void    babel::Session::handleReadBody(const boost::system::error_code &error) {
     if (!error) {
+        std::cout << _readM.getBody() << std::endl;
         startSession();
+    }
+    else {
+        Logger::say(error.message());
     }
 }
 

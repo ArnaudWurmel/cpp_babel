@@ -19,7 +19,7 @@ namespace   babel {
 
     public:
         void start_accept();
-        void handle_accept(std::shared_ptr<Session>, const boost::system::error_code& error);
+        void handle_accept(Session *, const boost::system::error_code& error);
 
     private:
 

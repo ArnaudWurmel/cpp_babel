@@ -6,11 +6,12 @@
 #define NETWORK_SESSION_H
 
 # include <boost/asio.hpp>
+# include <boost/enable_shared_from_this.hpp>
 # include "Message/Message.h"
 # include "../Logger/Logger.h"
 
 namespace babel {
-    class Session : private Logger {
+    class Session : private Logger, public boost::enable_shared_from_this<Session> {
     public:
         Session(boost::asio::io_service&);
         ~Session();

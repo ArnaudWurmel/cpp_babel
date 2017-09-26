@@ -35,6 +35,12 @@ boost/asio.hpp
 /home/wurmel_a/rendu/cpp_babel/Network/Session/Session.h
 
 /home/wurmel_a/rendu/cpp_babel/Network/Session/Message/Message.cpp
+cstdio
+-
+cstring
+-
+iostream
+-
 Message.h
 /home/wurmel_a/rendu/cpp_babel/Network/Session/Message/Message.h
 
@@ -50,6 +56,8 @@ Session.h
 
 /home/wurmel_a/rendu/cpp_babel/Network/Session/Session.h
 boost/asio.hpp
+-
+boost/enable_shared_from_this.hpp
 -
 Message/Message.h
 /home/wurmel_a/rendu/cpp_babel/Network/Session/Message/Message.h

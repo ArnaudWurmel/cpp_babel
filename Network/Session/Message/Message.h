@@ -8,36 +8,39 @@
 namespace babel {
     class Message {
     public:
-        static unsigned int headerSize;
-
-        enum { magic_number = 0x424D };
-
         enum    MessageType {
             Unknow,
             Connect
         };
 
-        struct __attribute__((__PACKED__)) AMessage {
+        struct __attribute__((packed)) AMessage {
             unsigned short magicNumber;
             MessageType type;
             unsigned int bodySize;
-            void    *body;
+            char    *body;
         };
+
+        enum { headerSize = sizeof(unsigned short) + sizeof(MessageType) + sizeof(unsigned int) };
+        enum { maxBodySize = 512 };
+        enum { magic_number = 0x424D };
 
     public:
         Message(MessageType const&);
         ~Message();
 
     public:
-        void    setBody(void *, unsigned int);
-        void    *getBody();
-        void const* getBody() const;
+        void    setBody(char *, unsigned int);
+        char    *getBody();
+        char const* getBody() const;
         void    *data();
-        bool    validateData() const;
-        unsigned int getBodySize() const;
+        bool    decodeHeader();
+        void    encodeHeader();
+        unsigned int    getBodySize() const;
 
     private:
+        unsigned int    _bodySize;
         AMessage    _message;
+        char    _data[headerSize + maxBodySize + 1];
     };
 }
 
