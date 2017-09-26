@@ -9,7 +9,7 @@ namespace babel {
     class Message {
     public:
         enum    MessageType {
-            Unknow,
+            Unknown,
             Connect
         };
 
