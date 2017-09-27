@@ -31,6 +31,7 @@ CMakeFiles/Network.dir/Serveur/Server.cpp.o
  /home/wurmel_a/rendu/cpp_babel/Network/Serveur/Abstract/ISocketAcceptor.h
  /home/wurmel_a/rendu/cpp_babel/Network/Serveur/Server.cpp
  /home/wurmel_a/rendu/cpp_babel/Network/Serveur/Server.h
+ /home/wurmel_a/rendu/cpp_babel/Network/Session/User.h
 CMakeFiles/Network.dir/Session/Message/Message.cpp.o
  /home/wurmel_a/rendu/cpp_babel/Network/Session/Message/Message.cpp
  /home/wurmel_a/rendu/cpp_babel/Network/Session/Message/Message.h
@@ -48,4 +49,5 @@ CMakeFiles/Network.dir/main.cpp.o
  /home/wurmel_a/rendu/cpp_babel/Network/Serveur/Abstract/ISocket.h
  /home/wurmel_a/rendu/cpp_babel/Network/Serveur/Abstract/ISocketAcceptor.h
  /home/wurmel_a/rendu/cpp_babel/Network/Serveur/Server.h
+ /home/wurmel_a/rendu/cpp_babel/Network/Session/User.h
  /home/wurmel_a/rendu/cpp_babel/Network/main.cpp

@@ -13,7 +13,7 @@
 namespace babel {
     class User {
     public:
-        User(babel::ISocket&);
+        User(std::shared_ptr<babel::ISocket>);
         virtual ~User();
 
     protected:
@@ -25,7 +25,7 @@ namespace babel {
     private:
         std::string _username;
         std::string _ipAddr;
-        babel::ISocket& _socket;
+        std::shared_ptr<babel::ISocket> _socket;
     };
 }
 

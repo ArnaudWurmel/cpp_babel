@@ -16,10 +16,13 @@ babel::Server::Server(unsigned int port) : Logger("Server") {
 
 void    babel::Server::threadLoop() {
     while (_threadRunning) {
-        std::cout << "Called" << std::endl;
         std::unique_lock<std::mutex>    lck(this->_haveAction);
         _cv.wait(lck);
-
+        while (_socketAcceptor->haveAWaitingClient()) {
+            std::shared_ptr<ISocket>    newSocket = _socketAcceptor->acceptClient();
+            _userList.insert(std::unique_ptr<User>(new babel::User(newSocket)));
+            say("Client connected");
+        }
     }
 }
 

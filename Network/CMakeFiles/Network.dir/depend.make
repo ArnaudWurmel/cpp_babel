@@ -30,6 +30,7 @@ CMakeFiles/Network.dir/Serveur/Server.cpp.o: Serveur/Abstract/ISocket.h
 CMakeFiles/Network.dir/Serveur/Server.cpp.o: Serveur/Abstract/ISocketAcceptor.h
 CMakeFiles/Network.dir/Serveur/Server.cpp.o: Serveur/Server.cpp
 CMakeFiles/Network.dir/Serveur/Server.cpp.o: Serveur/Server.h
+CMakeFiles/Network.dir/Serveur/Server.cpp.o: Session/User.h
 
 CMakeFiles/Network.dir/Session/Message/Message.cpp.o: Session/Message/Message.cpp
 CMakeFiles/Network.dir/Session/Message/Message.cpp.o: Session/Message/Message.h
@@ -47,5 +48,6 @@ CMakeFiles/Network.dir/main.cpp.o: Serveur/Abstract/BoostSocket.h
 CMakeFiles/Network.dir/main.cpp.o: Serveur/Abstract/ISocket.h
 CMakeFiles/Network.dir/main.cpp.o: Serveur/Abstract/ISocketAcceptor.h
 CMakeFiles/Network.dir/main.cpp.o: Serveur/Server.h
+CMakeFiles/Network.dir/main.cpp.o: Session/User.h
 CMakeFiles/Network.dir/main.cpp.o: main.cpp
 

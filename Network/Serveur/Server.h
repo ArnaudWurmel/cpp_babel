@@ -15,6 +15,7 @@
 # include "Abstract/BoostAcceptor.h"
 # include "Abstract/BoostSocket.h"
 # include "Abstract/ISocketAcceptor.h"
+# include "../Session/User.h"
 
 namespace   babel {
     class Server : private Logger {
@@ -31,6 +32,7 @@ namespace   babel {
         bool    _threadRunning;
         std::mutex  _haveAction;
         std::condition_variable _cv;
+        std::set<std::unique_ptr<User> >    _userList;
     };
 }
 
