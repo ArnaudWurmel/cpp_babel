@@ -6,13 +6,14 @@
 #define NETWORK_ISOCKET_H
 
 # include <queue>
-#include <mutex>
+# include <mutex>
+# include <condition_variable>
 # include "Message/Message.h"
 
 namespace babel {
     class   ISocket {
     public:
-        ISocket();
+        ISocket(std::mutex&, std::condition_variable&);
         virtual ~ISocket();
 
         virtual bool    connectSocket() = 0;
@@ -26,6 +27,10 @@ namespace babel {
     private:
         std::queue<babel::Message>  _messageList;
         std::mutex  _queueLocker;
+
+    private:
+        std::mutex& _haveData;
+        std::condition_variable&    _cv;
     };
 }
 

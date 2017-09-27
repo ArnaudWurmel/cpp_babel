@@ -31,6 +31,8 @@ boost/asio.hpp
 -
 queue
 -
+condition_variable
+-
 ISocketAcceptor.h
 /home/wurmel_a/rendu/cpp_babel/Network/Serveur/Abstract/ISocketAcceptor.h
 BoostSocket.h
@@ -45,6 +47,10 @@ BoostSocket.h
 /home/wurmel_a/rendu/cpp_babel/Network/Serveur/Abstract/BoostSocket.h
 
 /home/wurmel_a/rendu/cpp_babel/Network/Serveur/Abstract/BoostSocket.h
+mutex
+-
+condition_variable
+-
 boost/asio.hpp
 -
 ISocket.h
@@ -64,6 +70,8 @@ ISocket.h
 queue
 -
 mutex
+-
+condition_variable
 -
 Message/Message.h
 /home/wurmel_a/rendu/cpp_babel/Network/Serveur/Abstract/Message/Message.h
@@ -89,10 +97,12 @@ boost/bind.hpp
 -
 boost/asio.hpp
 -
+thread
+-
+condition_variable
+-
 ../Logger/Logger.h
 /home/wurmel_a/rendu/cpp_babel/Network/Logger/Logger.h
-../Session/Session.h
-/home/wurmel_a/rendu/cpp_babel/Network/Session/Session.h
 Abstract/BoostAcceptor.h
 /home/wurmel_a/rendu/cpp_babel/Network/Serveur/Abstract/BoostAcceptor.h
 Abstract/BoostSocket.h
@@ -112,30 +122,6 @@ Message.h
 
 /home/wurmel_a/rendu/cpp_babel/Network/Session/Message/Message.h
 
-/home/wurmel_a/rendu/cpp_babel/Network/Session/Session.cpp
-boost/bind.hpp
--
-boost/lexical_cast.hpp
--
-iostream
--
-../Serveur/Server.h
-/home/wurmel_a/rendu/cpp_babel/Network/Serveur/Server.h
-Session.h
-/home/wurmel_a/rendu/cpp_babel/Network/Session/Session.h
-
-/home/wurmel_a/rendu/cpp_babel/Network/Session/Session.h
-boost/asio.hpp
--
-boost/enable_shared_from_this.hpp
--
-Message/Message.h
-/home/wurmel_a/rendu/cpp_babel/Network/Session/Message/Message.h
-../Logger/Logger.h
-/home/wurmel_a/rendu/cpp_babel/Network/Logger/Logger.h
-User.h
-/home/wurmel_a/rendu/cpp_babel/Network/Session/User.h
-
 /home/wurmel_a/rendu/cpp_babel/Network/Session/User.cpp
 User.h
 /home/wurmel_a/rendu/cpp_babel/Network/Session/User.h
@@ -147,6 +133,8 @@ vector
 -
 ../Logger/Logger.h
 /home/wurmel_a/rendu/cpp_babel/Network/Logger/Logger.h
+../Serveur/Abstract/ISocket.h
+/home/wurmel_a/rendu/cpp_babel/Network/Serveur/Abstract/ISocket.h
 
 /home/wurmel_a/rendu/cpp_babel/Network/main.cpp
 Serveur/Server.h

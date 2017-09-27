@@ -4,7 +4,7 @@
 
 #include "User.h"
 
-babel::User::User() {}
+babel::User::User(ISocket& socket) : _socket(socket) {}
 
 void    babel::User::setUsername(std::string const& username) {
     _username = username;

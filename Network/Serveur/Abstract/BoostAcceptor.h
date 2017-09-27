@@ -9,13 +9,14 @@
 # include <mutex>
 # include <boost/asio.hpp>
 # include <queue>
+#include <condition_variable>
 # include "ISocketAcceptor.h"
 # include "BoostSocket.h"
 
 namespace babel {
     class BoostAcceptor : public ISocketAcceptor, public Logger {
     public:
-        BoostAcceptor(unsigned int);
+        BoostAcceptor(unsigned int, std::mutex&, std::condition_variable&);
         ~BoostAcceptor();
 
     public:
@@ -33,6 +34,10 @@ namespace babel {
         boost::asio::ip::tcp::acceptor _acceptor;
         std::queue<std::shared_ptr<babel::BoostSocket> >    _clientQueue;
         std::mutex  _queueLocker;
+
+    private:
+        std::mutex& _haveAction;
+        std::condition_variable& _cv;
     };
 }
 

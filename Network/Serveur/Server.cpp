@@ -7,13 +7,22 @@
 
 babel::Server::Server(unsigned int port) : Logger("Server") {
     Logger::say("Instancied");
-    _socketAcceptor = std::unique_ptr<ISocketAcceptor>(new babel::BoostAcceptor(port));
+    _threadRunning = true;
+    _socketAcceptor = std::unique_ptr<ISocketAcceptor>(new babel::BoostAcceptor(port, _haveAction, _cv));
+    _acceptorThread = std::unique_ptr<std::thread>(new std::thread(&babel::Server::threadLoop, this));
     _socketAcceptor->run();
-    start_accept();
+    _threadRunning = false;
 }
 
-void    babel::Server::start_accept() {
+void    babel::Server::threadLoop() {
+    while (_threadRunning) {
+        std::cout << "Called" << std::endl;
+        std::unique_lock<std::mutex>    lck(this->_haveAction);
+        _cv.wait(lck);
 
+    }
 }
 
-babel::Server::~Server() {}
+babel::Server::~Server() {
+    _acceptorThread->join();
+}

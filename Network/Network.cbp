@@ -129,12 +129,6 @@
 		<Unit filename="/home/wurmel_a/rendu/cpp_babel/Network/Session/Message/Message.h">
 			<Option target="Network"/>
 		</Unit>
-		<Unit filename="/home/wurmel_a/rendu/cpp_babel/Network/Session/Session.cpp">
-			<Option target="Network"/>
-		</Unit>
-		<Unit filename="/home/wurmel_a/rendu/cpp_babel/Network/Session/Session.h">
-			<Option target="Network"/>
-		</Unit>
 		<Unit filename="/home/wurmel_a/rendu/cpp_babel/Network/Session/User.cpp">
 			<Option target="Network"/>
 		</Unit>

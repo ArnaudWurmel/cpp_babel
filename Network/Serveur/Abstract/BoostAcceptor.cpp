@@ -4,13 +4,13 @@
 
 #include "BoostAcceptor.h"
 
-babel::BoostAcceptor::BoostAcceptor(unsigned int port) : Logger("BoostAcceptor"), _endpoint(boost::asio::ip::tcp::v4(), port), _acceptor(_ioService, _endpoint) {
+babel::BoostAcceptor::BoostAcceptor(unsigned int port, std::mutex& haveAction, std::condition_variable& cv) : Logger("BoostAcceptor"), _endpoint(boost::asio::ip::tcp::v4(), port), _acceptor(_ioService, _endpoint), _haveAction(haveAction), _cv(cv) {
     say("All initialized");
     startAccept();
 }
 
 void    babel::BoostAcceptor::startAccept() {
-    std::shared_ptr<BoostSocket>    new_session(new BoostSocket(_ioService));
+    std::shared_ptr<BoostSocket>    new_session(new BoostSocket(_ioService, _haveAction, _cv));
     _queueLocker.lock();
     _clientQueue.push(new_session);
     _queueLocker.unlock();
@@ -33,14 +33,15 @@ bool    babel::BoostAcceptor::haveAWaitingClient() {
 std::shared_ptr<babel::ISocket> babel::BoostAcceptor::acceptClient() {
     _queueLocker.lock();
     std::shared_ptr<babel::ISocket> newClient(_clientQueue.front());
-
     _clientQueue.pop();
+    _queueLocker.unlock();
     return newClient;
 }
 
 void    babel::BoostAcceptor::handle_accept(std::shared_ptr<BoostSocket> new_session, const boost::system::error_code &error) {
     if (!error) {
         new_session->startSession();
+        _cv.notify_one();
     }
     else {
         say(error.message());

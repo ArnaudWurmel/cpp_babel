@@ -6,7 +6,7 @@
 #include <boost/bind.hpp>
 #include "BoostSocket.h"
 
-babel::BoostSocket::BoostSocket(boost::asio::io_service& io_service) : Logger("BoostSocket"), _socket(io_service), _readM(babel::Message::MessageType::Unknown) {
+babel::BoostSocket::BoostSocket(boost::asio::io_service& io_service, std::mutex& haveData, std::condition_variable& cv) : ISocket(haveData, cv), Logger("BoostSocket"), _socket(io_service), _readM(babel::Message::MessageType::Unknown) {
 
 }
 

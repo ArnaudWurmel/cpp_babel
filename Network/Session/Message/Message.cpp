@@ -35,7 +35,8 @@ void    babel::Message::setBody(char *body, unsigned int bodySize) {
         delete[] _message.body;
     }
     _message.bodySize = bodySize;
-    _message.body = body;
+    _message.body = new char[bodySize + 1];
+    std::memcpy(_message.body, body, bodySize);
 }
 
 void    *babel::Message::data() {

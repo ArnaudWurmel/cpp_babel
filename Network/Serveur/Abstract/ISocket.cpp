@@ -5,7 +5,7 @@
 #include <exception>
 #include "ISocket.h"
 
-babel::ISocket::ISocket() {}
+babel::ISocket::ISocket(std::mutex& haveData, std::condition_variable& cv) : _haveData(haveData), _cv(cv) {}
 
 bool babel::ISocket::haveAvailableData() {
     _queueLocker.lock();
@@ -16,8 +16,10 @@ bool babel::ISocket::haveAvailableData() {
 
 void    babel::ISocket::addMessage(babel::Message message) {
     _queueLocker.lock();
+    std::unique_lock<std::mutex>    lck(_haveData);
     _messageList.push(message);
     _queueLocker.unlock();
+    _cv.notify_one();
 }
 
 babel::Message  babel::ISocket::getAvailableMessage() {

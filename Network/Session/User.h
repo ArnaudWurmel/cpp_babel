@@ -8,11 +8,12 @@
 # include <string>
 # include <vector>
 # include "../Logger/Logger.h"
+# include "../Serveur/Abstract/ISocket.h"
 
 namespace babel {
     class User {
     public:
-        User();
+        User(babel::ISocket&);
         virtual ~User();
 
     protected:
@@ -24,6 +25,7 @@ namespace babel {
     private:
         std::string _username;
         std::string _ipAddr;
+        babel::ISocket& _socket;
     };
 }
 

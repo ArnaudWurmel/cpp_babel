@@ -5,6 +5,8 @@
 #ifndef NETWORK_BOOSTSOCKET_H
 #define NETWORK_BOOSTSOCKET_H
 
+# include <mutex>
+# include <condition_variable>
 # include <boost/asio.hpp>
 # include "ISocket.h"
 # include "Message/Message.h"
@@ -14,7 +16,7 @@
 namespace babel {
     class BoostSocket : public ISocket, private Logger {
     public:
-        BoostSocket(boost::asio::io_service&);
+        BoostSocket(boost::asio::io_service&, std::mutex&, std::condition_variable&);
         ~BoostSocket();
 
     public:
