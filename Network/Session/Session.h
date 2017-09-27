@@ -9,24 +9,16 @@
 # include <boost/enable_shared_from_this.hpp>
 # include "Message/Message.h"
 # include "../Logger/Logger.h"
+# include "User.h"
 
 namespace babel {
-    class Session : private Logger, public boost::enable_shared_from_this<Session> {
+    class Server;
+
+    class Session : public User, private Logger, public boost::enable_shared_from_this<Session> {
     public:
-        Session(boost::asio::io_service&);
+        Session(boost::asio::io_service&, Server&);
         ~Session();
 
-    public:
-        void    startSession();
-        boost::asio::ip::tcp::socket&   getSocket();
-
-    public:
-        void    handleReadHeader(const boost::system::error_code& error);
-        void    handleReadBody(const boost::system::error_code& error);
-
-    private:
-        boost::asio::ip::tcp::socket    _socket;
-        Message _readM;
     };
 }
 

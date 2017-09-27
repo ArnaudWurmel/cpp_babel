@@ -14,6 +14,14 @@ babel::Message::Message(MessageType const& type) {
     _message.type = type;
 }
 
+babel::Message::Message(Message const &other) {
+    _message.magicNumber = other._message.magicNumber;
+    _message.bodySize = other._message.bodySize;
+    _message.type = other._message.type;
+    _message.body = new char[_message.bodySize + 1];
+    std::memcpy(_message.body, other._message.body, _message.bodySize);
+}
+
 char const* babel::Message::getBody() const {
     return _message.body;
 }
@@ -23,6 +31,9 @@ char    *babel::Message::getBody() {
 }
 
 void    babel::Message::setBody(char *body, unsigned int bodySize) {
+    if (_message.body) {
+        delete[] _message.body;
+    }
     _message.bodySize = bodySize;
     _message.body = body;
 }
@@ -52,4 +63,8 @@ void    babel::Message::encodeHeader() {
     std::memcpy(_data, &_message, headerSize);
 }
 
-babel::Message::~Message() {}
+babel::Message::~Message() {
+    if (_message.body) {
+        delete[] _message.body;
+    }
+}

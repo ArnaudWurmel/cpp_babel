@@ -5,24 +5,15 @@
 #include <iostream>
 #include "Server.h"
 
-babel::Server::Server(boost::asio::io_service& io_service, boost::asio::ip::tcp::endpoint const& endpoint) : Logger("Server"), _io_service(io_service), _acceptor(_io_service, endpoint) {
+babel::Server::Server(unsigned int port) : Logger("Server") {
     Logger::say("Instancied");
+    _socketAcceptor = std::unique_ptr<ISocketAcceptor>(new babel::BoostAcceptor(port));
+    _socketAcceptor->run();
     start_accept();
 }
 
 void    babel::Server::start_accept() {
-    Session    *new_session(new Session(_io_service));
 
-    _acceptor.async_accept(new_session->getSocket(),
-                            boost::bind(&babel::Server::handle_accept, this, new_session, boost::asio::placeholders::error));
-}
-
-void    babel::Server::handle_accept(Session *new_session, const boost::system::error_code &error) {
-    if (!error) {
-        std::cout << "Error : " << error << std::endl;
-        new_session->startSession();
-    }
-    start_accept();
 }
 
 babel::Server::~Server() {}

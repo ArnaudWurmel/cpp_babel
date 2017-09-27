@@ -51,14 +51,15 @@ int			main(int ac, char **av)
   unsigned short	port;
 
     if (ac == 2) {
-        boost::asio::io_service io_service;
-
-        port = std::atoi(av[1]);
-        if (isValidPort(port)) {
-            boost::asio::ip::tcp::endpoint  endpoint(boost::asio::ip::tcp::v4(), port);
-            babel::Server   server(io_service, endpoint);
-            io_service.run();
-            return 0;
+        try {
+            port = std::atoi(av[1]);
+            if (isValidPort(port)) {
+                babel::Server   server(port);
+                return 0;
+            }
+        }
+        catch (std::exception& e) {
+            std::cout << e.what() << std::endl;
         }
     }
     return 1;

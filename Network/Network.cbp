@@ -44,6 +44,9 @@
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
+					<Add directory="/home/wurmel_a/rendu/cpp_babel/Network/./Logger"/>
+					<Add directory="/home/wurmel_a/rendu/cpp_babel/Network/./Serveur"/>
+					<Add directory="/home/wurmel_a/rendu/cpp_babel/Network/./Session"/>
 					<Add directory="/usr/include/c++/5"/>
 					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
 					<Add directory="/usr/include/c++/5/backward"/>
@@ -67,6 +70,9 @@
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
+					<Add directory="/home/wurmel_a/rendu/cpp_babel/Network/./Logger"/>
+					<Add directory="/home/wurmel_a/rendu/cpp_babel/Network/./Serveur"/>
+					<Add directory="/home/wurmel_a/rendu/cpp_babel/Network/./Session"/>
 					<Add directory="/usr/include/c++/5"/>
 					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
 					<Add directory="/usr/include/c++/5/backward"/>
@@ -90,6 +96,27 @@
 		<Unit filename="/home/wurmel_a/rendu/cpp_babel/Network/Logger/Logger.h">
 			<Option target="Network"/>
 		</Unit>
+		<Unit filename="/home/wurmel_a/rendu/cpp_babel/Network/Serveur/Abstract/BoostAcceptor.cpp">
+			<Option target="Network"/>
+		</Unit>
+		<Unit filename="/home/wurmel_a/rendu/cpp_babel/Network/Serveur/Abstract/BoostAcceptor.h">
+			<Option target="Network"/>
+		</Unit>
+		<Unit filename="/home/wurmel_a/rendu/cpp_babel/Network/Serveur/Abstract/BoostSocket.cpp">
+			<Option target="Network"/>
+		</Unit>
+		<Unit filename="/home/wurmel_a/rendu/cpp_babel/Network/Serveur/Abstract/BoostSocket.h">
+			<Option target="Network"/>
+		</Unit>
+		<Unit filename="/home/wurmel_a/rendu/cpp_babel/Network/Serveur/Abstract/ISocket.cpp">
+			<Option target="Network"/>
+		</Unit>
+		<Unit filename="/home/wurmel_a/rendu/cpp_babel/Network/Serveur/Abstract/ISocket.h">
+			<Option target="Network"/>
+		</Unit>
+		<Unit filename="/home/wurmel_a/rendu/cpp_babel/Network/Serveur/Abstract/ISocketAcceptor.h">
+			<Option target="Network"/>
+		</Unit>
 		<Unit filename="/home/wurmel_a/rendu/cpp_babel/Network/Serveur/Server.cpp">
 			<Option target="Network"/>
 		</Unit>
@@ -106,6 +133,12 @@
 			<Option target="Network"/>
 		</Unit>
 		<Unit filename="/home/wurmel_a/rendu/cpp_babel/Network/Session/Session.h">
+			<Option target="Network"/>
+		</Unit>
+		<Unit filename="/home/wurmel_a/rendu/cpp_babel/Network/Session/User.cpp">
+			<Option target="Network"/>
+		</Unit>
+		<Unit filename="/home/wurmel_a/rendu/cpp_babel/Network/Session/User.h">
 			<Option target="Network"/>
 		</Unit>
 		<Unit filename="/home/wurmel_a/rendu/cpp_babel/Network/main.cpp">

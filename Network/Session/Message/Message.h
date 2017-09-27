@@ -26,6 +26,7 @@ namespace babel {
 
     public:
         Message(MessageType const&);
+        Message(Message const&);
         ~Message();
 
     public:

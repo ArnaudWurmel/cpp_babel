@@ -6,6 +6,8 @@
 
 #IncludeRegexTransform: 
 
+./Session/Message/Message.h
+
 /home/wurmel_a/rendu/cpp_babel/Network/Logger/Logger.cpp
 iostream
 -
@@ -16,6 +18,62 @@ Logger.h
 string
 -
 
+/home/wurmel_a/rendu/cpp_babel/Network/Serveur/Abstract/BoostAcceptor.cpp
+BoostAcceptor.h
+/home/wurmel_a/rendu/cpp_babel/Network/Serveur/Abstract/BoostAcceptor.h
+
+/home/wurmel_a/rendu/cpp_babel/Network/Serveur/Abstract/BoostAcceptor.h
+boost/bind.hpp
+-
+mutex
+-
+boost/asio.hpp
+-
+queue
+-
+ISocketAcceptor.h
+/home/wurmel_a/rendu/cpp_babel/Network/Serveur/Abstract/ISocketAcceptor.h
+BoostSocket.h
+/home/wurmel_a/rendu/cpp_babel/Network/Serveur/Abstract/BoostSocket.h
+
+/home/wurmel_a/rendu/cpp_babel/Network/Serveur/Abstract/BoostSocket.cpp
+iostream
+-
+boost/bind.hpp
+-
+BoostSocket.h
+/home/wurmel_a/rendu/cpp_babel/Network/Serveur/Abstract/BoostSocket.h
+
+/home/wurmel_a/rendu/cpp_babel/Network/Serveur/Abstract/BoostSocket.h
+boost/asio.hpp
+-
+ISocket.h
+/home/wurmel_a/rendu/cpp_babel/Network/Serveur/Abstract/ISocket.h
+Message/Message.h
+/home/wurmel_a/rendu/cpp_babel/Network/Serveur/Abstract/Message/Message.h
+../../Logger/Logger.h
+/home/wurmel_a/rendu/cpp_babel/Network/Logger/Logger.h
+
+/home/wurmel_a/rendu/cpp_babel/Network/Serveur/Abstract/ISocket.cpp
+exception
+-
+ISocket.h
+/home/wurmel_a/rendu/cpp_babel/Network/Serveur/Abstract/ISocket.h
+
+/home/wurmel_a/rendu/cpp_babel/Network/Serveur/Abstract/ISocket.h
+queue
+-
+mutex
+-
+Message/Message.h
+/home/wurmel_a/rendu/cpp_babel/Network/Serveur/Abstract/Message/Message.h
+
+/home/wurmel_a/rendu/cpp_babel/Network/Serveur/Abstract/ISocketAcceptor.h
+boost/asio/detail/shared_ptr.hpp
+-
+ISocket.h
+/home/wurmel_a/rendu/cpp_babel/Network/Serveur/Abstract/ISocket.h
+
 /home/wurmel_a/rendu/cpp_babel/Network/Serveur/Server.cpp
 iostream
 -
@@ -23,6 +81,8 @@ Server.h
 /home/wurmel_a/rendu/cpp_babel/Network/Serveur/Server.h
 
 /home/wurmel_a/rendu/cpp_babel/Network/Serveur/Server.h
+set
+-
 string
 -
 boost/bind.hpp
@@ -33,6 +93,12 @@ boost/asio.hpp
 /home/wurmel_a/rendu/cpp_babel/Network/Logger/Logger.h
 ../Session/Session.h
 /home/wurmel_a/rendu/cpp_babel/Network/Session/Session.h
+Abstract/BoostAcceptor.h
+/home/wurmel_a/rendu/cpp_babel/Network/Serveur/Abstract/BoostAcceptor.h
+Abstract/BoostSocket.h
+/home/wurmel_a/rendu/cpp_babel/Network/Serveur/Abstract/BoostSocket.h
+Abstract/ISocketAcceptor.h
+/home/wurmel_a/rendu/cpp_babel/Network/Serveur/Abstract/ISocketAcceptor.h
 
 /home/wurmel_a/rendu/cpp_babel/Network/Session/Message/Message.cpp
 cstdio
@@ -49,8 +115,12 @@ Message.h
 /home/wurmel_a/rendu/cpp_babel/Network/Session/Session.cpp
 boost/bind.hpp
 -
+boost/lexical_cast.hpp
+-
 iostream
 -
+../Serveur/Server.h
+/home/wurmel_a/rendu/cpp_babel/Network/Serveur/Server.h
 Session.h
 /home/wurmel_a/rendu/cpp_babel/Network/Session/Session.h
 
@@ -61,6 +131,20 @@ boost/enable_shared_from_this.hpp
 -
 Message/Message.h
 /home/wurmel_a/rendu/cpp_babel/Network/Session/Message/Message.h
+../Logger/Logger.h
+/home/wurmel_a/rendu/cpp_babel/Network/Logger/Logger.h
+User.h
+/home/wurmel_a/rendu/cpp_babel/Network/Session/User.h
+
+/home/wurmel_a/rendu/cpp_babel/Network/Session/User.cpp
+User.h
+/home/wurmel_a/rendu/cpp_babel/Network/Session/User.h
+
+/home/wurmel_a/rendu/cpp_babel/Network/Session/User.h
+string
+-
+vector
+-
 ../Logger/Logger.h
 /home/wurmel_a/rendu/cpp_babel/Network/Logger/Logger.h
 
