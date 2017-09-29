@@ -18,6 +18,7 @@ namespace babel {
 
         virtual bool    connectSocket() = 0;
         virtual void    startSession() = 0;
+        virtual std::string     getIpAddr() const = 0;
         virtual bool    haveAvailableData();
         babel::Message  getAvailableMessage();
 

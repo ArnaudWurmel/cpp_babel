@@ -19,6 +19,8 @@ string
 -
 
 /home/wurmel_a/rendu/cpp_babel/Network/Serveur/Abstract/BoostAcceptor.cpp
+iostream
+-
 BoostAcceptor.h
 /home/wurmel_a/rendu/cpp_babel/Network/Serveur/Abstract/BoostAcceptor.h
 
@@ -43,6 +45,8 @@ iostream
 -
 boost/bind.hpp
 -
+boost/lexical_cast.hpp
+-
 BoostSocket.h
 /home/wurmel_a/rendu/cpp_babel/Network/Serveur/Abstract/BoostSocket.h
 
@@ -62,6 +66,8 @@ Message/Message.h
 
 /home/wurmel_a/rendu/cpp_babel/Network/Serveur/Abstract/ISocket.cpp
 exception
+-
+iostream
 -
 ISocket.h
 /home/wurmel_a/rendu/cpp_babel/Network/Serveur/Abstract/ISocket.h
@@ -84,6 +90,8 @@ ISocket.h
 
 /home/wurmel_a/rendu/cpp_babel/Network/Serveur/Server.cpp
 iostream
+-
+functional
 -
 Server.h
 /home/wurmel_a/rendu/cpp_babel/Network/Serveur/Server.h
@@ -125,6 +133,8 @@ Message.h
 /home/wurmel_a/rendu/cpp_babel/Network/Session/Message/Message.h
 
 /home/wurmel_a/rendu/cpp_babel/Network/Session/User.cpp
+iostream
+-
 User.h
 /home/wurmel_a/rendu/cpp_babel/Network/Session/User.h
 

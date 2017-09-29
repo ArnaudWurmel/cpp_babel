@@ -14,18 +14,21 @@ namespace babel {
     class User {
     public:
         User(std::shared_ptr<babel::ISocket>);
-        virtual ~User();
+        ~User();
 
-    protected:
+    public:
+        void    initNetwork();
         void    setUsername(std::string const&);
         std::string const&  getUsername() const;
         void    setIpAddr(std::string const&);
         std::string const&  getIpAddr() const;
+        bool    manageData();
 
     private:
         std::string _username;
         std::string _ipAddr;
         std::shared_ptr<babel::ISocket> _socket;
+        bool    _continue;
     };
 }
 

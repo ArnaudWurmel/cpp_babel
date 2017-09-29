@@ -4,6 +4,7 @@
 
 #include <iostream>
 #include <boost/bind.hpp>
+#include <boost/lexical_cast.hpp>
 #include "BoostSocket.h"
 
 babel::BoostSocket::BoostSocket(boost::asio::io_service& io_service, std::mutex& haveData, std::condition_variable& cv) : ISocket(haveData, cv), Logger("BoostSocket"), _socket(io_service), _readM(babel::Message::MessageType::Unknown) {
@@ -49,6 +50,10 @@ void    babel::BoostSocket::handleReadBody(const boost::system::error_code &erro
     else {
         Logger::say(error.message());
     }
+}
+
+std::string babel::BoostSocket::getIpAddr() const {
+    return boost::lexical_cast<std::string>(_socket.remote_endpoint());
 }
 
 

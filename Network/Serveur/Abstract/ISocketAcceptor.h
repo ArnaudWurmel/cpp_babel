@@ -18,6 +18,7 @@ namespace babel {
         virtual bool    haveAWaitingClient() = 0;
         virtual std::shared_ptr<babel::ISocket> acceptClient() = 0;
         virtual void    run() = 0;
+        virtual void    stop() = 0;
     };
 }
 

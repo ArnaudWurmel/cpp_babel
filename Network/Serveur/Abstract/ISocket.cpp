@@ -3,6 +3,7 @@
 //
 
 #include <exception>
+#include <iostream>
 #include "ISocket.h"
 
 babel::ISocket::ISocket(std::mutex& haveData, std::condition_variable& cv) : _haveData(haveData), _cv(cv) {}
@@ -33,4 +34,6 @@ babel::Message  babel::ISocket::getAvailableMessage() {
     throw std::exception();
 }
 
-babel::ISocket::~ISocket() {}
+babel::ISocket::~ISocket() {
+    std::cout << "Deleted" << std::endl;
+}

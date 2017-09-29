@@ -23,6 +23,7 @@ namespace babel {
         boost::asio::ip::tcp::socket&   getSocket();
         bool    connectSocket();
         void    startSession();
+        std::string getIpAddr() const;
 
     private:
         void    handleReadHeader(const boost::system::error_code& error);

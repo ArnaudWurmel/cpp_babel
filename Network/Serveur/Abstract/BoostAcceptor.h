@@ -21,6 +21,7 @@ namespace babel {
 
     public:
         void    run();
+        void    stop();
         void    startAccept();
         bool    haveAWaitingClient();
         std::shared_ptr<babel::ISocket> acceptClient();
