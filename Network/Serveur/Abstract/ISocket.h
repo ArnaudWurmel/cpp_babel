@@ -16,17 +16,21 @@ namespace babel {
         ISocket(std::mutex&, std::condition_variable&);
         virtual ~ISocket();
 
+        virtual void    notifyMain() const;
         virtual bool    connectSocket() = 0;
+        virtual bool    isOpen() const = 0;
         virtual void    startSession() = 0;
         virtual std::string     getIpAddr() const = 0;
         virtual bool    haveAvailableData();
+        virtual void    write(babel::Message) = 0;
         babel::Message  getAvailableMessage();
 
     protected:
         void    addMessage(babel::Message);
 
-    private:
+    protected:
         std::queue<babel::Message>  _messageList;
+        std::queue<babel::Message>  _writeList;
         std::mutex  _queueLocker;
 
     private:

@@ -7,13 +7,17 @@
 
 # include <string>
 # include <vector>
+# include <functional>
+# include <utility>
+# include <map>
 # include "../Logger/Logger.h"
 # include "../Serveur/Abstract/ISocket.h"
 
 namespace babel {
-    class User {
+    class Server;
+    class User : private Logger {
     public:
-        User(std::shared_ptr<babel::ISocket>);
+        User(std::shared_ptr<babel::ISocket>, babel::Server&);
         ~User();
 
     public:
@@ -23,12 +27,22 @@ namespace babel {
         void    setIpAddr(std::string const&);
         std::string const&  getIpAddr() const;
         bool    manageData();
+        unsigned int    getId() const;
+        void    sendResponse(babel::Message::MessageType, std::string const&);
 
     private:
         std::string _username;
         std::string _ipAddr;
+        unsigned int    _id;
         std::shared_ptr<babel::ISocket> _socket;
         bool    _continue;
+
+    private:
+        std::map<babel::Message::MessageType, void (babel::Server::*)(babel::User&, babel::Message&) >   _functionPtrs;
+        babel::Server   &_server;
+
+    private:
+        static unsigned int _userId;
     };
 }
 

@@ -34,26 +34,59 @@ void    babel::BoostSocket::handleReadHeader(const boost::system::error_code &er
         }
         else {
             Logger::say("Can't validate header");
+            _socket.close();
+            notifyMain();
         }
     }
     else {
         Logger::say(error.message());
+        _socket.close();
+        notifyMain();
     }
+}
+
+bool    babel::BoostSocket::isOpen() const {
+    return _socket.is_open();
 }
 
 void    babel::BoostSocket::handleReadBody(const boost::system::error_code &error) {
     if (!error) {
-        std::cout << _readM.getBody() << std::endl;
         addMessage(_readM);
         startSession();
     }
     else {
-        Logger::say(error.message());
+        Logger::say("Reading body : " + error.message());
+        _socket.close();
+        notifyMain();
     }
 }
 
 std::string babel::BoostSocket::getIpAddr() const {
     return boost::lexical_cast<std::string>(_socket.remote_endpoint());
+}
+
+void    babel::BoostSocket::write(babel::Message toDeliver) {
+    _queueLocker.lock();
+    bool    writeState = _writeList.empty();
+    _writeList.push(toDeliver);
+    _queueLocker.unlock();
+    if (writeState) {
+        //boost::asio::async_write(_socket, boost::asio::buffer(_writeList.front().data(), _writeList.front().totalSize()), boost::bind(&babel::BoostSocket::handle_write, this, boost::asio::placeholders::error));
+    }
+}
+
+void    babel::BoostSocket::handle_write(const boost::system::error_code& error) {
+    if (!error) {
+        _queueLocker.lock();
+        _writeList.pop();
+        if (!_writeList.empty()) {
+            //boost::asio::async_write(_socket, boost::asio::buffer(_writeList.front().data(), _writeList.front().totalSize()), boost::bind(&babel::BoostSocket::handle_write, this, boost::asio::placeholders::error));
+        }
+        _queueLocker.unlock();
+    }
+    else {
+        say(error.message());
+    }
 }
 
 

@@ -20,7 +20,7 @@ void    babel::Server::threadLoop() {
         _cv.wait(lck);
         while (_socketAcceptor->haveAWaitingClient()) {
             std::shared_ptr<ISocket>    newSocket = _socketAcceptor->acceptClient();
-            babel::User *user = new babel::User(newSocket);
+            babel::User *user = new babel::User(newSocket, *this);
 
             user->initNetwork();
             _userList.insert(std::unique_ptr<User>(user));
@@ -35,6 +35,32 @@ void    babel::Server::threadLoop() {
             ++it;
         }
     }
+}
+
+void    babel::Server::connectUser(babel::User& user, babel::Message& message) {
+    std::string pseudo;
+
+    if (message.getBodySize() == 0) {
+        pseudo = "Invité #" + std::to_string(user.getId());
+    }
+    else {
+        pseudo = std::string(message.getBody(), message.getBodySize());
+    }
+    std::set<std::unique_ptr<User> >::const_iterator    it = _userList.begin();
+    bool taken = false;
+
+    while (!taken && it != _userList.end()) {
+        if ((*it)->getUsername().compare(pseudo) == 0) {
+            taken = true;
+        }
+        ++it;
+    }
+    /*if (taken) {
+        user.sendResponse(Message::MessageType::Error, "KO");
+    }
+    else {
+        user.sendResponse(Message::MessageType::Connect, "Success");
+    }*/
 }
 
 babel::Server::~Server() {

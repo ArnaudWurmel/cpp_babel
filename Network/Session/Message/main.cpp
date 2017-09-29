@@ -1,3 +1,4 @@
+#include <iostream>
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
@@ -30,6 +31,7 @@ int	main()
   addr_size = sizeof(serverAddr);
   connect(clientSocket, (struct sockaddr *)&serverAddr, addr_size); 
   
-  write(clientSocket, mess.data(), babel::Message::headerSize);
-  write(clientSocket, mess.getBody(), mess.getBodySize());
+  std::cout << write(clientSocket, mess.data(), babel::Message::headerSize) << std::endl;
+  std::cout << write(clientSocket, mess.getBody(), mess.getBodySize()) << std::endl;;
+  close(clientSocket);
 }

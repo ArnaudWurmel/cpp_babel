@@ -30,7 +30,7 @@ char    *babel::Message::getBody() {
     return _message.body;
 }
 
-void    babel::Message::setBody(char *body, unsigned int bodySize) {
+void    babel::Message::setBody(const char *body, unsigned int bodySize) {
     if (_message.body) {
         delete[] _message.body;
     }
@@ -62,6 +62,10 @@ bool    babel::Message::decodeHeader() {
 
 void    babel::Message::encodeHeader() {
     std::memcpy(_data, &_message, headerSize);
+}
+
+babel::Message::MessageType babel::Message::getType() const {
+    return _message.type;
 }
 
 babel::Message::~Message() {

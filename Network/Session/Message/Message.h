@@ -30,13 +30,14 @@ namespace babel {
         ~Message();
 
     public:
-        void    setBody(char *, unsigned int);
+        void    setBody(const char *, unsigned int);
         char    *getBody();
         char const* getBody() const;
         void    *data();
         bool    decodeHeader();
         void    encodeHeader();
         unsigned int    getBodySize() const;
+        MessageType getType() const;
 
     private:
         unsigned int    _bodySize;

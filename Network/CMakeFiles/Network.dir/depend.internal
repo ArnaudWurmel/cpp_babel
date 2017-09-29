@@ -36,8 +36,14 @@ CMakeFiles/Network.dir/Session/Message/Message.cpp.o
  /home/wurmel_a/rendu/cpp_babel/Network/Session/Message/Message.cpp
  /home/wurmel_a/rendu/cpp_babel/Network/Session/Message/Message.h
 CMakeFiles/Network.dir/Session/User.cpp.o
+ ./Logger/Logger.h
+ ./Serveur/Abstract/BoostAcceptor.h
+ ./Serveur/Abstract/BoostSocket.h
+ ./Serveur/Abstract/ISocket.h
+ ./Serveur/Abstract/ISocketAcceptor.h
+ ./Serveur/Server.h
  ./Session/Message/Message.h
- /home/wurmel_a/rendu/cpp_babel/Network/Logger/Logger.h
+ ./Session/User.h
  /home/wurmel_a/rendu/cpp_babel/Network/Serveur/Abstract/ISocket.h
  /home/wurmel_a/rendu/cpp_babel/Network/Session/User.cpp
  /home/wurmel_a/rendu/cpp_babel/Network/Session/User.h

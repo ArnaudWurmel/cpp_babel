@@ -23,6 +23,9 @@ namespace   babel {
         explicit Server(unsigned int port);
         ~Server();
 
+    public:
+        void    connectUser(babel::User&, babel::Message&);
+
     private:
         void    threadLoop();
 
