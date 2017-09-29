@@ -16,6 +16,8 @@ namespace babel {
         ISocket(std::mutex&, std::condition_variable&);
         virtual ~ISocket();
 
+        virtual void    write(babel::Message message) = 0;
+        virtual void    close() = 0;
         virtual bool    isOpen() const = 0;
         virtual bool    connectSocket() = 0;
         virtual void    startSession() = 0;
@@ -30,7 +32,7 @@ namespace babel {
         std::queue<babel::Message>  _messageList;
         std::mutex  _queueLocker;
 
-    private:
+    protected:
         std::mutex& _haveData;
         std::condition_variable&    _cv;
     };

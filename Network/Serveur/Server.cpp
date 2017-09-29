@@ -29,10 +29,11 @@ void    babel::Server::threadLoop() {
 
         while (it != _userList.end()) {
             if (!(*it)->manageData()) {
-                _userList.erase(it);
+                _userList.erase(it++);
                 say("Client ended");
             }
-            ++it;
+            else
+                ++it;
         }
     }
 }
@@ -64,7 +65,9 @@ void    babel::Server::connectUser(babel::User& user, babel::Message& message) {
 }
 
 babel::Server::~Server() {
+    _cv.notify_one();
     _acceptorThread->join();
+    _acceptorThread.reset();
     _userList.clear();
     _socketAcceptor->stop();
     _socketAcceptor.reset();

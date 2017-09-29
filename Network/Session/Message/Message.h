@@ -5,6 +5,8 @@
 #ifndef NETWORK_MESSAGE_H
 #define NETWORK_MESSAGE_H
 
+#include <vector>
+
 namespace babel {
     class Message {
     public:
@@ -37,13 +39,15 @@ namespace babel {
         void    *data();
         bool    decodeHeader();
         void    encodeHeader();
+        void    encodeData();
         unsigned int    getBodySize() const;
+        unsigned int    totalSize() const;
         MessageType getType() const;
 
     private:
         unsigned int    _bodySize;
         AMessage    _message;
-        char    _data[headerSize + maxBodySize + 1];
+        std::vector<char>   _data;
     };
 }
 

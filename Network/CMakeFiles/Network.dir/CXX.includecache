@@ -33,6 +33,8 @@ condition_variable
 -
 boost/asio.hpp
 -
+memory
+-
 ISocket.h
 ./Serveur/Abstract/ISocket.h
 Message/Message.h
@@ -81,6 +83,8 @@ Abstract/ISocketAcceptor.h
 ./Session/User.h
 
 ./Session/Message/Message.h
+vector
+-
 
 ./Session/User.h
 string
@@ -146,6 +150,8 @@ mutex
 condition_variable
 -
 boost/asio.hpp
+-
+memory
 -
 ISocket.h
 /home/wurmel_a/rendu/cpp_babel/Network/Serveur/Abstract/ISocket.h
@@ -221,6 +227,8 @@ Message.h
 /home/wurmel_a/rendu/cpp_babel/Network/Session/Message/Message.h
 
 /home/wurmel_a/rendu/cpp_babel/Network/Session/Message/Message.h
+vector
+-
 
 /home/wurmel_a/rendu/cpp_babel/Network/Session/User.cpp
 iostream

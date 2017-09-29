@@ -30,8 +30,14 @@ int	main()
   serverAddr.sin_addr.s_addr = inet_addr("127.0.0.1");
   addr_size = sizeof(serverAddr);
   connect(clientSocket, (struct sockaddr *)&serverAddr, addr_size); 
-  
+  char	buffer[2];
   std::cout << write(clientSocket, mess.data(), babel::Message::headerSize) << std::endl;
   std::cout << write(clientSocket, mess.getBody(), mess.getBodySize()) << std::endl;;
+  read(0, buffer, 1);
+  std::cout <<read(clientSocket, mess.data(), babel::Message::headerSize) << std::endl;
+  std::cout << read(clientSocket, mess.data() + static_cast<int>(babel::Message::headerSize), mess.getBodySize()) << std::endl;;
+  std::cout << mess.getBodySize() << std::endl;
+  std::cout << mess.getBody() << std::endl;
+  read(0, buffer, 1);
   close(clientSocket);
 }

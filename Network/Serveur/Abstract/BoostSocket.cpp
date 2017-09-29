@@ -19,6 +19,14 @@ bool    babel::BoostSocket::connectSocket() {
     return _socket.is_open();
 }
 
+void    babel::BoostSocket::close() {
+    if (_socket.is_open()) {
+        _socket.cancel();
+        _socket.close();
+        _cv.notify_one();
+    }
+}
+
 boost::asio::ip::tcp::socket&   babel::BoostSocket::getSocket() {
     return _socket;
 }
@@ -26,7 +34,7 @@ boost::asio::ip::tcp::socket&   babel::BoostSocket::getSocket() {
 void    babel::BoostSocket::startSession() {
     boost::asio::async_read(_socket,
                             boost::asio::buffer(_readM.data(), Message::headerSize),
-                            boost::bind(&babel::BoostSocket::handleReadHeader, this, boost::asio::placeholders::error));
+                            boost::bind(&babel::BoostSocket::handleReadHeader, shared_from_this(), boost::asio::placeholders::error));
 }
 
 void    babel::BoostSocket::handleReadHeader(const boost::system::error_code &error) {
@@ -34,14 +42,16 @@ void    babel::BoostSocket::handleReadHeader(const boost::system::error_code &er
         if (_readM.decodeHeader()) {
             boost::asio::async_read(_socket,
                                     boost::asio::buffer((_readM.getBody()), _readM.getBodySize()),
-                                    boost::bind(&babel::BoostSocket::handleReadBody, this, boost::asio::placeholders::error));
+                                    boost::bind(&babel::BoostSocket::handleReadBody, shared_from_this(), boost::asio::placeholders::error));
         }
         else {
             Logger::say("Can't validate header");
+            close();
         }
     }
     else {
         Logger::say(error.message());
+        close();
     }
 }
 
@@ -53,11 +63,50 @@ void    babel::BoostSocket::handleReadBody(const boost::system::error_code &erro
     }
     else {
         Logger::say(error.message());
+        close();
     }
 }
 
 std::string babel::BoostSocket::getIpAddr() const {
     return boost::lexical_cast<std::string>(_socket.remote_endpoint());
+}
+
+void    babel::BoostSocket::write(babel::Message message) {
+    _mutex.lock();
+    bool    onWriting = !_writeList.empty();
+    _writeList.push(message);
+    _mutex.unlock();
+    if (!onWriting) {
+        std::cout << _writeList.front().totalSize() << std::endl;
+        std::cout << std::string(_writeList.front().getBody(), _writeList.front().getBodySize()) << std::endl;
+        boost::asio::async_write(_socket,
+                                 boost::asio::buffer(_writeList.front().data(),
+                                                     _writeList.front().totalSize()),
+                                 boost::bind(&babel::BoostSocket::handleWrite, shared_from_this(),
+                                             boost::asio::placeholders::error));
+    }
+}
+
+void    babel::BoostSocket::handleWrite(const boost::system::error_code &error) {
+    std::cout << "CALLED" << std::endl;
+    if (!error) {
+        _mutex.lock();
+        _writeList.pop();
+        if (!_writeList.empty()) {
+            _mutex.unlock();
+            boost::asio::async_write(_socket,
+                                     boost::asio::buffer(_writeList.front().data(),
+                                                         _writeList.front().totalSize()),
+                                     boost::bind(&babel::BoostSocket::handleWrite, shared_from_this(),
+                                                 boost::asio::placeholders::error));
+            return ;
+        }
+        _mutex.unlock();
+    }
+    else {
+        say(error.message());
+        close();
+    }
 }
 
 
