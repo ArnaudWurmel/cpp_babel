@@ -46,7 +46,7 @@ void    babel::Server::connectUser(babel::User& user, babel::Message& message) {
     else {
         pseudo = std::string(message.getBody(), message.getBodySize());
     }
-    std::set<std::unique_ptr<User> >::const_iterator    it = _userList.begin();
+   std::set<std::unique_ptr<User> >::const_iterator    it = _userList.begin();
     bool taken = false;
 
     while (!taken && it != _userList.end()) {
@@ -55,12 +55,12 @@ void    babel::Server::connectUser(babel::User& user, babel::Message& message) {
         }
         ++it;
     }
-    /*if (taken) {
+    if (taken) {
         user.sendResponse(Message::MessageType::Error, "KO");
     }
     else {
         user.sendResponse(Message::MessageType::Connect, "Success");
-    }*/
+    }
 }
 
 babel::Server::~Server() {

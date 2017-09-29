@@ -10,7 +10,8 @@ namespace babel {
     public:
         enum    MessageType {
             Unknown,
-            Connect
+            Connect,
+            Error
         };
 
         struct __attribute__((packed)) AMessage {

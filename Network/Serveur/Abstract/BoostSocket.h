@@ -20,17 +20,15 @@ namespace babel {
         ~BoostSocket();
 
     public:
+        bool    isOpen() const;
         boost::asio::ip::tcp::socket&   getSocket();
         bool    connectSocket();
-        bool    isOpen() const;
         void    startSession();
-        void    write(babel::Message);
         std::string getIpAddr() const;
 
     private:
         void    handleReadHeader(const boost::system::error_code& error);
         void    handleReadBody(const boost::system::error_code& error);
-        void    handle_write(const boost::system::error_code&);
 
     private:
         boost::asio::ip::tcp::socket    _socket;

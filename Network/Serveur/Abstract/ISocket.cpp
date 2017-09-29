@@ -15,14 +15,12 @@ bool babel::ISocket::haveAvailableData() {
     return state;
 }
 
-void    babel::ISocket::notifyMain() const {
-    _cv.notify_one();
-}
-
 void    babel::ISocket::addMessage(babel::Message message) {
+    std::cout << "Before lock..." << std::endl;
     _queueLocker.lock();
     _messageList.push(message);
     _queueLocker.unlock();
+    std::cout << "End lock" << std::endl;
     _cv.notify_one();
 }
 
@@ -34,8 +32,9 @@ babel::Message  babel::ISocket::getAvailableMessage() {
         _queueLocker.unlock();
         return message;
     }
-    _queueLocker.unlock();
     throw std::exception();
 }
 
-babel::ISocket::~ISocket() {}
+babel::ISocket::~ISocket() {
+    std::cout << "Deleted" << std::endl;
+}
