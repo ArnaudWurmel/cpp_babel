@@ -67,7 +67,7 @@ void    babel::BoostSocket::handleReadBody(const boost::system::error_code &erro
 }
 
 std::string babel::BoostSocket::getIpAddr() const {
-    return boost::lexical_cast<std::string>(_socket.remote_endpoint());
+    return _socket.remote_endpoint().address().to_string();
 }
 
 void    babel::BoostSocket::write(babel::Message message) {

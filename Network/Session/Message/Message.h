@@ -15,7 +15,11 @@ namespace babel {
             Connect = 1,
             Error = 2,
             Userlist = 3,
-            Event = 6
+            ChannelList = 4,
+            Join = 5,
+            Event = 6,
+            Leave = 7,
+            CreateChannel = 8
         };
 
         struct __attribute__((packed)) AMessage {

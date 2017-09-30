@@ -29,6 +29,7 @@ namespace babel {
         bool    manageData();
         unsigned int    getId() const;
         void    sendResponse(babel::Message::MessageType, std::string const&);
+        void    leaveChannel();
 
     private:
         std::string _username;

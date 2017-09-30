@@ -13,6 +13,10 @@ babel::User::User(std::shared_ptr<ISocket> socket, babel::Server& server) : Logg
     _continue = true;
     _functionPtrs.insert(std::make_pair(Message::MessageType::Connect, &babel::Server::connectUser));
     _functionPtrs.insert(std::make_pair(Message::MessageType::Userlist, &babel::Server::userList));
+    _functionPtrs.insert(std::make_pair(Message::MessageType::ChannelList, &babel::Server::channelList));
+    _functionPtrs.insert(std::make_pair(Message::MessageType::Join, &babel::Server::joinChannel));
+    _functionPtrs.insert(std::make_pair(Message::MessageType::Leave, &babel::Server::leaveChannelFor));
+    _functionPtrs.insert(std::make_pair(Message::MessageType::CreateChannel, &babel::Server::createChannel));
     _id = ++babel::User::_userId;
 }
 
@@ -42,6 +46,7 @@ void    babel::User::initNetwork() {
     }
     catch (std::exception& e) {
         std::cerr << e.what() << std::endl;
+        _socket->close();
     }
 }
 
@@ -62,6 +67,10 @@ void    babel::User::sendResponse(babel::Message::MessageType mType, std::string
     message.setBody(body.c_str(), body.size());
     std::cout << "Body : " << body << std::endl;
     _socket->write(message);
+}
+
+void    babel::User::leaveChannel() {
+    _server.leaveChannel(*this);
 }
 
 babel::User::~User() {

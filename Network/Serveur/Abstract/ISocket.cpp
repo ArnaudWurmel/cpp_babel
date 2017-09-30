@@ -33,6 +33,4 @@ babel::Message  babel::ISocket::getAvailableMessage() {
     throw std::exception();
 }
 
-babel::ISocket::~ISocket() {
-    std::cout << "Deleted" << std::endl;
-}
+babel::ISocket::~ISocket() {}

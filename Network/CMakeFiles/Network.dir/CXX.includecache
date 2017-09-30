@@ -81,6 +81,16 @@ Abstract/ISocketAcceptor.h
 ./Serveur/Abstract/ISocketAcceptor.h
 ../Session/User.h
 ./Session/User.h
+../Session/Channel.h
+./Session/Channel.h
+
+./Session/Channel.h
+iostream
+-
+set
+-
+User.h
+./Session/User.h
 
 ./Session/Message/Message.h
 vector
@@ -214,6 +224,20 @@ Abstract/BoostSocket.h
 Abstract/ISocketAcceptor.h
 /home/wurmel_a/rendu/cpp_babel/Network/Serveur/Abstract/ISocketAcceptor.h
 ../Session/User.h
+/home/wurmel_a/rendu/cpp_babel/Network/Session/User.h
+../Session/Channel.h
+/home/wurmel_a/rendu/cpp_babel/Network/Session/Channel.h
+
+/home/wurmel_a/rendu/cpp_babel/Network/Session/Channel.cpp
+Channel.h
+/home/wurmel_a/rendu/cpp_babel/Network/Session/Channel.h
+
+/home/wurmel_a/rendu/cpp_babel/Network/Session/Channel.h
+iostream
+-
+set
+-
+User.h
 /home/wurmel_a/rendu/cpp_babel/Network/Session/User.h
 
 /home/wurmel_a/rendu/cpp_babel/Network/Session/Message/Message.cpp
