@@ -54,8 +54,13 @@ bool    babel::User::manageData() {
     while (_socket->haveAvailableData()) {
         babel::Message  message = _socket->getAvailableMessage();
 
-        if (_functionPtrs.find(message.getType()) != _functionPtrs.end()) {
-            (_server.*_functionPtrs[message.getType()])(*this, message);
+        if (getUsername().size() > 0 || message.getType() == babel::Message::MessageType::Connect) {
+            if (_functionPtrs.find(message.getType()) != _functionPtrs.end()) {
+                (_server.*_functionPtrs[message.getType()])(*this, message);
+            }
+        }
+        else {
+            sendResponse(babel::Message::MessageType::Error, "KO");
         }
     }
     return _socket->isOpen();
