@@ -5,6 +5,8 @@ CMakeFiles/Network.dir/Logger/Logger.cpp.o: Logger/Logger.cpp
 CMakeFiles/Network.dir/Logger/Logger.cpp.o: Logger/Logger.h
 
 CMakeFiles/Network.dir/Serveur/Abstract/BoostAcceptor.cpp.o: ./Session/Message/Message.h
+CMakeFiles/Network.dir/Serveur/Abstract/BoostAcceptor.cpp.o: ./Session/Message/endpacked.h
+CMakeFiles/Network.dir/Serveur/Abstract/BoostAcceptor.cpp.o: ./Session/Message/packed.h
 CMakeFiles/Network.dir/Serveur/Abstract/BoostAcceptor.cpp.o: Logger/Logger.h
 CMakeFiles/Network.dir/Serveur/Abstract/BoostAcceptor.cpp.o: Serveur/Abstract/BoostAcceptor.cpp
 CMakeFiles/Network.dir/Serveur/Abstract/BoostAcceptor.cpp.o: Serveur/Abstract/BoostAcceptor.h
@@ -13,16 +15,22 @@ CMakeFiles/Network.dir/Serveur/Abstract/BoostAcceptor.cpp.o: Serveur/Abstract/IS
 CMakeFiles/Network.dir/Serveur/Abstract/BoostAcceptor.cpp.o: Serveur/Abstract/ISocketAcceptor.h
 
 CMakeFiles/Network.dir/Serveur/Abstract/BoostSocket.cpp.o: ./Session/Message/Message.h
+CMakeFiles/Network.dir/Serveur/Abstract/BoostSocket.cpp.o: ./Session/Message/endpacked.h
+CMakeFiles/Network.dir/Serveur/Abstract/BoostSocket.cpp.o: ./Session/Message/packed.h
 CMakeFiles/Network.dir/Serveur/Abstract/BoostSocket.cpp.o: Logger/Logger.h
 CMakeFiles/Network.dir/Serveur/Abstract/BoostSocket.cpp.o: Serveur/Abstract/BoostSocket.cpp
 CMakeFiles/Network.dir/Serveur/Abstract/BoostSocket.cpp.o: Serveur/Abstract/BoostSocket.h
 CMakeFiles/Network.dir/Serveur/Abstract/BoostSocket.cpp.o: Serveur/Abstract/ISocket.h
 
 CMakeFiles/Network.dir/Serveur/Abstract/ISocket.cpp.o: ./Session/Message/Message.h
+CMakeFiles/Network.dir/Serveur/Abstract/ISocket.cpp.o: ./Session/Message/endpacked.h
+CMakeFiles/Network.dir/Serveur/Abstract/ISocket.cpp.o: ./Session/Message/packed.h
 CMakeFiles/Network.dir/Serveur/Abstract/ISocket.cpp.o: Serveur/Abstract/ISocket.cpp
 CMakeFiles/Network.dir/Serveur/Abstract/ISocket.cpp.o: Serveur/Abstract/ISocket.h
 
 CMakeFiles/Network.dir/Serveur/Server.cpp.o: ./Session/Message/Message.h
+CMakeFiles/Network.dir/Serveur/Server.cpp.o: ./Session/Message/endpacked.h
+CMakeFiles/Network.dir/Serveur/Server.cpp.o: ./Session/Message/packed.h
 CMakeFiles/Network.dir/Serveur/Server.cpp.o: Logger/Logger.h
 CMakeFiles/Network.dir/Serveur/Server.cpp.o: Serveur/Abstract/BoostAcceptor.h
 CMakeFiles/Network.dir/Serveur/Server.cpp.o: Serveur/Abstract/BoostSocket.h
@@ -34,6 +42,8 @@ CMakeFiles/Network.dir/Serveur/Server.cpp.o: Session/Channel.h
 CMakeFiles/Network.dir/Serveur/Server.cpp.o: Session/User.h
 
 CMakeFiles/Network.dir/Session/Channel.cpp.o: ./Session/Message/Message.h
+CMakeFiles/Network.dir/Session/Channel.cpp.o: ./Session/Message/endpacked.h
+CMakeFiles/Network.dir/Session/Channel.cpp.o: ./Session/Message/packed.h
 CMakeFiles/Network.dir/Session/Channel.cpp.o: Logger/Logger.h
 CMakeFiles/Network.dir/Session/Channel.cpp.o: Serveur/Abstract/ISocket.h
 CMakeFiles/Network.dir/Session/Channel.cpp.o: Session/Channel.cpp
@@ -42,6 +52,8 @@ CMakeFiles/Network.dir/Session/Channel.cpp.o: Session/User.h
 
 CMakeFiles/Network.dir/Session/Message/Message.cpp.o: Session/Message/Message.cpp
 CMakeFiles/Network.dir/Session/Message/Message.cpp.o: Session/Message/Message.h
+CMakeFiles/Network.dir/Session/Message/Message.cpp.o: Session/Message/endpacked.h
+CMakeFiles/Network.dir/Session/Message/Message.cpp.o: Session/Message/packed.h
 
 CMakeFiles/Network.dir/Session/User.cpp.o: ./Logger/Logger.h
 CMakeFiles/Network.dir/Session/User.cpp.o: ./Serveur/Abstract/BoostAcceptor.h
@@ -51,12 +63,16 @@ CMakeFiles/Network.dir/Session/User.cpp.o: ./Serveur/Abstract/ISocketAcceptor.h
 CMakeFiles/Network.dir/Session/User.cpp.o: ./Serveur/Server.h
 CMakeFiles/Network.dir/Session/User.cpp.o: ./Session/Channel.h
 CMakeFiles/Network.dir/Session/User.cpp.o: ./Session/Message/Message.h
+CMakeFiles/Network.dir/Session/User.cpp.o: ./Session/Message/endpacked.h
+CMakeFiles/Network.dir/Session/User.cpp.o: ./Session/Message/packed.h
 CMakeFiles/Network.dir/Session/User.cpp.o: ./Session/User.h
 CMakeFiles/Network.dir/Session/User.cpp.o: Serveur/Abstract/ISocket.h
 CMakeFiles/Network.dir/Session/User.cpp.o: Session/User.cpp
 CMakeFiles/Network.dir/Session/User.cpp.o: Session/User.h
 
 CMakeFiles/Network.dir/main.cpp.o: ./Session/Message/Message.h
+CMakeFiles/Network.dir/main.cpp.o: ./Session/Message/endpacked.h
+CMakeFiles/Network.dir/main.cpp.o: ./Session/Message/packed.h
 CMakeFiles/Network.dir/main.cpp.o: Logger/Logger.h
 CMakeFiles/Network.dir/main.cpp.o: Serveur/Abstract/BoostAcceptor.h
 CMakeFiles/Network.dir/main.cpp.o: Serveur/Abstract/BoostSocket.h

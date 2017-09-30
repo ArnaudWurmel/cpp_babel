@@ -11,7 +11,9 @@ set(SOURCE_FILES main.cpp Serveur/Server.cpp Logger/Logger.cpp Session/Message/M
 include_directories(
 ./Logger
 ./Serveur
+./Serveur/Abstract
 ./Session
+./Session/Message
 )
 
 # Executable declaration

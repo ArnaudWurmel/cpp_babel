@@ -95,6 +95,14 @@ User.h
 ./Session/Message/Message.h
 vector
 -
+packed.h
+./Session/Message/packed.h
+endpacked.h
+./Session/Message/endpacked.h
+
+./Session/Message/endpacked.h
+
+./Session/Message/packed.h
 
 ./Session/User.h
 string
@@ -253,6 +261,14 @@ Message.h
 /home/wurmel_a/rendu/cpp_babel/Network/Session/Message/Message.h
 vector
 -
+packed.h
+/home/wurmel_a/rendu/cpp_babel/Network/Session/Message/packed.h
+endpacked.h
+/home/wurmel_a/rendu/cpp_babel/Network/Session/Message/endpacked.h
+
+/home/wurmel_a/rendu/cpp_babel/Network/Session/Message/endpacked.h
+
+/home/wurmel_a/rendu/cpp_babel/Network/Session/Message/packed.h
 
 /home/wurmel_a/rendu/cpp_babel/Network/Session/User.cpp
 iostream

@@ -6,6 +6,8 @@ CMakeFiles/Network.dir/Logger/Logger.cpp.o
  /home/wurmel_a/rendu/cpp_babel/Network/Logger/Logger.h
 CMakeFiles/Network.dir/Serveur/Abstract/BoostAcceptor.cpp.o
  ./Session/Message/Message.h
+ ./Session/Message/endpacked.h
+ ./Session/Message/packed.h
  /home/wurmel_a/rendu/cpp_babel/Network/Logger/Logger.h
  /home/wurmel_a/rendu/cpp_babel/Network/Serveur/Abstract/BoostAcceptor.cpp
  /home/wurmel_a/rendu/cpp_babel/Network/Serveur/Abstract/BoostAcceptor.h
@@ -14,16 +16,22 @@ CMakeFiles/Network.dir/Serveur/Abstract/BoostAcceptor.cpp.o
  /home/wurmel_a/rendu/cpp_babel/Network/Serveur/Abstract/ISocketAcceptor.h
 CMakeFiles/Network.dir/Serveur/Abstract/BoostSocket.cpp.o
  ./Session/Message/Message.h
+ ./Session/Message/endpacked.h
+ ./Session/Message/packed.h
  /home/wurmel_a/rendu/cpp_babel/Network/Logger/Logger.h
  /home/wurmel_a/rendu/cpp_babel/Network/Serveur/Abstract/BoostSocket.cpp
  /home/wurmel_a/rendu/cpp_babel/Network/Serveur/Abstract/BoostSocket.h
  /home/wurmel_a/rendu/cpp_babel/Network/Serveur/Abstract/ISocket.h
 CMakeFiles/Network.dir/Serveur/Abstract/ISocket.cpp.o
  ./Session/Message/Message.h
+ ./Session/Message/endpacked.h
+ ./Session/Message/packed.h
  /home/wurmel_a/rendu/cpp_babel/Network/Serveur/Abstract/ISocket.cpp
  /home/wurmel_a/rendu/cpp_babel/Network/Serveur/Abstract/ISocket.h
 CMakeFiles/Network.dir/Serveur/Server.cpp.o
  ./Session/Message/Message.h
+ ./Session/Message/endpacked.h
+ ./Session/Message/packed.h
  /home/wurmel_a/rendu/cpp_babel/Network/Logger/Logger.h
  /home/wurmel_a/rendu/cpp_babel/Network/Serveur/Abstract/BoostAcceptor.h
  /home/wurmel_a/rendu/cpp_babel/Network/Serveur/Abstract/BoostSocket.h
@@ -35,6 +43,8 @@ CMakeFiles/Network.dir/Serveur/Server.cpp.o
  /home/wurmel_a/rendu/cpp_babel/Network/Session/User.h
 CMakeFiles/Network.dir/Session/Channel.cpp.o
  ./Session/Message/Message.h
+ ./Session/Message/endpacked.h
+ ./Session/Message/packed.h
  /home/wurmel_a/rendu/cpp_babel/Network/Logger/Logger.h
  /home/wurmel_a/rendu/cpp_babel/Network/Serveur/Abstract/ISocket.h
  /home/wurmel_a/rendu/cpp_babel/Network/Session/Channel.cpp
@@ -43,6 +53,8 @@ CMakeFiles/Network.dir/Session/Channel.cpp.o
 CMakeFiles/Network.dir/Session/Message/Message.cpp.o
  /home/wurmel_a/rendu/cpp_babel/Network/Session/Message/Message.cpp
  /home/wurmel_a/rendu/cpp_babel/Network/Session/Message/Message.h
+ /home/wurmel_a/rendu/cpp_babel/Network/Session/Message/endpacked.h
+ /home/wurmel_a/rendu/cpp_babel/Network/Session/Message/packed.h
 CMakeFiles/Network.dir/Session/User.cpp.o
  ./Logger/Logger.h
  ./Serveur/Abstract/BoostAcceptor.h
@@ -52,12 +64,16 @@ CMakeFiles/Network.dir/Session/User.cpp.o
  ./Serveur/Server.h
  ./Session/Channel.h
  ./Session/Message/Message.h
+ ./Session/Message/endpacked.h
+ ./Session/Message/packed.h
  ./Session/User.h
  /home/wurmel_a/rendu/cpp_babel/Network/Serveur/Abstract/ISocket.h
  /home/wurmel_a/rendu/cpp_babel/Network/Session/User.cpp
  /home/wurmel_a/rendu/cpp_babel/Network/Session/User.h
 CMakeFiles/Network.dir/main.cpp.o
  ./Session/Message/Message.h
+ ./Session/Message/endpacked.h
+ ./Session/Message/packed.h
  /home/wurmel_a/rendu/cpp_babel/Network/Logger/Logger.h
  /home/wurmel_a/rendu/cpp_babel/Network/Serveur/Abstract/BoostAcceptor.h
  /home/wurmel_a/rendu/cpp_babel/Network/Serveur/Abstract/BoostSocket.h
