@@ -14,6 +14,7 @@ namespace babel {
             Unknown = 0,
             Connect = 1,
             Error = 2,
+            Userlist = 3,
             Event = 6
         };
 
@@ -39,11 +40,12 @@ namespace babel {
         char const* getBody() const;
         void    *data();
         bool    decodeHeader();
-        void    encodeHeader();
+        bool    encodeHeader();
         void    encodeData();
         unsigned int    getBodySize() const;
         unsigned int    totalSize() const;
         MessageType getType() const;
+        void    setType(MessageType);
 
     private:
         unsigned int    _bodySize;

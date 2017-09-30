@@ -25,6 +25,7 @@ namespace   babel {
 
     public:
         void    connectUser(babel::User&, babel::Message&);
+        void    userList(babel::User&, babel::Message&);
 
     private:
         void    threadLoop();

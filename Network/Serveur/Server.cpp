@@ -70,6 +70,19 @@ void    babel::Server::connectUser(babel::User& user, babel::Message& message) {
     }
 }
 
+void    babel::Server::userList(babel::User& caller, babel::Message& message) {
+    std::set<std::unique_ptr<babel::User> >::const_iterator it = _userList.begin();
+    std::string res = "";
+
+    while (it != _userList.end()) {
+        if ((*it)->getUsername().size()) {
+            res = res + (*it)->getUsername() + ";";
+        }
+        ++it;
+    }
+    caller.sendResponse(babel::Message::MessageType::Userlist, res);
+}
+
 void    babel::Server::triggerEvent(unsigned int senderId, std::string const& body) {
     std::set<std::unique_ptr<User> >::iterator  it = _userList.begin();
 

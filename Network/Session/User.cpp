@@ -12,6 +12,7 @@ unsigned int babel::User::_userId = 0;
 babel::User::User(std::shared_ptr<ISocket> socket, babel::Server& server) : Logger("User"), _socket(socket), _server(server) {
     _continue = true;
     _functionPtrs.insert(std::make_pair(Message::MessageType::Connect, &babel::Server::connectUser));
+    _functionPtrs.insert(std::make_pair(Message::MessageType::Userlist, &babel::Server::userList));
     _id = ++babel::User::_userId;
 }
 

@@ -61,12 +61,21 @@ bool    babel::Message::decodeHeader() {
     return true;
 }
 
+void    babel::Message::setType(MessageType type) {
+    _message.type = type;
+}
+
 void    babel::Message::encodeData() {
+    if (_message.bodySize >= maxBodySize) {
+        _message.bodySize = maxBodySize - 1;
+    }
     std::memcpy(_data.data() + headerSize, _message.body, _message.bodySize);
 }
 
-void    babel::Message::encodeHeader() {
-    std::memcpy(_data.data(), &_message, headerSize);
+bool    babel::Message::encodeHeader() {
+    if (_message.bodySize < maxBodySize)
+        std::memcpy(_data.data(), &_message, headerSize);
+    return _message.bodySize < maxBodySize;
 }
 
 babel::Message::MessageType babel::Message::getType() const {

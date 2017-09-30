@@ -40,5 +40,17 @@ int	main()
   std::cout << mess.getBodySize() << std::endl;
   std::cout << "Body : " << mess.getBody() << std::endl;
   read(0, buffer, 1);
+  mess.setType(babel::Message::Userlist);
+  mess.encodeHeader();
+  mess.encodeData();
+  std::cout << write(clientSocket, mess.data(), babel::Message::headerSize) << std::endl;
+  std::cout << write(clientSocket, mess.getBody(), mess.getBodySize()) << std::endl;;
+  read(0, buffer, 1);
+  std::cout <<read(clientSocket, mess.data(), babel::Message::headerSize) << std::endl;
+  mess.decodeHeader();
+  std::cout << read(clientSocket, mess.getBody(), mess.getBodySize()) << std::endl;;
+  std::cout << mess.getBodySize() << std::endl;
+  std::cout << "Body : " << mess.getBody() << std::endl;
+  read(0, buffer, 1);
   close(clientSocket);
 }
