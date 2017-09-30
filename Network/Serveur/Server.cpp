@@ -60,7 +60,7 @@ void    babel::Server::connectUser(babel::User& user, babel::Message& message) {
         user.sendResponse(Message::MessageType::Error, "KO");
     }
     else {
-        user.sendResponse(Message::MessageType::Connect, "Success");
+        user.sendResponse(Message::MessageType::Connect, pseudo);
     }
 }
 

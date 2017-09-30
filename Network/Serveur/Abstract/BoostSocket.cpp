@@ -57,7 +57,6 @@ void    babel::BoostSocket::handleReadHeader(const boost::system::error_code &er
 
 void    babel::BoostSocket::handleReadBody(const boost::system::error_code &error) {
     if (!error) {
-        std::cout << _readM.getBody() << std::endl;
         addMessage(_readM);
         startSession();
     }
@@ -75,10 +74,10 @@ void    babel::BoostSocket::write(babel::Message message) {
     _mutex.lock();
     bool    onWriting = !_writeList.empty();
     _writeList.push(message);
+    _writeList.back().encodeHeader();
+    _writeList.back().encodeData();
     _mutex.unlock();
     if (!onWriting) {
-        std::cout << _writeList.front().totalSize() << std::endl;
-        std::cout << std::string(_writeList.front().getBody(), _writeList.front().getBodySize()) << std::endl;
         boost::asio::async_write(_socket,
                                  boost::asio::buffer(_writeList.front().data(),
                                                      _writeList.front().totalSize()),
@@ -88,8 +87,8 @@ void    babel::BoostSocket::write(babel::Message message) {
 }
 
 void    babel::BoostSocket::handleWrite(const boost::system::error_code &error) {
-    std::cout << "CALLED" << std::endl;
     if (!error) {
+        say("Sended");
         _mutex.lock();
         _writeList.pop();
         if (!_writeList.empty()) {

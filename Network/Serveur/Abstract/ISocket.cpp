@@ -16,11 +16,9 @@ bool babel::ISocket::haveAvailableData() {
 }
 
 void    babel::ISocket::addMessage(babel::Message message) {
-    std::cout << "Before lock..." << std::endl;
     _queueLocker.lock();
     _messageList.push(message);
     _queueLocker.unlock();
-    std::cout << "End lock" << std::endl;
     _cv.notify_one();
 }
 

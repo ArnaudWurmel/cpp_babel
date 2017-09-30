@@ -18,7 +18,7 @@ int	main()
 {
   babel::Message	mess(babel::Message::Connect);
 
-  mess.setBody("Arnaud", 7);
+  mess.setBody("", 0);
   mess.encodeHeader();
   int clientSocket;
   struct sockaddr_in serverAddr;
@@ -35,9 +35,10 @@ int	main()
   std::cout << write(clientSocket, mess.getBody(), mess.getBodySize()) << std::endl;;
   read(0, buffer, 1);
   std::cout <<read(clientSocket, mess.data(), babel::Message::headerSize) << std::endl;
-  std::cout << read(clientSocket, mess.data() + static_cast<int>(babel::Message::headerSize), mess.getBodySize()) << std::endl;;
+  mess.decodeHeader();
+  std::cout << read(clientSocket, mess.getBody(), mess.getBodySize()) << std::endl;;
   std::cout << mess.getBodySize() << std::endl;
-  std::cout << mess.getBody() << std::endl;
+  std::cout << "Body : " << mess.getBody() << std::endl;
   read(0, buffer, 1);
   close(clientSocket);
 }

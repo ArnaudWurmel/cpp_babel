@@ -58,10 +58,8 @@ bool    babel::User::manageData() {
 void    babel::User::sendResponse(babel::Message::MessageType mType, std::string const& body) {
     Message message(mType);
 
-    std::cout << "Body : " << body.c_str() << std::endl;
     message.setBody(body.c_str(), body.size());
-    message.encodeHeader();
-    message.encodeData();
+    std::cout << "Body : " << body << std::endl;
     _socket->write(message);
 }
 
