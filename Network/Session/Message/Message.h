@@ -18,12 +18,14 @@ namespace babel {
             Event = 6
         };
 
-        struct __attribute__((packed)) AMessage {
+#include "packed.h"
+        struct AMessage {
             unsigned short magicNumber;
             MessageType type;
             unsigned int bodySize;
             char    *body;
-        };
+        } PACKED;
+#include "endpacked.h"
 
         enum { headerSize = sizeof(unsigned short) + sizeof(MessageType) + sizeof(unsigned int) };
         enum { maxBodySize = 512 };
