@@ -11,9 +11,10 @@ namespace babel {
     class Message {
     public:
         enum    MessageType {
-            Unknown,
-            Connect,
-            Error
+            Unknown = 0,
+            Connect = 1,
+            Error = 2,
+            Event = 6
         };
 
         struct __attribute__((packed)) AMessage {

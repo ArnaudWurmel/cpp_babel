@@ -29,6 +29,9 @@ void    babel::Server::threadLoop() {
 
         while (it != _userList.end()) {
             if (!(*it)->manageData()) {
+                std::string body = "disc " + (*it)->getUsername();
+
+                triggerEvent((*it)->getId(), body);
                 _userList.erase(it++);
                 say("Client ended");
             }
@@ -60,7 +63,21 @@ void    babel::Server::connectUser(babel::User& user, babel::Message& message) {
         user.sendResponse(Message::MessageType::Error, "KO");
     }
     else {
+        user.setUsername(pseudo);
         user.sendResponse(Message::MessageType::Connect, pseudo);
+        std::string     body = "con " + user.getUsername();
+        triggerEvent(user.getId(), body);
+    }
+}
+
+void    babel::Server::triggerEvent(unsigned int senderId, std::string const& body) {
+    std::set<std::unique_ptr<User> >::iterator  it = _userList.begin();
+
+    while (it != _userList.end()) {
+        if ((*it)->getId() != senderId) {
+            (*it)->sendResponse(babel::Message::MessageType::Event, body);
+        }
+        ++it;
     }
 }
 

@@ -28,6 +28,7 @@ namespace   babel {
 
     private:
         void    threadLoop();
+        void    triggerEvent(unsigned int senderId, std::string const&);
 
     private:
         std::unique_ptr<babel::ISocketAcceptor> _socketAcceptor;
