@@ -56,7 +56,7 @@ void    babel::Server::connectUser(babel::User& user, babel::Message& message) {
         }
         ++it;
     }
-    if (taken) {
+    if (taken || pseudo.size() >= babel::Message::maxBodySize) {
         user.sendResponse(Message::MessageType::Error, "KO");
     }
     else {

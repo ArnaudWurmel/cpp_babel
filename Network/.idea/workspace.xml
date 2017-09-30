@@ -27,8 +27,8 @@
       <file leaf-file-name="Server.cpp" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Serveur/Server.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="584">
-              <caret line="62" column="65" lean-forward="true" selection-start-line="62" selection-start-column="65" selection-end-line="62" selection-end-column="65" />
+            <state relative-caret-position="602">
+              <caret line="63" column="5" lean-forward="true" selection-start-line="63" selection-start-column="5" selection-end-line="63" selection-end-column="5" />
               <folding>
                 <element signature="e#43#62#0" expanded="true" />
               </folding>
@@ -53,7 +53,9 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="486">
               <caret line="33" column="2" lean-forward="false" selection-start-line="33" selection-start-column="2" selection-end-line="33" selection-end-column="2" />
-              <folding />
+              <folding>
+                <marker date="1506772152437" expanded="true" signature="426:1443" ph="{...}" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -530,12 +532,12 @@
       <workItem from="1506525737214" duration="12659000" />
       <workItem from="1506604730754" duration="2181000" />
       <workItem from="1506688355406" duration="10829000" />
-      <workItem from="1506712193425" duration="9088000" />
+      <workItem from="1506712193425" duration="9330000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="56472000" />
+    <option name="totallyTimeSpent" value="56714000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-3" y="-1" width="1926" height="1058" extended-state="6" />
@@ -547,7 +549,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.09743041" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.43683085" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1124197" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1280683" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32976446" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -893,7 +895,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="486">
           <caret line="33" column="2" lean-forward="false" selection-start-line="33" selection-start-column="2" selection-end-line="33" selection-end-column="2" />
-          <folding />
+          <folding>
+            <marker date="1506772152437" expanded="true" signature="426:1443" ph="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -937,8 +941,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Serveur/Server.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="584">
-          <caret line="62" column="65" lean-forward="true" selection-start-line="62" selection-start-column="65" selection-end-line="62" selection-end-column="65" />
+        <state relative-caret-position="602">
+          <caret line="63" column="5" lean-forward="true" selection-start-line="63" selection-start-column="5" selection-end-line="63" selection-end-column="5" />
           <folding>
             <element signature="e#43#62#0" expanded="true" />
           </folding>
