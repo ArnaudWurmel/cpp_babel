@@ -15,7 +15,6 @@ void    babel::BoostAcceptor::startAccept() {
 
     _acceptor.async_accept(new_session->getSocket(),
                            boost::bind(&babel::BoostAcceptor::handle_accept, this, new_session, boost::asio::placeholders::error));
-
 }
 
 void    babel::BoostAcceptor::run() {
@@ -24,7 +23,7 @@ void    babel::BoostAcceptor::run() {
 
 bool    babel::BoostAcceptor::haveAWaitingClient() {
     _queueLocker.lock();
-    bool state = _clientQueue.size() > 1 || (_clientQueue.size() > 0 && _clientQueue.front()->connectSocket());
+    bool state = _clientQueue.size() > 1 || (_clientQueue.size() > 0 && _clientQueue.front()->isOpen());
     _queueLocker.unlock();
     return state;
 }
@@ -46,6 +45,7 @@ void    babel::BoostAcceptor::handle_accept(std::shared_ptr<BoostSocket> new_ses
         new_session->startSession();
         _queueLocker.lock();
         _clientQueue.push(new_session);
+        say("Client Connected");
         _queueLocker.unlock();
         _cv.notify_one();
     }

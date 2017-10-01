@@ -24,7 +24,7 @@ namespace babel {
         void    close();
         bool    isOpen() const;
         boost::asio::ip::tcp::socket&   getSocket();
-        bool    connectSocket();
+        bool    connectSocket(std::string const&, unsigned short);
         void    startSession();
         std::string getIpAddr() const;
         void    write(babel::Message);

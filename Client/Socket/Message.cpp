@@ -7,6 +7,14 @@
 #include <iostream>
 #include "Message.h"
 
+babel::Message::Message() : _data(headerSize + maxBodySize + 1, 0) {
+    std::memset(&_message, 0, sizeof(_message));
+    _message.magicNumber = magic_number;
+    _message.body = nullptr;
+    _message.bodySize = 0;
+    _message.type = babel::Message::MessageType::Unknown;
+}
+
 babel::Message::Message(MessageType const& type) : _data(headerSize + maxBodySize + 1, 0) {
     std::memset(&_message, 0, sizeof(_message));
     _message.magicNumber = magic_number;
@@ -15,7 +23,7 @@ babel::Message::Message(MessageType const& type) : _data(headerSize + maxBodySiz
     _message.type = type;
 }
 
-babel::Message::Message(Message const&other) : _data(headerSize + maxBodySize + 1) {
+babel::Message::Message(Message const&other) : _data(headerSize + maxBodySize + 1, 0) {
     _message.magicNumber = other._message.magicNumber;
     _message.bodySize = other._message.bodySize;
     _message.type = other._message.type;
@@ -40,7 +48,7 @@ void    babel::Message::setBody(const char *body, unsigned int bodySize) {
     std::memcpy(_message.body, body, bodySize);
 }
 
-void    *babel::Message::data() {
+char    *babel::Message::data() {
     return _data.data();
 }
 
@@ -49,8 +57,7 @@ unsigned int    babel::Message::getBodySize() const {
 }
 
 bool    babel::Message::decodeHeader() {
-  std::memcpy(&_message, _data.data(), headerSize);
-  std::cout << _message.bodySize << std::endl;
+    std::memcpy(&_message, _data.data(), headerSize);
     if (_message.bodySize > maxBodySize) {
         return false;
     }

@@ -15,8 +15,12 @@ bool    babel::BoostSocket::isOpen() const {
     return _socket.is_open();
 }
 
-bool    babel::BoostSocket::connectSocket() {
-    return _socket.is_open();
+bool    babel::BoostSocket::connectSocket(std::string const& host, unsigned short port) {
+    boost::asio::ip::tcp::endpoint  endpoint(boost::asio::ip::address::from_string(host), port);
+    boost::system::error_code   code;
+
+    _socket.connect(endpoint, code);
+    return !code && _socket.is_open();
 }
 
 void    babel::BoostSocket::close() {

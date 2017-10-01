@@ -50,6 +50,7 @@ void    babel::Server::connectUser(babel::User& user, babel::Message& message) {
     else {
         pseudo = std::string(message.getBody(), message.getBodySize());
     }
+    std::cout << pseudo << std::endl;
    std::set<std::shared_ptr<User> >::const_iterator    it = _userList.begin();
     bool taken = false;
 
@@ -59,7 +60,8 @@ void    babel::Server::connectUser(babel::User& user, babel::Message& message) {
         }
         ++it;
     }
-    if (taken || pseudo.size() >= babel::Message::maxBodySize || validateName(pseudo)) {
+    std::cout << taken << " " << pseudo.size() << " " << validateName(pseudo) << std::endl;
+    if (taken || pseudo.size() >= babel::Message::maxBodySize || !validateName(pseudo)) {
         user.sendResponse(Message::MessageType::Error, "KO");
     }
     else {
