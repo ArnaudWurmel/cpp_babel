@@ -2,8 +2,8 @@
 #include <QApplication>
 #include <QMainWindow>
 #include "Socket/QtSocket.h"
-#include <QGraphicsScene>
-#include <QGraphicsView>
+
+#include "src/Window.h"
 
 int main(int ac, char **av) {
     QApplication    app(ac, av);
@@ -17,18 +17,9 @@ int main(int ac, char **av) {
     std::cout << socket.connectSocket("127.0.0.1", 8080) << std::endl;
     socket.write(message);
 
+    //Instancie class window
+    Window window;
 
-    //SCENE
-    QGraphicsScene scene;
-
-    //VIEW
-    QGraphicsView view(&scene);
-    view.setMinimumHeight(150);
-    view.setMinimumWidth(150);
-    view.setWindowTitle("cpp_babel");
-
-
-
-    view.show();
+    window.show();
     return app.exec();
 }
