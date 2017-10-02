@@ -41,7 +41,7 @@ QGroupBox *Window::createChannelsList()
 
 QGroupBox *Window::createUsersList()
 {
-    QGroupBox *groupBox = new QGroupBox(tr("Channels list"));
+    QGroupBox *groupBox = new QGroupBox(tr("Users list"));
 
     QRadioButton *radio1 = new QRadioButton(tr("&Radio button 1"));
     QRadioButton *radio2 = new QRadioButton(tr("R&adio button 2"));
