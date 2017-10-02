@@ -32,6 +32,8 @@ void    mainThread(babel::DataManager *dataManager) {
     }
 }
 
+#include "src/Window.h"
+
 int main(int ac, char **av) {
     QApplication    app(ac, av);
     std::string host = "127.0.0.1";
@@ -45,6 +47,7 @@ int main(int ac, char **av) {
         babel::DataManager  dataManager(host, port);
         std::thread thread(&mainThread, &dataManager);
 
+<<<<<<< HEAD
         int status = app.exec();
         thread.join();
         return status;
@@ -54,3 +57,16 @@ int main(int ac, char **av) {
         return 1;
     }
 }
+=======
+    message.setBody("Arnaud", 6);
+    socket.startSession();
+    std::cout << socket.connectSocket("127.0.0.1", 8080) << std::endl;
+    socket.write(message);
+
+    //Instancie class window
+    Window window;
+
+    window.show();
+    return app.exec();
+}
+>>>>>>> be2809400ca14373fe8fb161f420349b3da6964a
