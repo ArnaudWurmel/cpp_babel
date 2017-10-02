@@ -27,9 +27,14 @@ namespace babel {
         void    socketConnected();
         void    connectionClosed();
         void    readyRead();
+        void    needFlushing(void);
+
+    signals:
+        void    flushing(void);
 
     private:
         std::unique_ptr<QTcpSocket> _socket;
+        std::queue<babel::Message>  _writingList;
         babel::Message  _readMess;
         bool    _readBody;
     };

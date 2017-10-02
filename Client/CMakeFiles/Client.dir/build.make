@@ -153,9 +153,81 @@ CMakeFiles/Client.dir/Socket/QtSocket.cpp.o.provides: CMakeFiles/Client.dir/Sock
 CMakeFiles/Client.dir/Socket/QtSocket.cpp.o.provides.build: CMakeFiles/Client.dir/Socket/QtSocket.cpp.o
 
 
+CMakeFiles/Client.dir/DataManager/DataManager.cpp.o: CMakeFiles/Client.dir/flags.make
+CMakeFiles/Client.dir/DataManager/DataManager.cpp.o: DataManager/DataManager.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/wurmel_a/rendu/cpp_babel/Client/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/Client.dir/DataManager/DataManager.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Client.dir/DataManager/DataManager.cpp.o -c /home/wurmel_a/rendu/cpp_babel/Client/DataManager/DataManager.cpp
+
+CMakeFiles/Client.dir/DataManager/DataManager.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Client.dir/DataManager/DataManager.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/wurmel_a/rendu/cpp_babel/Client/DataManager/DataManager.cpp > CMakeFiles/Client.dir/DataManager/DataManager.cpp.i
+
+CMakeFiles/Client.dir/DataManager/DataManager.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Client.dir/DataManager/DataManager.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/wurmel_a/rendu/cpp_babel/Client/DataManager/DataManager.cpp -o CMakeFiles/Client.dir/DataManager/DataManager.cpp.s
+
+CMakeFiles/Client.dir/DataManager/DataManager.cpp.o.requires:
+
+.PHONY : CMakeFiles/Client.dir/DataManager/DataManager.cpp.o.requires
+
+CMakeFiles/Client.dir/DataManager/DataManager.cpp.o.provides: CMakeFiles/Client.dir/DataManager/DataManager.cpp.o.requires
+	$(MAKE) -f CMakeFiles/Client.dir/build.make CMakeFiles/Client.dir/DataManager/DataManager.cpp.o.provides.build
+.PHONY : CMakeFiles/Client.dir/DataManager/DataManager.cpp.o.provides
+
+CMakeFiles/Client.dir/DataManager/DataManager.cpp.o.provides.build: CMakeFiles/Client.dir/DataManager/DataManager.cpp.o
+
+
+CMakeFiles/Client.dir/Exceptions/Exception.cpp.o: CMakeFiles/Client.dir/flags.make
+CMakeFiles/Client.dir/Exceptions/Exception.cpp.o: Exceptions/Exception.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/wurmel_a/rendu/cpp_babel/Client/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/Client.dir/Exceptions/Exception.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Client.dir/Exceptions/Exception.cpp.o -c /home/wurmel_a/rendu/cpp_babel/Client/Exceptions/Exception.cpp
+
+CMakeFiles/Client.dir/Exceptions/Exception.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Client.dir/Exceptions/Exception.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/wurmel_a/rendu/cpp_babel/Client/Exceptions/Exception.cpp > CMakeFiles/Client.dir/Exceptions/Exception.cpp.i
+
+CMakeFiles/Client.dir/Exceptions/Exception.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Client.dir/Exceptions/Exception.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/wurmel_a/rendu/cpp_babel/Client/Exceptions/Exception.cpp -o CMakeFiles/Client.dir/Exceptions/Exception.cpp.s
+
+CMakeFiles/Client.dir/Exceptions/Exception.cpp.o.requires:
+
+.PHONY : CMakeFiles/Client.dir/Exceptions/Exception.cpp.o.requires
+
+CMakeFiles/Client.dir/Exceptions/Exception.cpp.o.provides: CMakeFiles/Client.dir/Exceptions/Exception.cpp.o.requires
+	$(MAKE) -f CMakeFiles/Client.dir/build.make CMakeFiles/Client.dir/Exceptions/Exception.cpp.o.provides.build
+.PHONY : CMakeFiles/Client.dir/Exceptions/Exception.cpp.o.provides
+
+CMakeFiles/Client.dir/Exceptions/Exception.cpp.o.provides.build: CMakeFiles/Client.dir/Exceptions/Exception.cpp.o
+
+
+CMakeFiles/Client.dir/Logger/Logger.cpp.o: CMakeFiles/Client.dir/flags.make
+CMakeFiles/Client.dir/Logger/Logger.cpp.o: Logger/Logger.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/wurmel_a/rendu/cpp_babel/Client/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/Client.dir/Logger/Logger.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Client.dir/Logger/Logger.cpp.o -c /home/wurmel_a/rendu/cpp_babel/Client/Logger/Logger.cpp
+
+CMakeFiles/Client.dir/Logger/Logger.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Client.dir/Logger/Logger.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/wurmel_a/rendu/cpp_babel/Client/Logger/Logger.cpp > CMakeFiles/Client.dir/Logger/Logger.cpp.i
+
+CMakeFiles/Client.dir/Logger/Logger.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Client.dir/Logger/Logger.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/wurmel_a/rendu/cpp_babel/Client/Logger/Logger.cpp -o CMakeFiles/Client.dir/Logger/Logger.cpp.s
+
+CMakeFiles/Client.dir/Logger/Logger.cpp.o.requires:
+
+.PHONY : CMakeFiles/Client.dir/Logger/Logger.cpp.o.requires
+
+CMakeFiles/Client.dir/Logger/Logger.cpp.o.provides: CMakeFiles/Client.dir/Logger/Logger.cpp.o.requires
+	$(MAKE) -f CMakeFiles/Client.dir/build.make CMakeFiles/Client.dir/Logger/Logger.cpp.o.provides.build
+.PHONY : CMakeFiles/Client.dir/Logger/Logger.cpp.o.provides
+
+CMakeFiles/Client.dir/Logger/Logger.cpp.o.provides.build: CMakeFiles/Client.dir/Logger/Logger.cpp.o
+
+
 CMakeFiles/Client.dir/Client_automoc.cpp.o: CMakeFiles/Client.dir/flags.make
 CMakeFiles/Client.dir/Client_automoc.cpp.o: Client_automoc.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/wurmel_a/rendu/cpp_babel/Client/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/Client.dir/Client_automoc.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/wurmel_a/rendu/cpp_babel/Client/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/Client.dir/Client_automoc.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Client.dir/Client_automoc.cpp.o -c /home/wurmel_a/rendu/cpp_babel/Client/Client_automoc.cpp
 
 CMakeFiles/Client.dir/Client_automoc.cpp.i: cmake_force
@@ -183,6 +255,9 @@ Client_OBJECTS = \
 "CMakeFiles/Client.dir/Socket/ISocket.cpp.o" \
 "CMakeFiles/Client.dir/Socket/Message.cpp.o" \
 "CMakeFiles/Client.dir/Socket/QtSocket.cpp.o" \
+"CMakeFiles/Client.dir/DataManager/DataManager.cpp.o" \
+"CMakeFiles/Client.dir/Exceptions/Exception.cpp.o" \
+"CMakeFiles/Client.dir/Logger/Logger.cpp.o" \
 "CMakeFiles/Client.dir/Client_automoc.cpp.o"
 
 # External object files for target Client
@@ -192,6 +267,9 @@ Client: CMakeFiles/Client.dir/main.cpp.o
 Client: CMakeFiles/Client.dir/Socket/ISocket.cpp.o
 Client: CMakeFiles/Client.dir/Socket/Message.cpp.o
 Client: CMakeFiles/Client.dir/Socket/QtSocket.cpp.o
+Client: CMakeFiles/Client.dir/DataManager/DataManager.cpp.o
+Client: CMakeFiles/Client.dir/Exceptions/Exception.cpp.o
+Client: CMakeFiles/Client.dir/Logger/Logger.cpp.o
 Client: CMakeFiles/Client.dir/Client_automoc.cpp.o
 Client: CMakeFiles/Client.dir/build.make
 Client: /opt/Qt5.7.0/5.7/gcc_64/lib/libQt5Widgets.so.5.7.0
@@ -199,7 +277,7 @@ Client: /opt/Qt5.7.0/5.7/gcc_64/lib/libQt5Network.so.5.7.0
 Client: /opt/Qt5.7.0/5.7/gcc_64/lib/libQt5Gui.so.5.7.0
 Client: /opt/Qt5.7.0/5.7/gcc_64/lib/libQt5Core.so.5.7.0
 Client: CMakeFiles/Client.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/wurmel_a/rendu/cpp_babel/Client/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking CXX executable Client"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/wurmel_a/rendu/cpp_babel/Client/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Linking CXX executable Client"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/Client.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -211,6 +289,9 @@ CMakeFiles/Client.dir/requires: CMakeFiles/Client.dir/main.cpp.o.requires
 CMakeFiles/Client.dir/requires: CMakeFiles/Client.dir/Socket/ISocket.cpp.o.requires
 CMakeFiles/Client.dir/requires: CMakeFiles/Client.dir/Socket/Message.cpp.o.requires
 CMakeFiles/Client.dir/requires: CMakeFiles/Client.dir/Socket/QtSocket.cpp.o.requires
+CMakeFiles/Client.dir/requires: CMakeFiles/Client.dir/DataManager/DataManager.cpp.o.requires
+CMakeFiles/Client.dir/requires: CMakeFiles/Client.dir/Exceptions/Exception.cpp.o.requires
+CMakeFiles/Client.dir/requires: CMakeFiles/Client.dir/Logger/Logger.cpp.o.requires
 CMakeFiles/Client.dir/requires: CMakeFiles/Client.dir/Client_automoc.cpp.o.requires
 
 .PHONY : CMakeFiles/Client.dir/requires

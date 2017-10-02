@@ -4,6 +4,8 @@
 
 #include <QHostAddress>
 #include <iostream>
+#include <thread>
+#include <QtCore/QCoreApplication>
 #include "QtSocket.h"
 
 babel::QtSocket::QtSocket(std::mutex& locker, std::condition_variable& cv, QObject *parent) : QObject(parent), ISocket(locker, cv) {
@@ -24,6 +26,7 @@ bool    babel::QtSocket::isOpen() const {
 void    babel::QtSocket::startSession() {
     connect(_socket.get(), SIGNAL(readyRead()), this, SLOT(readyRead()));
     connect(_socket.get(), SIGNAL(disconnected()), this, SLOT(connectionClosed()));
+    connect(this, SIGNAL(flushing()), SLOT(needFlushing()));
 }
 
 std::string  babel::QtSocket::getIpAddr() const {
@@ -31,13 +34,12 @@ std::string  babel::QtSocket::getIpAddr() const {
 }
 
 void    babel::QtSocket::write(babel::Message message) {
-    message.encodeHeader();
-    message.encodeData();
-    _socket->write(message.data(), message.totalSize());
-    _socket->waitForBytesWritten(1000);
+    _writingList.push(message);
+    emit flushing();
 }
 
 void    babel::QtSocket::close() {
+    std::cout << "Called" << std::endl;
     _socket->close();
 }
 
@@ -47,6 +49,7 @@ void    babel::QtSocket::socketConnected() {
 
 void    babel::QtSocket::connectionClosed() {
     std::cout << "Socket disconnected" << std::endl;
+    QCoreApplication::quit();
 }
 
 void    babel::QtSocket::readyRead() {
@@ -57,14 +60,24 @@ void    babel::QtSocket::readyRead() {
                 _readBody = true;
                 readyRead();
             }
-            else
+            else {
                 addMessage(_readMess);
+            }
         }
     }
     else {
         _socket->read(_readMess.getBody(), _readMess.getBodySize());
         addMessage(_readMess);
     }
+}
+
+void    babel::QtSocket::needFlushing() {
+    babel::Message  message = _writingList.front();
+
+    message.encodeHeader();
+    message.encodeData();
+    _socket->write(message.data(), message.totalSize());
+    _socket->waitForBytesWritten(1000);
 }
 
 babel::QtSocket::~QtSocket() {

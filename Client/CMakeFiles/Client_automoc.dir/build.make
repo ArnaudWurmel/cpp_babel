@@ -55,7 +55,7 @@ include CMakeFiles/Client_automoc.dir/progress.make
 
 CMakeFiles/Client_automoc:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/wurmel_a/rendu/cpp_babel/Client/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Automatic moc for target Client"
-	/usr/bin/cmake -E cmake_autogen /home/wurmel_a/rendu/cpp_babel/Client/CMakeFiles/Client_automoc.dir/ ""
+	/usr/bin/cmake -E cmake_autogen /home/wurmel_a/rendu/cpp_babel/Client/CMakeFiles/Client_automoc.dir/ Debug
 
 Client_automoc: CMakeFiles/Client_automoc
 Client_automoc: CMakeFiles/Client_automoc.dir/build.make

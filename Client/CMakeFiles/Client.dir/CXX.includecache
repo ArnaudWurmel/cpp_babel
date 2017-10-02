@@ -10,6 +10,42 @@
 moc_QtSocket.cpp
 /home/wurmel_a/rendu/cpp_babel/Client/moc_QtSocket.cpp
 
+/home/wurmel_a/rendu/cpp_babel/Client/DataManager/DataManager.cpp
+DataManager.h
+/home/wurmel_a/rendu/cpp_babel/Client/DataManager/DataManager.h
+../Socket/QtSocket.h
+/home/wurmel_a/rendu/cpp_babel/Client/Socket/QtSocket.h
+../Exceptions/Exception.h
+/home/wurmel_a/rendu/cpp_babel/Client/Exceptions/Exception.h
+
+/home/wurmel_a/rendu/cpp_babel/Client/DataManager/DataManager.h
+map
+-
+../Socket/ISocket.h
+/home/wurmel_a/rendu/cpp_babel/Client/Socket/ISocket.h
+../Logger/Logger.h
+/home/wurmel_a/rendu/cpp_babel/Client/Logger/Logger.h
+
+/home/wurmel_a/rendu/cpp_babel/Client/Exceptions/Exception.cpp
+Exception.h
+/home/wurmel_a/rendu/cpp_babel/Client/Exceptions/Exception.h
+
+/home/wurmel_a/rendu/cpp_babel/Client/Exceptions/Exception.h
+iostream
+-
+exception
+-
+
+/home/wurmel_a/rendu/cpp_babel/Client/Logger/Logger.cpp
+iostream
+-
+Logger.h
+/home/wurmel_a/rendu/cpp_babel/Client/Logger/Logger.h
+
+/home/wurmel_a/rendu/cpp_babel/Client/Logger/Logger.h
+string
+-
+
 /home/wurmel_a/rendu/cpp_babel/Client/Socket/ISocket.cpp
 exception
 -
@@ -51,6 +87,10 @@ QHostAddress
 -
 iostream
 -
+thread
+-
+QtCore/QCoreApplication
+-
 QtSocket.h
 /home/wurmel_a/rendu/cpp_babel/Client/Socket/QtSocket.h
 
@@ -73,8 +113,12 @@ QApplication
 -
 QMainWindow
 -
-Socket/QtSocket.h
-/home/wurmel_a/rendu/cpp_babel/Client/Socket/QtSocket.h
+cstring
+-
+thread
+-
+DataManager/DataManager.h
+/home/wurmel_a/rendu/cpp_babel/Client/DataManager/DataManager.h
 
 /home/wurmel_a/rendu/cpp_babel/Client/moc_QtSocket.cpp
 Socket/QtSocket.h
@@ -83,6 +127,10 @@ QtCore/qbytearray.h
 -
 QtCore/qmetatype.h
 -
+
+/opt/Qt5.7.0/5.7/gcc_64/include/QtCore/QCoreApplication
+qcoreapplication.h
+/opt/Qt5.7.0/5.7/gcc_64/include/QtCore/qcoreapplication.h
 
 /opt/Qt5.7.0/5.7/gcc_64/include/QtCore/QObject
 qobject.h

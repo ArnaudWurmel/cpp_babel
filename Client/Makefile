@@ -163,6 +163,87 @@ Client_automoc.cpp.s:
 	$(MAKE) -f CMakeFiles/Client.dir/build.make CMakeFiles/Client.dir/Client_automoc.cpp.s
 .PHONY : Client_automoc.cpp.s
 
+DataManager/DataManager.o: DataManager/DataManager.cpp.o
+
+.PHONY : DataManager/DataManager.o
+
+# target to build an object file
+DataManager/DataManager.cpp.o:
+	$(MAKE) -f CMakeFiles/Client.dir/build.make CMakeFiles/Client.dir/DataManager/DataManager.cpp.o
+.PHONY : DataManager/DataManager.cpp.o
+
+DataManager/DataManager.i: DataManager/DataManager.cpp.i
+
+.PHONY : DataManager/DataManager.i
+
+# target to preprocess a source file
+DataManager/DataManager.cpp.i:
+	$(MAKE) -f CMakeFiles/Client.dir/build.make CMakeFiles/Client.dir/DataManager/DataManager.cpp.i
+.PHONY : DataManager/DataManager.cpp.i
+
+DataManager/DataManager.s: DataManager/DataManager.cpp.s
+
+.PHONY : DataManager/DataManager.s
+
+# target to generate assembly for a file
+DataManager/DataManager.cpp.s:
+	$(MAKE) -f CMakeFiles/Client.dir/build.make CMakeFiles/Client.dir/DataManager/DataManager.cpp.s
+.PHONY : DataManager/DataManager.cpp.s
+
+Exceptions/Exception.o: Exceptions/Exception.cpp.o
+
+.PHONY : Exceptions/Exception.o
+
+# target to build an object file
+Exceptions/Exception.cpp.o:
+	$(MAKE) -f CMakeFiles/Client.dir/build.make CMakeFiles/Client.dir/Exceptions/Exception.cpp.o
+.PHONY : Exceptions/Exception.cpp.o
+
+Exceptions/Exception.i: Exceptions/Exception.cpp.i
+
+.PHONY : Exceptions/Exception.i
+
+# target to preprocess a source file
+Exceptions/Exception.cpp.i:
+	$(MAKE) -f CMakeFiles/Client.dir/build.make CMakeFiles/Client.dir/Exceptions/Exception.cpp.i
+.PHONY : Exceptions/Exception.cpp.i
+
+Exceptions/Exception.s: Exceptions/Exception.cpp.s
+
+.PHONY : Exceptions/Exception.s
+
+# target to generate assembly for a file
+Exceptions/Exception.cpp.s:
+	$(MAKE) -f CMakeFiles/Client.dir/build.make CMakeFiles/Client.dir/Exceptions/Exception.cpp.s
+.PHONY : Exceptions/Exception.cpp.s
+
+Logger/Logger.o: Logger/Logger.cpp.o
+
+.PHONY : Logger/Logger.o
+
+# target to build an object file
+Logger/Logger.cpp.o:
+	$(MAKE) -f CMakeFiles/Client.dir/build.make CMakeFiles/Client.dir/Logger/Logger.cpp.o
+.PHONY : Logger/Logger.cpp.o
+
+Logger/Logger.i: Logger/Logger.cpp.i
+
+.PHONY : Logger/Logger.i
+
+# target to preprocess a source file
+Logger/Logger.cpp.i:
+	$(MAKE) -f CMakeFiles/Client.dir/build.make CMakeFiles/Client.dir/Logger/Logger.cpp.i
+.PHONY : Logger/Logger.cpp.i
+
+Logger/Logger.s: Logger/Logger.cpp.s
+
+.PHONY : Logger/Logger.s
+
+# target to generate assembly for a file
+Logger/Logger.cpp.s:
+	$(MAKE) -f CMakeFiles/Client.dir/build.make CMakeFiles/Client.dir/Logger/Logger.cpp.s
+.PHONY : Logger/Logger.cpp.s
+
 Socket/ISocket.o: Socket/ISocket.cpp.o
 
 .PHONY : Socket/ISocket.o
@@ -284,6 +365,15 @@ help:
 	@echo "... Client_automoc.o"
 	@echo "... Client_automoc.i"
 	@echo "... Client_automoc.s"
+	@echo "... DataManager/DataManager.o"
+	@echo "... DataManager/DataManager.i"
+	@echo "... DataManager/DataManager.s"
+	@echo "... Exceptions/Exception.o"
+	@echo "... Exceptions/Exception.i"
+	@echo "... Exceptions/Exception.s"
+	@echo "... Logger/Logger.o"
+	@echo "... Logger/Logger.i"
+	@echo "... Logger/Logger.s"
 	@echo "... Socket/ISocket.o"
 	@echo "... Socket/ISocket.i"
 	@echo "... Socket/ISocket.s"

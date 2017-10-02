@@ -5,6 +5,9 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
   "/home/wurmel_a/rendu/cpp_babel/Client/Client_automoc.cpp" "/home/wurmel_a/rendu/cpp_babel/Client/CMakeFiles/Client.dir/Client_automoc.cpp.o"
+  "/home/wurmel_a/rendu/cpp_babel/Client/DataManager/DataManager.cpp" "/home/wurmel_a/rendu/cpp_babel/Client/CMakeFiles/Client.dir/DataManager/DataManager.cpp.o"
+  "/home/wurmel_a/rendu/cpp_babel/Client/Exceptions/Exception.cpp" "/home/wurmel_a/rendu/cpp_babel/Client/CMakeFiles/Client.dir/Exceptions/Exception.cpp.o"
+  "/home/wurmel_a/rendu/cpp_babel/Client/Logger/Logger.cpp" "/home/wurmel_a/rendu/cpp_babel/Client/CMakeFiles/Client.dir/Logger/Logger.cpp.o"
   "/home/wurmel_a/rendu/cpp_babel/Client/Socket/ISocket.cpp" "/home/wurmel_a/rendu/cpp_babel/Client/CMakeFiles/Client.dir/Socket/ISocket.cpp.o"
   "/home/wurmel_a/rendu/cpp_babel/Client/Socket/Message.cpp" "/home/wurmel_a/rendu/cpp_babel/Client/CMakeFiles/Client.dir/Socket/Message.cpp.o"
   "/home/wurmel_a/rendu/cpp_babel/Client/Socket/QtSocket.cpp" "/home/wurmel_a/rendu/cpp_babel/Client/CMakeFiles/Client.dir/Socket/QtSocket.cpp.o"
@@ -17,7 +20,6 @@ set(CMAKE_TARGET_DEFINITIONS_CXX
   "QT_CORE_LIB"
   "QT_GUI_LIB"
   "QT_NETWORK_LIB"
-  "QT_NO_DEBUG"
   "QT_WIDGETS_LIB"
   )
 
