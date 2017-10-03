@@ -68,6 +68,7 @@ void    babel::QtSocket::readyRead() {
     else {
         _socket->read(_readMess.getBody(), _readMess.getBodySize());
         addMessage(_readMess);
+        _readBody = false;
     }
 }
 
