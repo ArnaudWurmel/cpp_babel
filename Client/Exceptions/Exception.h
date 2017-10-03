@@ -15,7 +15,7 @@ namespace babel {
         ~Exception();
 
     public:
-        char const *what() const _GLIBCXX_USE_NOEXCEPT;
+        char const *what() const noexcept;
 
     private:
         std::string _what;
