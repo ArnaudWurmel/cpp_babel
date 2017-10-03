@@ -81,6 +81,7 @@ void    babel::Message::encodeData() {
 }
 
 bool    babel::Message::encodeHeader() {
+    std::memset(_data.data(), 0, _data.size());
     if (_message.bodySize < maxBodySize)
         std::memcpy(_data.data(), &_message, headerSize);
     return _message.bodySize < maxBodySize;

@@ -6,13 +6,19 @@
 #define CLIENT_DATAMANAGER_H
 
 #include <map>
+#include <thread>
+#include <src/Window.h>
 # include "../Socket/ISocket.h"
 # include "../Logger/Logger.h"
 
 namespace babel {
     class DataManager : private babel::Logger {
+
     public:
-        DataManager(std::string const&, unsigned short port);
+        static DataManager *getInstance(DataManager *inst = NULL);
+
+    public:
+        DataManager(Window&, std::string const&, unsigned short port);
         ~DataManager();
 
     public:
@@ -21,23 +27,40 @@ namespace babel {
 
     public:
         bool    connectUser(std::string const& name = "");
+        bool    updateUserList();
+        void    executeAction(babel::Message::MessageType type, std::string const &body);
+        void    startData();
+        void    clearEventList();
 
     private:
-        bool    waitForCommand(babel::Message::MessageType);
-        bool    emptyCommandList();
-
-    private:
+        void    senderLoop();
         void    handleConnect(babel::Message const&);
+        void    handleError(babel::Message const&);
+        void    handleUserList(babel::Message const&);
 
     private:
+        void    handleCon(std::string const&);
+
+    private:
+        bool    _haveInput;
+        Window  &_window;
+        std::queue<babel::Message>  _input;
+        std::mutex  _synchroniser;
+        std::mutex  _socketReading;
+        std::condition_variable _socketWaiter;
+        std::mutex  _lockInput;
+        std::condition_variable _inputWaiter;
+        bool    _continue;
         std::map<babel::Message::MessageType, void (babel::DataManager::*)(babel::Message const&)>    _functionPtrs;
-        std::string _username;
         std::shared_ptr<ISocket>    _socket;
-        std::mutex  _locker;
-        std::condition_variable _cv;
         babel::Message  _sender;
-        std::queue<babel::Message >    _eventList;
+        std::unique_ptr<std::thread>    _dataLooper;
+        std::map<babel::Message::MessageType, void (babel::DataManager::*)(std::string const&) >    _eventPtrs;
+
+    private:
+        std::string _username;
         std::string _lastError;
+        std::queue<babel::Message >    _eventList;
     };
 }
 

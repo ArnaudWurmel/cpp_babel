@@ -12,6 +12,9 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "/home/wurmel_a/rendu/cpp_babel/Client/Socket/Message.cpp" "/home/wurmel_a/rendu/cpp_babel/Client/CMakeFiles/Client.dir/Socket/Message.cpp.o"
   "/home/wurmel_a/rendu/cpp_babel/Client/Socket/QtSocket.cpp" "/home/wurmel_a/rendu/cpp_babel/Client/CMakeFiles/Client.dir/Socket/QtSocket.cpp.o"
   "/home/wurmel_a/rendu/cpp_babel/Client/main.cpp" "/home/wurmel_a/rendu/cpp_babel/Client/CMakeFiles/Client.dir/main.cpp.o"
+  "/home/wurmel_a/rendu/cpp_babel/Client/src/Channel.cpp" "/home/wurmel_a/rendu/cpp_babel/Client/CMakeFiles/Client.dir/src/Channel.cpp.o"
+  "/home/wurmel_a/rendu/cpp_babel/Client/src/User.cpp" "/home/wurmel_a/rendu/cpp_babel/Client/CMakeFiles/Client.dir/src/User.cpp.o"
+  "/home/wurmel_a/rendu/cpp_babel/Client/src/Window.cpp" "/home/wurmel_a/rendu/cpp_babel/Client/CMakeFiles/Client.dir/src/Window.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
