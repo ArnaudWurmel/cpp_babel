@@ -54,12 +54,16 @@ bool    babel::User::manageData() {
     while (_socket->haveAvailableData()) {
         babel::Message  message = _socket->getAvailableMessage();
 
+        std::cout << "Available data" << std::endl;
+        std::cout << "<" << getUsername() << ">" << std::endl;
         if (getUsername().size() > 0 || message.getType() == babel::Message::MessageType::Connect) {
             if (_functionPtrs.find(message.getType()) != _functionPtrs.end()) {
+                std::cout << "Find <" << message.getType() << ">" << " <" << Message::MessageType::Userlist << ">" << std::endl;
                 (_server.*_functionPtrs[message.getType()])(*this, message);
             }
         }
         else {
+            std::cout << "Here" << std::endl;
             sendResponse(babel::Message::MessageType::Error, "KO");
         }
     }

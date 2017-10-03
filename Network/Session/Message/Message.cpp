@@ -50,7 +50,7 @@ unsigned int    babel::Message::getBodySize() const {
 
 bool    babel::Message::decodeHeader() {
   std::memcpy(&_message, _data.data(), headerSize);
-  std::cout << _message.bodySize << std::endl;
+    std::cout << "Decode type: <" << _message.type << ">" << std::endl;
     if (_message.bodySize > maxBodySize) {
         return false;
     }

@@ -24,7 +24,7 @@ Window::Window()
 }
 
 void    Window::start() {
-    executeAction(babel::Message::MessageType::Connect, "Arnaud");
+    executeAction(babel::Message::MessageType::Connect, "Arnaud2");
     executeAction(babel::Message::MessageType::Userlist, "");
 }
 

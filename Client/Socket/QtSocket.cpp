@@ -79,6 +79,7 @@ void    babel::QtSocket::needFlushing() {
     message.encodeData();
     _socket->write(message.data(), message.totalSize());
     _socket->waitForBytesWritten(1000);
+    _writingList.pop();
 }
 
 babel::QtSocket::~QtSocket() {

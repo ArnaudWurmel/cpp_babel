@@ -32,7 +32,6 @@ babel::DataManager::DataManager(Window& win, std::string const& host, unsigned s
 
 void    babel::DataManager::executeAction(babel::Message::MessageType type, std::string const &body) {
     _synchroniser.lock();
-    std::cout << "Type : <" << type << "> body : <" << body.size() << std::endl;
     _sender.setType(type);
     _sender.setBody(body.c_str(), body.size());
     _haveInput = true;
@@ -52,28 +51,21 @@ void    babel::DataManager::senderLoop() {
         if (_haveInput || _inputWaiter.wait_for(lck, std::chrono::milliseconds(200)) == std::cv_status::no_timeout) {
             if (!_continue)
                 return ;
-            std::cout << "Find a input" << std::endl;
             _haveInput = false;
             _sender.encodeHeader();
             _sender.encodeData();
             _socket->write(_sender);
-            std::cout << "Before accept data from socket" << std::endl;
             _socketWaiter.wait(socketData);
-            std::cout << "Get data from socket" << std::endl;
             if (_continue && _socket->haveAvailableData()) {
                 bool    found = false;
                 Message::MessageType mType = _sender.getType();
 
-                std::cout << "Socket available data" << std::endl;
                 while (!found && _continue) {
                     if (_socket->haveAvailableData()) {
                         babel::Message  respond = _socket->getAvailableMessage();
 
-                        std::cout << respond.getBodySize() << std::endl;
-                        std::cout << "Body : <" << std::string(respond.getBody(), respond.getBodySize()) << ">" << std::endl;
                         if (respond.getType() == mType || mType == Message::MessageType::Error) {
                             found = true;
-                            std::cout << respond.getType() << std::endl;
                             if (_functionPtrs.find(respond.getType()) != _functionPtrs.end()) {
                                 (this->*_functionPtrs[mType])(respond);
                             }
@@ -131,7 +123,6 @@ void    babel::DataManager::handleError(babel::Message const& message) {
 }
 
 void    babel::DataManager::handleUserList(babel::Message const& message) {
-    std::cout << "Body size : " << message.getBodySize() << std::endl;
     say(std::string(message.getBody(), message.getBodySize()));
 }
 
@@ -146,7 +137,6 @@ void    babel::DataManager::clearEventList() {
             if (body.find(" ") != std::string::npos) {
                 body = body.substr(0, body.find(" "));
             }
-            std::cout << "Body : <" << body << ">" << std::endl;
         }
     }
 }

@@ -82,6 +82,7 @@ void    babel::Server::userList(babel::User& caller, babel::Message& message) {
         }
         ++it;
     }
+    std::cout << "Res : <" << res << ">" << std::endl;
     caller.sendResponse(babel::Message::MessageType::Userlist, res);
 }
 
