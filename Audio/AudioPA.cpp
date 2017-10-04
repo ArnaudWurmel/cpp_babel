@@ -5,13 +5,13 @@ AudioPA::AudioPA() {
     std::cout << "Error :" << Pa_GetErrorText(err) << std::endl;
   this->state = PA_OFF;
   this->inputParameters.device = Pa_GetDefaultInputDevice();
-  this->inputParameters.channelCount = 2;
+  this->inputParameters.channelCount = NUM_CHANNELS;
   this->inputParameters.sampleFormat = paFloat32;
   this->inputParameters.suggestedLatency =
       Pa_GetDeviceInfo(inputParameters.device)->defaultLowInputLatency;
   this->inputParameters.hostApiSpecificStreamInfo = NULL;
   this->outputParameters.device = Pa_GetDefaultOutputDevice();
-  this->outputParameters.channelCount = 2;
+  this->outputParameters.channelCount = NUM_CHANNELS;
   this->outputParameters.sampleFormat = paFloat32;
   this->outputParameters.suggestedLatency =
       Pa_GetDeviceInfo(outputParameters.device)->defaultLowOutputLatency;
@@ -37,7 +37,7 @@ int AudioPA::callBackFunction(const void *&inputBuffer, void *&outputBuffer,
                               PaStreamCallbackFlags &statusFlags) {
   const SAMPLE *rptr = (const SAMPLE *)inputBuffer;
   SAMPLE *wptr = this->inputSamples;
-  std::cout << framesPerBuffer << std::endl;
+
   if (inputBuffer == NULL) {
     for (unsigned int i = 0; i < framesPerBuffer; i++) {
       *wptr++ = 0;
@@ -84,7 +84,7 @@ static int Pa_callBack(const void *inputBuffer, void *outputBuffer,
 }
 bool AudioPA::startAudio() {
   Pa_OpenStream(&this->stream, &this->inputParameters, &this->outputParameters,
-                SAMPLE_RATE, 480, paClipOff, Pa_callBack, this);
+                SAMPLE_RATE, FRAMES_PER_BUFFER, paClipOff, Pa_callBack, this);
   Pa_StartStream(this->stream);
   this->state = PA_ON;
   return (true);

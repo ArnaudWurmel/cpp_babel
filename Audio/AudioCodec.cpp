@@ -1,8 +1,8 @@
 #include "AudioCodec.hpp"
 
-AudioCodec::AudioCodec() {
-  this->FrameSize = 24000;
-  this->num_channels = 2;
+OpusCodec::OpusCodec() {
+  this->FrameSize = SAMPLE_RATE;
+  this->num_channels = NUM_CHANNELS;
   this->enc = opus_encoder_create(this->FrameSize, this->num_channels,
                                   OPUS_APPLICATION_VOIP, &this->error);
   this->dec =
@@ -10,22 +10,31 @@ AudioCodec::AudioCodec() {
   opus_int32 size;
   opus_encoder_ctl(enc, OPUS_GET_BANDWIDTH(&size));
   this->data_size = size;
+  this->ret = 0;
 }
-AudioCodec::~AudioCodec() {}
-
-float *AudioCodec::AudioDecode(unsigned char *data) {
-  float *frame = new float[this->FrameSize * this->num_channels];
-
-  memset(frame, '\0', sizeof(float) * (this->FrameSize * this->num_channels));
-  int ret = opus_decode_float(this->dec, data, this->ret, frame, 480, 0);
-  return (frame);
+OpusCodec::~OpusCodec() {
+  opus_decoder_destroy(this->dec);
+  opus_encoder_destroy(this->enc);
 }
 
-unsigned char *AudioCodec::AudioEncode(float *frame) {
-  unsigned char *buff = new unsigned char[this->data_size];
+DecodedFrame OpusCodec::AudioDecode(EncodedFrame frame) {
+  DecodedFrame NFrame;
 
-  bzero(buff, this->data_size);
-  this->ret = opus_encode_float(this->enc, frame, 480, buff, this->data_size);
-  std::cout << "Encode len : " << ret << std::endl;
-  return (buff);
+  NFrame.frame.resize(FRAMES_PER_BUFFER * NUM_CHANNELS);
+  NFrame.size = opus_decode_float(this->dec, frame.frame.data(), frame.size,
+                                  NFrame.frame.data(), FRAMES_PER_BUFFER, 0) *
+                NUM_CHANNELS;
+  std::cout << "decode size : " << NFrame.size << '\n';
+  return (NFrame);
+}
+
+EncodedFrame OpusCodec::AudioEncode(DecodedFrame frame) {
+  EncodedFrame NFrame;
+
+  NFrame.frame.resize(frame.size);
+  NFrame.size =
+      opus_encode_float(this->enc, frame.frame.data(), FRAMES_PER_BUFFER,
+                        NFrame.frame.data(), frame.size);
+  std::cout << "Encoded new frame size : " << NFrame.size << '\n';
+  return (NFrame);
 }

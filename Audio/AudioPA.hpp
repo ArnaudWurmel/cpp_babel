@@ -1,14 +1,9 @@
 #ifndef AUDIOPA_HPP
 #define AUDIOPA_HPP_
 
-#include <portaudio.h>
+#include "AudioSettings.h"
 #include <iostream>
-
-typedef float SAMPLE;
-#define SAMPLE_RATE (24000)
-#define NUM_CHANNELS (2)
-
-enum { PA_OFF = 0, PA_ON };
+#include <portaudio.h>
 
 class AudioPA {
 private:
