@@ -2,4 +2,10 @@
 *.gch
 cmake-build-debug/
 .idea/*
-
+*CMakeCache.txt*
+Network/CMakeFiles/*
+Network/CMakeCache.txt
+Network/Makefile
+server/CMakeFiles/
+*~
+*cmake_install.cmake
