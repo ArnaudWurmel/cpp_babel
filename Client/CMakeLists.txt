@@ -1,6 +1,9 @@
 cmake_minimum_required(VERSION 3.5.1)
 project(Client)
 
+if (!WIN32)
+	set(CMAKE_PREFIX_PATH "/opt/Qt5.7.0/5.7/gcc_64/")
+endif()
 set(CMAKE_CXX_STANDARD 11)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)

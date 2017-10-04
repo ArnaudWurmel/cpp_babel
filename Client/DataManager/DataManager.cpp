@@ -123,7 +123,9 @@ void    babel::DataManager::handleError(babel::Message const& message) {
 }
 
 void    babel::DataManager::handleUserList(babel::Message const& message) {
-    say(std::string(message.getBody(), message.getBodySize()));
+    std::string body(message.getBody(), message.getBodySize());
+
+
 }
 
 void    babel::DataManager::clearEventList() {
@@ -142,6 +144,10 @@ void    babel::DataManager::clearEventList() {
 }
 
 void    babel::DataManager::handleCon(std::string const& data) {
+
+}
+
+std::vector<std::string>    babel::DataManager::getTokenFrom(std::string const& body, std::string const &sep) {
 
 }
 

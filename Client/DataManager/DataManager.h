@@ -37,9 +37,10 @@ namespace babel {
         void    handleConnect(babel::Message const&);
         void    handleError(babel::Message const&);
         void    handleUserList(babel::Message const&);
+        void    handleCon(std::string const&);
 
     private:
-        void    handleCon(std::string const&);
+        std::vector<std::string>    getTokenFrom(std::string const&, std::string const& sep);
 
     private:
         bool    _haveInput;
