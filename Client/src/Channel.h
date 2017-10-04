@@ -20,6 +20,9 @@ public:
     void    addUser(std::shared_ptr<User>&);
     std::string const&  getName() const;
 
+protected:
+    void    mousePressEvent(QMouseEvent *);
+
 private:
     std::vector<std::shared_ptr<User> > _userList;
     std::unique_ptr<QVBoxLayout>    _layout;

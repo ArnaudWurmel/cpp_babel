@@ -8,7 +8,7 @@
 # include <QLabel>
 
 class User : public QLabel {
-
+Q_OBJECT
 public:
     User(std::string const&);
     ~User();

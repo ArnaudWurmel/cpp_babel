@@ -20,6 +20,8 @@ babel::DataManager::DataManager(Window& win, std::string const& host, unsigned s
     _functionPtrs.insert(std::make_pair(Message::MessageType::Connect, &babel::DataManager::handleConnect));
     _functionPtrs.insert(std::make_pair(Message::MessageType::Error, &babel::DataManager::handleError));
     _functionPtrs.insert(std::make_pair(Message::MessageType::Userlist, &babel::DataManager::handleUserList));
+
+    _eventPtrs.insert(std::make_pair("con", &babel::DataManager::handleCon));
     say("Using : " + host + ":" + std::to_string(port));
     _socket = std::unique_ptr<ISocket>(new babel::QtSocket(_socketReading, _socketWaiter));
     if (!_socket->connectSocket(host, port)) {
@@ -52,10 +54,12 @@ void    babel::DataManager::senderLoop() {
             if (!_continue)
                 return ;
             _haveInput = false;
-            _sender.encodeHeader();
-            _sender.encodeData();
-            _socket->write(_sender);
-            _socketWaiter.wait(socketData);
+            if (_sender.getType() != Message::MessageType::Unknown) {
+                _sender.encodeHeader();
+                _sender.encodeData();
+                _socket->write(_sender);
+                _socketWaiter.wait(socketData);
+            }
             if (_continue && _socket->haveAvailableData()) {
                 bool    found = false;
                 Message::MessageType mType = _sender.getType();
@@ -64,7 +68,12 @@ void    babel::DataManager::senderLoop() {
                     if (_socket->haveAvailableData()) {
                         babel::Message  respond = _socket->getAvailableMessage();
 
-                        if (respond.getType() == mType || mType == Message::MessageType::Error) {
+                        if (mType == Message::MessageType::Unknown && respond.getType() == babel::Message::MessageType::Event) {
+                            std::cout << "Add a event" << std::endl;
+                            _eventList.push(respond);
+                            found = !_socket->haveAvailableData();
+                        }
+                        else if (mType != babel::Message::Unknown && (respond.getType() == mType || mType == Message::MessageType::Error)) {
                             found = true;
                             if (_functionPtrs.find(respond.getType()) != _functionPtrs.end()) {
                                 (this->*_functionPtrs[mType])(respond);
@@ -77,6 +86,8 @@ void    babel::DataManager::senderLoop() {
                     else
                         _socketWaiter.wait(socketData);
                 }
+                if (mType == babel::Message::Unknown && _eventList.size() > 0)
+                    emit _window.newEvent();
             }
         }
     }
@@ -125,30 +136,59 @@ void    babel::DataManager::handleError(babel::Message const& message) {
 void    babel::DataManager::handleUserList(babel::Message const& message) {
     std::string body(message.getBody(), message.getBodySize());
 
+    std::vector<std::string>    tokenList = getTokenFrom(body, ";");
 
+    if (tokenList.size()) {
+        emit _window.updateUList(tokenList);
+    }
 }
 
 void    babel::DataManager::clearEventList() {
+    std::cout << _eventList.size() << std::endl;
     while (_eventList.size() > 0) {
         babel::Message  message = _eventList.front();
         _eventList.pop();
 
-        if (message.getType() == babel::Message::MessageType::Event) {
-            std::string body(message.getBody(), message.getBodySize());
+        if (message.getType() == babel::Message::MessageType::Event && message.getBodySize() > 0) {
+            std::vector<std::string>    tokenList = getTokenFrom(std::string(message.getBody(), message.getBodySize()), " ");
 
-            if (body.find(" ") != std::string::npos) {
-                body = body.substr(0, body.find(" "));
+            if (tokenList.size() > 0) {
+                if (_eventPtrs.find(tokenList[0]) != _eventPtrs.end()) {
+                    (this->*_eventPtrs[tokenList[0]])(tokenList);
+                }
+                std::cout << tokenList[0] << std::endl;
             }
         }
     }
 }
 
-void    babel::DataManager::handleCon(std::string const& data) {
-
+void    babel::DataManager::handleCon(std::vector<std::string> const& data) {
+    if (data.size() > 1) {
+        emit _window.addUser(data[1]);
+        std::cout << "Con <" << data[1] << ">" << std::endl;
+    }
 }
 
 std::vector<std::string>    babel::DataManager::getTokenFrom(std::string const& body, std::string const &sep) {
+    std::vector<std::string>    tokenList;
+    std::string::const_iterator it;
 
+    it = body.begin();
+    while (it != body.end()) {
+        std::string token;
+
+        while (it != body.end() && sep.find(*it) == std::string::npos) {
+            token += *it;
+            ++it;
+        }
+        if (token.size()) {
+            tokenList.push_back(token);
+            token.clear();
+        }
+        while (it != body.end() && sep.find(*it) != std::string::npos)
+            ++it;
+    }
+    return tokenList;
 }
 
 babel::DataManager::~DataManager() {

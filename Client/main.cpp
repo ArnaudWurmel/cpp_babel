@@ -30,7 +30,7 @@ int main(int ac, char **av) {
     std::unique_ptr<babel::DataManager>  dataManager;
 
     qRegisterMetaType<std::string>("std::string");
-    qRegisterMetaType<std::vector<std::string> >("std::vector<std::string>>");
+    qRegisterMetaType<std::vector<std::string> >("std::vector<std::string>");
     if (!parsingParameters(ac, av, host, port)) {
         std::cerr << "Can't validate parameters" << std::endl;
         return 1;

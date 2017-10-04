@@ -3,6 +3,7 @@
 //
 
 #include <iostream>
+#include <DataManager/DataManager.h>
 #include "Channel.h"
 
 Channel::Channel(std::string const& name) : QGroupBox(name.c_str()), _name(name) {
@@ -18,6 +19,11 @@ void    Channel::addUser(std::shared_ptr<User>& newUser) {
 
 std::string const&  Channel::getName() const {
     return _name;
+}
+
+void    Channel::mousePressEvent(QMouseEvent *) {
+    std::cout << "Mouse pressed" << std::endl;
+    babel::DataManager::getInstance()->executeAction(babel::Message::MessageType::Unknown, "");
 }
 
 Channel::~Channel() {}
