@@ -2,11 +2,12 @@
 #define RECORD_HPP_
 
 #include "AudioSettings.h"
+#include "IAudio.hpp"
 #include <iostream>
 #include <list>
 #include <portaudio.h>
 
-class Record {
+class Record : public IAudio {
 private:
   PaStreamParameters inputParameters;
   int state;
@@ -22,7 +23,7 @@ public:
   Record();
   ~Record();
   DecodedFrame RecordedFrames();
-  bool startRecord();
-  bool stopRecord();
+  bool startAudio();
+  bool stopAudio();
 };
 #endif /* RECORD_HPP_ */

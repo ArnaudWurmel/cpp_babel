@@ -58,7 +58,7 @@ static int Pa_callBack(const void *inputBuffer, void *outputBuffer,
                                 timeInfo, statusFlags);
 }
 
-bool Play::startPlay() {
+bool Play::startAudio() {
   Pa_OpenStream(&this->stream, NULL, &this->outputParameters, SAMPLE_RATE,
                 FRAMES_PER_BUFFER, paClipOff, Pa_callBack, this);
   Pa_StartStream(this->stream);
@@ -66,7 +66,7 @@ bool Play::startPlay() {
   return (true);
 }
 
-bool Play::stopPlay() {
+bool Play::stopAudio() {
   this->state = PA_OFF;
   Pa_CloseStream(this->stream);
   return (true);
