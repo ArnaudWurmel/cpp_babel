@@ -19,7 +19,8 @@ namespace babel {
             Join = 5,
             Event = 6,
             Leave = 7,
-            CreateChannel = 8
+            CreateChannel = 8,
+            Audio = 9
         };
 
 #include "packed.h"
@@ -43,6 +44,7 @@ namespace babel {
 
     public:
         void    setBody(const char *, unsigned int);
+        void    setBody(const unsigned char *, unsigned int);
         char    *getBody();
         char const* getBody() const;
         char    *data();

@@ -8,6 +8,7 @@
 # include <iostream>
 #include <bits/unique_ptr.h>
 #include <vector>
+#include <thread>
 # include "../Socket/IServer.h"
 # include "../Logger/Logger.h"
 
@@ -32,6 +33,10 @@ public:
     void    stopPlayingAUser(std::string const&);
 
 private:
+    void    sendLoop();
+
+private:
+    std::unique_ptr<std::thread>    _thread;
     bool    _running;
     std::unique_ptr<babel::IServer> _server;
     std::string _channelName;

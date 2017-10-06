@@ -7,6 +7,8 @@
 
 # include <QUdpSocket>
 #include <thread>
+#include <mutex>
+#include <queue>
 # include "IServer.h"
 #include "Message.h"
 
@@ -20,23 +22,20 @@ namespace babel {
 
     public:
         void    bind(std::string const&, unsigned short);
-        void    runThread();
         void    stop();
         void    sendFrameTo(std::string const&, babel::Message&);
-
-    private:
-        void    sendLoop();
+        bool    haveAvailableData();
+        babel::Message  getAvailableData();
 
     public slots:
         void    readReady();
 
     private:
+        std::mutex  _queueLocker;
         QUdpSocket  _socket;
         babel::Message  _inMess;
         bool    _readHeader;
-        bool    _continue;
-        std::unique_ptr<std::thread>    _thread;
-        std::vector<std::pair<std::string, babel::Message> >    _frameList;
+        std::queue<std::pair<std::string, babel::Message> >    _frameList;
     };
 }
 

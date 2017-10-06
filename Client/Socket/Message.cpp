@@ -48,6 +48,15 @@ void    babel::Message::setBody(const char *body, unsigned int bodySize) {
     std::memcpy(_message.body, body, bodySize);
 }
 
+void    babel::Message::setBody(const unsigned char *body, unsigned int bodySize) {
+    if (_message.body) {
+        delete[] _message.body;
+    }
+    _message.bodySize = bodySize;
+    _message.body = new char[bodySize];
+    std::memcpy(_message.body, body, bodySize);
+}
+
 char    *babel::Message::data() {
     return _data.data();
 }

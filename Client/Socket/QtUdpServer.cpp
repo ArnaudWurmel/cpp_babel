@@ -5,9 +5,7 @@
 #include "QtUdpServer.h"
 #include "Message.h"
 
-babel::QtUdpServer::QtUdpServer() {
-    _continue = true;
-}
+babel::QtUdpServer::QtUdpServer() {}
 
 void babel::QtUdpServer::bind(std::string const& host, unsigned short port) {
     _readHeader = true;
@@ -15,14 +13,7 @@ void babel::QtUdpServer::bind(std::string const& host, unsigned short port) {
     connect(&_socket, SIGNAL(readyRead()), this, SLOT(readReady()));
 }
 
-void    babel::QtUdpServer::runThread() {
-    std::cout << " ================ INITIALIZED ============== " << std::endl;
-    _thread = std::unique_ptr<std::thread>(new std::thread(&babel::QtUdpServer::sendLoop, this));
-}
-
 void    babel::QtUdpServer::stop() {
-    _continue = false;
-    _thread->join();
     _socket.close();
 }
 
@@ -41,8 +32,10 @@ void    babel::QtUdpServer::readReady() {
     }
     else {
         _socket.readDatagram(_inMess.getBody(), _inMess.getBodySize(), &sender, &port);
-        _frameList.push_back(std::make_pair(sender.toString().toStdString(), _inMess));
-        _readHeader = false;
+        _queueLocker.lock();
+        _frameList.push(std::make_pair(sender.toString().toStdString(), _inMess));
+        _readHeader = true;
+        _queueLocker.unlock();
         std::cout << "Frame readed" << std::endl;
     }
     if (_socket.bytesAvailable() >= babel::Message::headerSize) {
@@ -56,12 +49,19 @@ void    babel::QtUdpServer::sendFrameTo(std::string const& addr, babel::Message&
     _socket.writeDatagram(frame.data(), frame.totalSize(), QHostAddress(addr.c_str()), 8888);
 }
 
-void    babel::QtUdpServer::sendLoop() {
-    while (_continue) {
-    }
+bool    babel::QtUdpServer::haveAvailableData() {
+    _queueLocker.lock();
+    bool state = _frameList.size() > 0;
+    _queueLocker.unlock();
+    return state;
 }
 
-babel::QtUdpServer::~QtUdpServer() {
-    if (_continue)
-        stop();
+babel::Message  babel::QtUdpServer::getAvailableData() {
+    _queueLocker.lock();
+    babel::Message  message = _frameList.front().second;
+    _frameList.pop();
+    _queueLocker.unlock();
+    return message;
 }
+
+babel::QtUdpServer::~QtUdpServer() {}

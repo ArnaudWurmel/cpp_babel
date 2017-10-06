@@ -28,7 +28,7 @@
         <entry file="file://$PROJECT_DIR$/Serveur/Server.cpp">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="373">
-              <caret line="154" column="1" lean-forward="true" selection-start-line="154" selection-start-column="1" selection-end-line="154" selection-end-column="1" />
+              <caret line="154" column="1" lean-forward="false" selection-start-line="154" selection-start-column="1" selection-end-line="154" selection-end-column="1" />
               <folding />
             </state>
           </provider>
@@ -567,15 +567,15 @@
       <workItem from="1507235206868" duration="116000" />
       <workItem from="1507235816782" duration="31000" />
       <workItem from="1507278937040" duration="6711000" />
-      <workItem from="1507299848245" duration="5359000" />
+      <workItem from="1507299848245" duration="5958000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="81190000" />
+    <option name="totallyTimeSpent" value="81789000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="960" y="0" width="960" height="1054" extended-state="4" />
+    <frame x="960" y="0" width="960" height="1054" extended-state="5" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23678415" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -919,7 +919,7 @@
     <entry file="file://$PROJECT_DIR$/Serveur/Server.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="373">
-          <caret line="154" column="1" lean-forward="true" selection-start-line="154" selection-start-column="1" selection-end-line="154" selection-end-column="1" />
+          <caret line="154" column="1" lean-forward="false" selection-start-line="154" selection-start-column="1" selection-end-line="154" selection-end-column="1" />
           <folding />
         </state>
       </provider>

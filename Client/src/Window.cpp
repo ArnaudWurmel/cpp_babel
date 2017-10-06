@@ -179,6 +179,8 @@ void    Window::joinThisChannel(std::vector<std::string> const& userList) {
 
             while (iterator != _uList.end()) {
                 if ((*iterator)->getName().compare(babel::DataManager::getInstance()->getUsername()) == 0) {
+                    if (_soundManager->isRunning())
+                        _soundManager->closeServer();
                     _soundManager->openServer(channelName);
                     std::vector<std::string>::const_iterator itUList = userList.begin();
 

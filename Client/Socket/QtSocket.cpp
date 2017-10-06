@@ -53,7 +53,7 @@ void    babel::QtSocket::connectionClosed() {
 
 void    babel::QtSocket::readyRead() {
     if (!_readBody) {
-        _socket->read(_readMess.data(), babel::Message::headerSize);
+        _socket->read(reinterpret_cast<char *>(_readMess.data()), babel::Message::headerSize);
         if (_readMess.decodeHeader()) {
             if (_readMess.getBodySize() > 0) {
                 _readBody = true;
@@ -68,8 +68,8 @@ void    babel::QtSocket::readyRead() {
         }
     }
     else {
-        _socket->read(_readMess.getBody(), _readMess.getBodySize());
-        std::cout << "Body readed : " << std::string(_readMess.getBody(), _readMess.getBodySize()) << std::endl;
+        _socket->read(reinterpret_cast<char *>(_readMess.getBody()), _readMess.getBodySize());
+        std::cout << "Body readed : " << std::string(reinterpret_cast<char *>(_readMess.getBody()), _readMess.getBodySize()) << std::endl;
         addMessage(_readMess);
         _readBody = false;
         if (_socket->bytesAvailable() >= babel::Message::headerSize)
@@ -82,7 +82,7 @@ void    babel::QtSocket::needFlushing() {
 
     message.encodeHeader();
     message.encodeData();
-    _socket->write(message.data(), message.totalSize());
+    _socket->write(reinterpret_cast<char *>(message.data()), message.totalSize());
     _socket->waitForBytesWritten(1000);
     _writingList.pop();
 }

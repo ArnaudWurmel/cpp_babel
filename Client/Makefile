@@ -136,6 +136,114 @@ Client_automoc/fast:
 	$(MAKE) -f CMakeFiles/Client_automoc.dir/build.make CMakeFiles/Client_automoc.dir/build
 .PHONY : Client_automoc/fast
 
+Audio/AudioCodec.o: Audio/AudioCodec.cpp.o
+
+.PHONY : Audio/AudioCodec.o
+
+# target to build an object file
+Audio/AudioCodec.cpp.o:
+	$(MAKE) -f CMakeFiles/Client.dir/build.make CMakeFiles/Client.dir/Audio/AudioCodec.cpp.o
+.PHONY : Audio/AudioCodec.cpp.o
+
+Audio/AudioCodec.i: Audio/AudioCodec.cpp.i
+
+.PHONY : Audio/AudioCodec.i
+
+# target to preprocess a source file
+Audio/AudioCodec.cpp.i:
+	$(MAKE) -f CMakeFiles/Client.dir/build.make CMakeFiles/Client.dir/Audio/AudioCodec.cpp.i
+.PHONY : Audio/AudioCodec.cpp.i
+
+Audio/AudioCodec.s: Audio/AudioCodec.cpp.s
+
+.PHONY : Audio/AudioCodec.s
+
+# target to generate assembly for a file
+Audio/AudioCodec.cpp.s:
+	$(MAKE) -f CMakeFiles/Client.dir/build.make CMakeFiles/Client.dir/Audio/AudioCodec.cpp.s
+.PHONY : Audio/AudioCodec.cpp.s
+
+Audio/AudioPA.o: Audio/AudioPA.cpp.o
+
+.PHONY : Audio/AudioPA.o
+
+# target to build an object file
+Audio/AudioPA.cpp.o:
+	$(MAKE) -f CMakeFiles/Client.dir/build.make CMakeFiles/Client.dir/Audio/AudioPA.cpp.o
+.PHONY : Audio/AudioPA.cpp.o
+
+Audio/AudioPA.i: Audio/AudioPA.cpp.i
+
+.PHONY : Audio/AudioPA.i
+
+# target to preprocess a source file
+Audio/AudioPA.cpp.i:
+	$(MAKE) -f CMakeFiles/Client.dir/build.make CMakeFiles/Client.dir/Audio/AudioPA.cpp.i
+.PHONY : Audio/AudioPA.cpp.i
+
+Audio/AudioPA.s: Audio/AudioPA.cpp.s
+
+.PHONY : Audio/AudioPA.s
+
+# target to generate assembly for a file
+Audio/AudioPA.cpp.s:
+	$(MAKE) -f CMakeFiles/Client.dir/build.make CMakeFiles/Client.dir/Audio/AudioPA.cpp.s
+.PHONY : Audio/AudioPA.cpp.s
+
+Audio/Play.o: Audio/Play.cpp.o
+
+.PHONY : Audio/Play.o
+
+# target to build an object file
+Audio/Play.cpp.o:
+	$(MAKE) -f CMakeFiles/Client.dir/build.make CMakeFiles/Client.dir/Audio/Play.cpp.o
+.PHONY : Audio/Play.cpp.o
+
+Audio/Play.i: Audio/Play.cpp.i
+
+.PHONY : Audio/Play.i
+
+# target to preprocess a source file
+Audio/Play.cpp.i:
+	$(MAKE) -f CMakeFiles/Client.dir/build.make CMakeFiles/Client.dir/Audio/Play.cpp.i
+.PHONY : Audio/Play.cpp.i
+
+Audio/Play.s: Audio/Play.cpp.s
+
+.PHONY : Audio/Play.s
+
+# target to generate assembly for a file
+Audio/Play.cpp.s:
+	$(MAKE) -f CMakeFiles/Client.dir/build.make CMakeFiles/Client.dir/Audio/Play.cpp.s
+.PHONY : Audio/Play.cpp.s
+
+Audio/Record.o: Audio/Record.cpp.o
+
+.PHONY : Audio/Record.o
+
+# target to build an object file
+Audio/Record.cpp.o:
+	$(MAKE) -f CMakeFiles/Client.dir/build.make CMakeFiles/Client.dir/Audio/Record.cpp.o
+.PHONY : Audio/Record.cpp.o
+
+Audio/Record.i: Audio/Record.cpp.i
+
+.PHONY : Audio/Record.i
+
+# target to preprocess a source file
+Audio/Record.cpp.i:
+	$(MAKE) -f CMakeFiles/Client.dir/build.make CMakeFiles/Client.dir/Audio/Record.cpp.i
+.PHONY : Audio/Record.cpp.i
+
+Audio/Record.s: Audio/Record.cpp.s
+
+.PHONY : Audio/Record.s
+
+# target to generate assembly for a file
+Audio/Record.cpp.s:
+	$(MAKE) -f CMakeFiles/Client.dir/build.make CMakeFiles/Client.dir/Audio/Record.cpp.s
+.PHONY : Audio/Record.cpp.s
+
 Client_automoc.o: Client_automoc.cpp.o
 
 .PHONY : Client_automoc.o
@@ -497,6 +605,18 @@ help:
 	@echo "... edit_cache"
 	@echo "... Client"
 	@echo "... Client_automoc"
+	@echo "... Audio/AudioCodec.o"
+	@echo "... Audio/AudioCodec.i"
+	@echo "... Audio/AudioCodec.s"
+	@echo "... Audio/AudioPA.o"
+	@echo "... Audio/AudioPA.i"
+	@echo "... Audio/AudioPA.s"
+	@echo "... Audio/Play.o"
+	@echo "... Audio/Play.i"
+	@echo "... Audio/Play.s"
+	@echo "... Audio/Record.o"
+	@echo "... Audio/Record.i"
+	@echo "... Audio/Record.s"
 	@echo "... Client_automoc.o"
 	@echo "... Client_automoc.i"
 	@echo "... Client_automoc.s"

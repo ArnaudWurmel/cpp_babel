@@ -116,6 +116,39 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/home/wurmel_a/rendu/cpp_babel/Client/Audio/AudioCodec.cpp">
+			<Option target="Client"/>
+		</Unit>
+		<Unit filename="/home/wurmel_a/rendu/cpp_babel/Client/Audio/AudioCodec.hpp">
+			<Option target="Client"/>
+		</Unit>
+		<Unit filename="/home/wurmel_a/rendu/cpp_babel/Client/Audio/AudioPA.cpp">
+			<Option target="Client"/>
+		</Unit>
+		<Unit filename="/home/wurmel_a/rendu/cpp_babel/Client/Audio/AudioPA.hpp">
+			<Option target="Client"/>
+		</Unit>
+		<Unit filename="/home/wurmel_a/rendu/cpp_babel/Client/Audio/AudioSettings.h">
+			<Option target="Client"/>
+		</Unit>
+		<Unit filename="/home/wurmel_a/rendu/cpp_babel/Client/Audio/IAudio.hpp">
+			<Option target="Client"/>
+		</Unit>
+		<Unit filename="/home/wurmel_a/rendu/cpp_babel/Client/Audio/IAudioCodec.hpp">
+			<Option target="Client"/>
+		</Unit>
+		<Unit filename="/home/wurmel_a/rendu/cpp_babel/Client/Audio/Play.cpp">
+			<Option target="Client"/>
+		</Unit>
+		<Unit filename="/home/wurmel_a/rendu/cpp_babel/Client/Audio/Play.hpp">
+			<Option target="Client"/>
+		</Unit>
+		<Unit filename="/home/wurmel_a/rendu/cpp_babel/Client/Audio/Record.cpp">
+			<Option target="Client"/>
+		</Unit>
+		<Unit filename="/home/wurmel_a/rendu/cpp_babel/Client/Audio/Record.hpp">
+			<Option target="Client"/>
+		</Unit>
 		<Unit filename="/home/wurmel_a/rendu/cpp_babel/Client/Client_automoc.cpp">
 			<Option target="Client"/>
 		</Unit>
