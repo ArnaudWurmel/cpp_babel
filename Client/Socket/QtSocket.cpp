@@ -39,7 +39,6 @@ void    babel::QtSocket::write(babel::Message message) {
 }
 
 void    babel::QtSocket::close() {
-    std::cout << "Called" << std::endl;
     _socket->close();
 }
 
@@ -67,6 +66,7 @@ void    babel::QtSocket::readyRead() {
     }
     else {
         _socket->read(_readMess.getBody(), _readMess.getBodySize());
+        std::cout << "Body readed : " << std::string(_readMess.getBody(), _readMess.getBodySize()) << std::endl;
         addMessage(_readMess);
         _readBody = false;
     }
@@ -78,7 +78,7 @@ void    babel::QtSocket::needFlushing() {
     message.encodeHeader();
     message.encodeData();
     _socket->write(message.data(), message.totalSize());
-    _socket->waitForBytesWritten(1000);
+    std::cout << "Write : " << _socket->waitForBytesWritten(1000) << std::endl;
     _writingList.pop();
 }
 

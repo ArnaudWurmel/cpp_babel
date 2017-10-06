@@ -10,21 +10,25 @@
 # include <memory>
 # include "User.h"
 
+class   Window;
+
 class Channel : public QGroupBox {
 
 public:
-    Channel(std::string const&);
+    Channel(Window&, std::string const&);
     ~Channel();
 
 public:
-    void    addUser(std::shared_ptr<User>&);
+    void    addUser(std::string const&);
+    void    removeUser(std::string const&);
     std::string const&  getName() const;
 
 protected:
     void    mousePressEvent(QMouseEvent *);
 
 private:
-    std::vector<std::shared_ptr<User> > _userList;
+    Window& _window;
+    std::vector<std::unique_ptr<User> > _userList;
     std::unique_ptr<QVBoxLayout>    _layout;
     std::string _name;
 };

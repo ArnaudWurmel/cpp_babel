@@ -24,10 +24,10 @@ namespace babel {
     public:
         std::string const&  getUsername() const;
         std::string const&  getLastError() const;
+        std::string const&  getCurrentChannel() const;
+        void    setCurrentChannelName(std::string const&);
 
     public:
-        bool    connectUser(std::string const& name = "");
-        bool    updateUserList();
         void    executeAction(babel::Message::MessageType type, std::string const &body);
         void    startData();
         void    clearEventList();
@@ -37,8 +37,16 @@ namespace babel {
         void    handleConnect(babel::Message const&);
         void    handleError(babel::Message const&);
         void    handleUserList(babel::Message const&);
+        void    handleChannelList(babel::Message const&);
+        void    handleJoin(babel::Message const&);
 
+        /*
+         * Events
+         */
         void    handleCon(std::vector<std::string> const&);
+        void    handleDisc(std::vector<std::string> const&);
+        void    handleUserJoin(std::vector<std::string> const&);
+        void    handleUserLeave(std::vector<std::string> const&);
 
     public:
         static std::vector<std::string>    getTokenFrom(std::string const&, std::string const& sep);
@@ -62,6 +70,7 @@ namespace babel {
     private:
         std::string _username;
         std::string _lastError;
+        std::string _channelName;
         std::queue<babel::Message >    _eventList;
     };
 }

@@ -8,6 +8,9 @@
 
 babel::Server::Server(unsigned int port) : Logger("Server") {
     Logger::say("Instancied");
+    _channelList.insert(std::unique_ptr<Channel>(new Channel("General")));
+    _channelList.insert(std::unique_ptr<Channel>(new Channel("General2")));
+
     _threadRunning = true;
     _socketAcceptor = std::unique_ptr<ISocketAcceptor>(new babel::BoostAcceptor(port, _haveAction, _cv));
     _acceptorThread = std::unique_ptr<std::thread>(new std::thread(&babel::Server::threadLoop, this));
@@ -45,7 +48,7 @@ void    babel::Server::connectUser(babel::User& user, babel::Message& message) {
     std::string pseudo;
 
     if (message.getBodySize() == 0) {
-        pseudo = "Invité #" + std::to_string(user.getId());
+        pseudo = "Invité#" + std::to_string(user.getId());
     }
     else {
         pseudo = std::string(message.getBody(), message.getBodySize());
@@ -101,6 +104,7 @@ void    babel::Server::channelList(babel::User& caller, babel::Message& message)
         res += ";";
         ++it;
     }
+    say("Res : " + res);
     caller.sendResponse(babel::Message::MessageType::ChannelList, res);
 }
 
@@ -115,11 +119,12 @@ void    babel::Server::joinChannel(babel::User& caller, babel::Message& message)
             ++itUser;
         }
         if (itUser != _userList.end()) {
+            caller.leaveChannel();
             std::string channelName(message.getBody(), message.getBodySize());
             std::set<std::unique_ptr<Channel> >::iterator   it = _channelList.begin();
 
             while (it != _channelList.end()) {
-                if ((*it)->getName().compare(channelName)) {
+                if ((*it)->getName().compare(channelName) == 0) {
                     std::set<std::shared_ptr<User> >::const_iterator    itChannelMember = (*it)->getUserList().begin();
                     std::string res;
 
@@ -131,8 +136,9 @@ void    babel::Server::joinChannel(babel::User& caller, babel::Message& message)
                     (*it)->join(*itUser);
                     std::string triggerBody = "Join " + caller.getUsername() + " " + (*it)->getName();
                     triggerEvent(caller.getId(), triggerBody);
-                    triggerBody = "JoinMe " + caller.getUsername() + " " + caller.getIpAddr();
-                    (*it)->triggerChannelEvent(caller, triggerBody);
+      //              triggerBody = "JoinMe " + caller.getUsername() + " " + caller.getIpAddr();
+  //                  (*it)->triggerChannelEvent(caller, triggerBody);
+                    return ;
                 }
                 ++it;
             }

@@ -17,7 +17,6 @@ std::set<std::shared_ptr<babel::User> > const&  babel::Channel::getUserList() co
 }
 
 bool    babel::Channel::join(std::shared_ptr<babel::User> const& user) {
-    user->leaveChannel();
     _memberList.insert(user);
     return true;
 }

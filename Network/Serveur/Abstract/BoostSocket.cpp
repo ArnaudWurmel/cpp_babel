@@ -92,6 +92,7 @@ void    babel::BoostSocket::write(babel::Message message) {
 
 void    babel::BoostSocket::handleWrite(const boost::system::error_code &error) {
     if (!error) {
+        std::cout << "Writed : " << std::string(_writeList.front().getBody(), _writeList.front().getBodySize());
         say("Sended");
         _mutex.lock();
         _writeList.pop();
