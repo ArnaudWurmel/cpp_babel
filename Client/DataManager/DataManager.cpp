@@ -32,7 +32,6 @@ babel::DataManager::DataManager(Window& win, std::string const& host, unsigned s
     if (!_socket->connectSocket(host, port)) {
         throw NetworkException();
     }
-    _synchroniser.lock();
     _socket->startSession();
     _haveInput = false;
 }
@@ -51,6 +50,7 @@ void    babel::DataManager::startData() {
 }
 
 void    babel::DataManager::senderLoop() {
+    _synchroniser.lock();
     while (_continue) {
         std::unique_lock<std::mutex> lck(_lockInput);
         std::unique_lock<std::mutex>    socketData(_socketReading);
