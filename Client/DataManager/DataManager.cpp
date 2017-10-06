@@ -43,7 +43,6 @@ void    babel::DataManager::executeAction(babel::Message::MessageType type, std:
     _sender.setBody(body.c_str(), body.size());
     _haveInput = true;
     _inputWaiter.notify_one();
-    say("Action added");
     _synchroniser.unlock();
 }
 
@@ -77,7 +76,6 @@ void    babel::DataManager::senderLoop() {
                     if (_socket->haveAvailableData()) {
                         babel::Message  respond = _socket->getAvailableMessage();
 
-                        std::cout << std::string(respond.getBody(), respond.getBodySize()) << std::endl;
                         if (mType == Message::MessageType::Unknown && respond.getType() == babel::Message::MessageType::Event) {
                             _eventList.push(respond);
                             found = !_socket->haveAvailableData();
@@ -92,8 +90,9 @@ void    babel::DataManager::senderLoop() {
                             _eventList.push(respond);
                         }
                     }
-                    else
+                    else {
                         _socketWaiter.wait(socketData);
+                    }
                 }
                 if (mType == babel::Message::Unknown && _eventList.size() > 0)
                     emit _window.newEvent();
@@ -153,7 +152,6 @@ void    babel::DataManager::handleChannelList(babel::Message const& message) {
     std::string body(message.getBody(), message.getBodySize());
     std::vector<std::string>    tokenList = getTokenFrom(body, ";");
 
-    say(body);
     emit _window.updateChanList(tokenList);
 }
 
@@ -168,7 +166,6 @@ void    babel::DataManager::clearEventList() {
         babel::Message  message = _eventList.front();
         _eventList.pop();
 
-        std::cout << std::string(message.getBody(), message.getBodySize()) << std::endl;
         if (message.getType() == babel::Message::MessageType::Event && message.getBodySize() > 0) {
             std::vector<std::string>    tokenList = getTokenFrom(std::string(message.getBody(), message.getBodySize()), " ");
 

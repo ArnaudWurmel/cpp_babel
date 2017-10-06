@@ -136,8 +136,8 @@ void    babel::Server::joinChannel(babel::User& caller, babel::Message& message)
                     (*it)->join(*itUser);
                     std::string triggerBody = "Join " + caller.getUsername() + " " + (*it)->getName();
                     triggerEvent(caller.getId(), triggerBody);
-      //              triggerBody = "JoinMe " + caller.getUsername() + " " + caller.getIpAddr();
-  //                  (*it)->triggerChannelEvent(caller, triggerBody);
+                    triggerBody = "JoinMe " + caller.getUsername() + " " + caller.getIpAddr();
+                    (*it)->triggerChannelEvent(caller, triggerBody);
                     return ;
                 }
                 ++it;

@@ -10,6 +10,7 @@
 #include "../Logger/Logger.h"
 #include "User.h"
 #include "Channel.h"
+#include "SoundManager.h"
 
 class QGroupBox;
 
@@ -63,6 +64,7 @@ private:
     std::unique_ptr<QGroupBox>  _channelList;
     std::unique_ptr<QGroupBox>  _userList;
     std::unique_ptr<QGridLayout>    _grid;
+    std::unique_ptr<SoundManager>   _soundManager;
     std::queue<std::pair<babel::Message::MessageType, std::string> > _actionList;
     std::mutex  _commandExecuting;
     std::vector<std::unique_ptr<User> > _uList;

@@ -32,7 +32,7 @@ namespace babel {
     private:
         void    handleReadHeader(const boost::system::error_code& error);
         void    handleReadBody(const boost::system::error_code& error);
-        void    handleWrite(const boost::system::error_code& error);
+        void    handleWrite(boost::system::error_code const&);
 
 
     private:

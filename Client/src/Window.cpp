@@ -28,6 +28,7 @@ Window::Window() : Logger("Window")
     connect(this, SIGNAL(errored(std::string const&)), SLOT(printError(std::string const&)));
     connect(this, SIGNAL(joinEvent(std::string const&, std::string const&)), SLOT(userJoinAChannel(std::string const&, std::string const&)));
     connect(this, SIGNAL(leaveEvent(std::string const&, std::string const&)), SLOT(userLeaveAChannel(std::string const&, std::string const&)));
+    _soundManager = std::unique_ptr<SoundManager>(new SoundManager());
 }
 
 void    Window::start() {
@@ -50,7 +51,6 @@ void    Window::executeAction(babel::Message::MessageType type, std::string cons
     say(std::string("Add action : ") + std::to_string(type) + " " + body);
     _actionList.push(std::make_pair(type, body));
     if (!onWriting) {
-        say("Write");
         babel::DataManager::getInstance()->executeAction(_actionList.front().first, _actionList.front().second);
     }
 }
@@ -131,7 +131,6 @@ void    Window::updateChannelList(std::vector<std::string> const& tokenList) {
         bool    found = false;
 
         if (channelInfo.size() >= 1) {
-            std::cout << channelInfo[0] << std::endl;
             while (!found && itC != _chanList.end()) {
                 if ((*itC)->getName().compare(*it) == 0) {
                     found = true;
@@ -157,7 +156,6 @@ void    Window::updateChannelList(std::vector<std::string> const& tokenList) {
 void    Window::keepWriting() {
     babel::DataManager::getInstance()->clearEventList();
     if (_actionList.size()) {
-        std::cout << _actionList.size() << std::endl;
         _actionList.pop();
         if (_actionList.size()) {
             babel::DataManager::getInstance()->executeAction(_actionList.front().first, _actionList.front().second);
@@ -181,6 +179,14 @@ void    Window::joinThisChannel(std::vector<std::string> const& userList) {
 
             while (iterator != _uList.end()) {
                 if ((*iterator)->getName().compare(babel::DataManager::getInstance()->getUsername()) == 0) {
+                    _soundManager->openServer(channelName);
+                    std::vector<std::string>::const_iterator itUList = userList.begin();
+
+                    while (itUList != userList.end()) {
+                        std::cout << "User added" << std::endl;
+                        _soundManager->addUser(*itUList);
+                        ++itUList;
+                    }
                     (*it)->addUser((*iterator)->getName());
                     keepWriting();
                     return ;
@@ -200,6 +206,9 @@ void    Window::userQuitChannel(std::string const &username) {
         if ((*it)->getName().compare(username) == 0) {
             std::vector<std::unique_ptr<Channel> >::iterator    itChan = _chanList.begin();
 
+            if (_soundManager->isRunning()) {
+                _soundManager->closeServer();
+            }
             while (itChan != _chanList.end()) {
                 (*itChan)->removeUser((*it)->getName());
                 ++itChan;

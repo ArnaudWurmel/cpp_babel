@@ -80,38 +80,32 @@ void    babel::BoostSocket::write(babel::Message message) {
     _writeList.push(message);
     _writeList.back().encodeHeader();
     _writeList.back().encodeData();
-    _mutex.unlock();
     if (!onWriting) {
         boost::asio::async_write(_socket,
                                  boost::asio::buffer(_writeList.front().data(),
                                                      _writeList.front().totalSize()),
                                  boost::bind(&babel::BoostSocket::handleWrite, shared_from_this(),
                                              boost::asio::placeholders::error));
+        _mutex.unlock();
+        return ;
     }
+    _mutex.unlock();
 }
 
-void    babel::BoostSocket::handleWrite(const boost::system::error_code &error) {
-    if (!error) {
-        std::cout << "Writed : " << std::string(_writeList.front().getBody(), _writeList.front().getBodySize());
-        say("Sended");
-        _mutex.lock();
-        _writeList.pop();
-        if (!_writeList.empty()) {
-            _mutex.unlock();
+void    babel::BoostSocket::handleWrite(boost::system::error_code const& e) {
+    say("Sended");
+    _mutex.lock();
+    _writeList.pop();
+    if (!_writeList.empty()) {
             boost::asio::async_write(_socket,
                                      boost::asio::buffer(_writeList.front().data(),
                                                          _writeList.front().totalSize()),
                                      boost::bind(&babel::BoostSocket::handleWrite, shared_from_this(),
                                                  boost::asio::placeholders::error));
-            return ;
-        }
         _mutex.unlock();
+        return ;
     }
-    else {
-        say(error.message());
-        close();
-    }
+    _mutex.unlock();
 }
-
 
 babel::BoostSocket::~BoostSocket() {}

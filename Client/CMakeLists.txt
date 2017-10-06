@@ -10,7 +10,7 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOMOC ON)
 find_package(Qt5 COMPONENTS Core Widgets Network Gui REQUIRED)
 
-set(SOURCE_FILES main.cpp Socket/ISocket.h Socket/ISocket.cpp Socket/endpacked.h Socket/packed.h Socket/Message.h Socket/Message.cpp Socket/QtSocket.cpp Socket/QtSocket.h DataManager/DataManager.cpp DataManager/DataManager.h Exceptions/Exception.cpp Exceptions/Exception.h Logger/Logger.cpp src/Window.h src/Window.cpp src/Channel.cpp src/Channel.h src/User.cpp src/User.h )
+set(SOURCE_FILES main.cpp Socket/ISocket.h Socket/ISocket.cpp Socket/endpacked.h Socket/packed.h Socket/Message.h Socket/Message.cpp Socket/QtSocket.cpp Socket/QtSocket.h DataManager/DataManager.cpp DataManager/DataManager.h Exceptions/Exception.cpp Exceptions/Exception.h Logger/Logger.cpp src/Window.h src/Window.cpp src/Channel.cpp src/Channel.h src/User.cpp src/User.h src/SoundManager.cpp src/SoundManager.h Socket/QtUdpServer.cpp Socket/QtUdpServer.h Socket/IServer.h)
 add_executable(Client ${SOURCE_FILES})
 target_link_libraries(Client Qt5::Widgets Qt5::Network)
 
