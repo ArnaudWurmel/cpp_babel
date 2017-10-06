@@ -13,12 +13,16 @@
 #include "../Audio/AudioCodec.hpp"
 #include "../Socket/QtUdpServer.h"
 
-SoundManager::User::User(std::string const &name, std::string const& ip) {
+SoundManager::User::User(std::string const &name, std::string const& ip, Play *play) {
     _name = name;
     _ip = ip;
+    _play = std::unique_ptr<Play>(play);
+    _play->startAudio();
 }
 
-SoundManager::User::~User() {}
+SoundManager::User::~User() {
+    _play->stopAudio();
+}
 
 SoundManager::SoundManager() : Logger("SoundManager") {
     say("Initialized");
@@ -30,18 +34,23 @@ bool    SoundManager::openServer(std::string const& channelName) {
     _server = std::unique_ptr<babel::IServer>(new babel::QtUdpServer());
     _server->bind("127.0.0.1", 8888);
     _running = true;
-    _thread = std::unique_ptr<std::thread>(new std::thread(&SoundManager::sendLoop, this));
+    Play    *play = new Play();
+    Record  *rec = new Record;
+    _threadRead = std::unique_ptr<std::thread>(new std::thread(&SoundManager::getLoop, this, play));
+    _thread = std::unique_ptr<std::thread>(new std::thread(&SoundManager::sendLoop, this, rec));
     say("Server runned");
     return true;
 }
 
 void    SoundManager::closeServer() {
     _running = false;
+    _thread->join();
+    _thread.reset();
+    _threadRead->join();
+    _threadRead.reset();
     _server->stop();
     _server.reset();
     _userList.clear();
-    _thread->join();
-    _thread.reset();
     say("Server stopped");
 }
 
@@ -53,7 +62,7 @@ void    SoundManager::addUser(std::string const& uInfo) {
     std::vector<std::string>    userInfoVec = babel::DataManager::getTokenFrom(uInfo, " ");
 
     if (userInfoVec.size() == 2) {
-        _userList.push_back(std::unique_ptr<SoundManager::User>(new SoundManager::User(userInfoVec[0], userInfoVec[1])));
+        _userList.push_back(std::unique_ptr<SoundManager::User>(new SoundManager::User(userInfoVec[0], userInfoVec[1], new Play())));
     }
 }
 
@@ -69,19 +78,41 @@ void    SoundManager::stopPlayingAUser(std::string const& uName) {
     }
 }
 
-void    SoundManager::sendLoop() {
+void    SoundManager::getLoop(Play *playPtr) {
     std::unique_ptr<IAudioCodec>    codec(new OpusCodec());
-    std::unique_ptr<Play> play(new Play());
-    std::unique_ptr<Record> rec(new Record());
 
-    play->startAudio();
+    while (_running) {
+        if (isRunning() && _server->haveAvailableData()) {
+            std::pair<std::string, babel::Message>  frameMessage = _server->getAvailableData();
+
+            if (frameMessage.second.getBodySize() > 0) {
+                EncodedFrame    frame;
+                frame.frame = std::vector<unsigned char>(frameMessage.second.getBody(), frameMessage.second.getBody() + frameMessage.second.getBodySize());
+                frame.size = frameMessage.second.getBodySize();
+                DecodedFrame toPlay = codec->AudioDecode(frame);
+                std::vector<std::unique_ptr<User> >::iterator   it = _userList.begin();
+
+                while (it != _userList.end()) {
+                    std::cout << (*it)->_name << " " << frameMessage.first << std::endl;
+                    if ((*it)->_ip.compare(frameMessage.first) == 0) {
+                        std::cout << "Played" << std::endl;
+                        (*it)->_play->PlayFrames(toPlay);
+                    }
+                    ++it;
+                }
+                Pa_Sleep(5);
+            }
+        }
+    }
+}
+
+void    SoundManager::sendLoop(Record *recPtr) {
+    std::unique_ptr<IAudioCodec>    codec(new OpusCodec());
+    std::unique_ptr<Record> rec(recPtr);
+
     rec->startAudio();
 
     while (_running) {
-        if (!play->isActive()) {
-            play->stopAudio();
-            play->startAudio();
-        }
         if (!rec->isActive()) {
             rec->stopAudio();
             rec->startAudio();
@@ -90,22 +121,11 @@ void    SoundManager::sendLoop() {
         EncodedFrame toSend = codec->AudioEncode(rec->RecordedFrames());
         if (toSend.size > 0) {
             babel::Message  message;
-
             message.setType(babel::Message::MessageType::Audio);
             message.setBody(toSend.frame.data(), toSend.size);
             while (it != _userList.end()) {
                 _server->sendFrameTo((*it)->_ip, message);
                 ++it;
-            }
-        }
-        if (isRunning() && _server->haveAvailableData()) {
-            babel::Message  frameMessage = _server->getAvailableData();
-
-            if (frameMessage.getBodySize() > 0) {
-                EncodedFrame    frame;
-                frame.frame = std::vector<unsigned char>(frameMessage.getBody(), frameMessage.getBody() + frameMessage.getBodySize());
-                frame.size = frameMessage.getBodySize();
-                DecodedFrame toPlay = codec->AudioDecode(frame);
             }
         }
     }

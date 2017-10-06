@@ -9,16 +9,20 @@
 #include <bits/unique_ptr.h>
 #include <vector>
 #include <thread>
+#include <Audio/Play.hpp>
 # include "../Socket/IServer.h"
 # include "../Logger/Logger.h"
+# include "../Audio/Record.hpp"
 
 class SoundManager : public babel::Logger {
 public:
     struct User {
-        User(std::string const&, std::string const&);
+        User(std::string const&, std::string const&, Play *);
         ~User();
+
         std::string _name;
         std::string _ip;
+        std::unique_ptr<Play>   _play;
     };
 
 public:
@@ -33,10 +37,12 @@ public:
     void    stopPlayingAUser(std::string const&);
 
 private:
-    void    sendLoop();
+    void    sendLoop(Record *);
+    void    getLoop(Play *);
 
 private:
     std::unique_ptr<std::thread>    _thread;
+    std::unique_ptr<std::thread>    _threadRead;
     bool    _running;
     std::unique_ptr<babel::IServer> _server;
     std::string _channelName;

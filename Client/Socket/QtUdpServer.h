@@ -25,7 +25,7 @@ namespace babel {
         void    stop();
         void    sendFrameTo(std::string const&, babel::Message&);
         bool    haveAvailableData();
-        babel::Message  getAvailableData();
+        std::pair<std::string, babel::Message>  getAvailableData();
 
     public slots:
         void    readReady();

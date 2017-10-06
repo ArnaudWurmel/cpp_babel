@@ -28,7 +28,7 @@ namespace babel {
             unsigned short magicNumber;
             MessageType type;
             unsigned int bodySize;
-            char    *body;
+            unsigned char    *body;
         } PACKED;
 #include "endpacked.h"
 
@@ -45,9 +45,9 @@ namespace babel {
     public:
         void    setBody(const char *, unsigned int);
         void    setBody(const unsigned char *, unsigned int);
-        char    *getBody();
-        char const* getBody() const;
-        char    *data();
+        unsigned char    *getBody();
+        unsigned char const* getBody() const;
+        unsigned char    *data();
         bool    decodeHeader();
         bool    encodeHeader();
         void    encodeData();
@@ -59,7 +59,7 @@ namespace babel {
     private:
         unsigned int    _bodySize;
         AMessage    _message;
-        std::vector<char>   _data;
+        std::vector<unsigned char>   _data;
     };
 }
 

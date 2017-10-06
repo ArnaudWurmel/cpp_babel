@@ -2,6 +2,7 @@
 // Created by wurmel_a on 06/10/17.
 //
 
+#include <cstring>
 #include "QtUdpServer.h"
 #include "Message.h"
 
@@ -20,33 +21,26 @@ void    babel::QtUdpServer::stop() {
 void    babel::QtUdpServer::readReady() {
     QHostAddress    sender;
     quint16 port;
+    QByteArray  buffer;
 
-    if (_readHeader) {
-        _socket.readDatagram(_inMess.data(), babel::Message::headerSize, &sender, &port);
-        if (_inMess.decodeHeader()) {
-            if (_inMess.getBodySize() > 0) {
-                _readHeader = false;
-                readReady();
-            }
+    while (this->_socket.hasPendingDatagrams()) {
+        buffer.resize(_socket.pendingDatagramSize());
+        _socket.readDatagram(buffer.data(), buffer.size(), &sender, &port);
+        babel::Message  res;
+
+        std::memcpy(res.data(), buffer.data(), buffer.size());
+        if (res.decodeHeader()) {
+            std::memcpy(res.getBody(), buffer.data() + babel::Message::headerSize, buffer.size() - babel::Message::headerSize);
+            _frameList.push(std::make_pair(sender.toString().toStdString(), res));
+            std::cout << "Decoded" << std::endl;
         }
-    }
-    else {
-        _socket.readDatagram(_inMess.getBody(), _inMess.getBodySize(), &sender, &port);
-        _queueLocker.lock();
-        _frameList.push(std::make_pair(sender.toString().toStdString(), _inMess));
-        _readHeader = true;
-        _queueLocker.unlock();
-        std::cout << "Frame readed" << std::endl;
-    }
-    if (_socket.bytesAvailable() >= babel::Message::headerSize) {
-        readReady();
     }
 }
 
 void    babel::QtUdpServer::sendFrameTo(std::string const& addr, babel::Message& frame) {
     frame.encodeHeader();
     frame.encodeData();
-    _socket.writeDatagram(frame.data(), frame.totalSize(), QHostAddress(addr.c_str()), 8888);
+    std::cout << _socket.writeDatagram(reinterpret_cast<char *>(frame.data()), frame.totalSize(), QHostAddress(addr.c_str()), 8887) << std::endl;
 }
 
 bool    babel::QtUdpServer::haveAvailableData() {
@@ -56,9 +50,9 @@ bool    babel::QtUdpServer::haveAvailableData() {
     return state;
 }
 
-babel::Message  babel::QtUdpServer::getAvailableData() {
+std::pair<std::string, babel::Message>  babel::QtUdpServer::getAvailableData() {
     _queueLocker.lock();
-    babel::Message  message = _frameList.front().second;
+    std::pair<std::string, babel::Message>  message = _frameList.front();
     _frameList.pop();
     _queueLocker.unlock();
     return message;

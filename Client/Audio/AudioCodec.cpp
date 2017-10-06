@@ -24,7 +24,6 @@ DecodedFrame OpusCodec::AudioDecode(EncodedFrame frame) {
   NFrame.size = opus_decode_float(this->dec, frame.frame.data(), frame.size,
                                   NFrame.frame.data(), FRAMES_PER_BUFFER, 0) *
                 NUM_CHANNELS;
-  std::cout << "decode size : " << NFrame.size << '\n';
   return (NFrame);
 }
 
@@ -35,6 +34,5 @@ EncodedFrame OpusCodec::AudioEncode(DecodedFrame frame) {
   NFrame.size =
       opus_encode_float(this->enc, frame.frame.data(), FRAMES_PER_BUFFER,
                         NFrame.frame.data(), frame.size);
-  std::cout << "Encoded new frame size : " << NFrame.size << '\n';
   return (NFrame);
 }

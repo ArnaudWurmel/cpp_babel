@@ -27,15 +27,15 @@ babel::Message::Message(Message const&other) : _data(headerSize + maxBodySize + 
     _message.magicNumber = other._message.magicNumber;
     _message.bodySize = other._message.bodySize;
     _message.type = other._message.type;
-    _message.body = new char[_message.bodySize];
+    _message.body = new unsigned char[_message.bodySize];
     std::memcpy(_message.body, other._message.body, _message.bodySize);
 }
 
-char const* babel::Message::getBody() const {
+unsigned char const* babel::Message::getBody() const {
     return _message.body;
 }
 
-char    *babel::Message::getBody() {
+unsigned char    *babel::Message::getBody() {
     return _message.body;
 }
 
@@ -44,7 +44,7 @@ void    babel::Message::setBody(const char *body, unsigned int bodySize) {
         delete[] _message.body;
     }
     _message.bodySize = bodySize;
-    _message.body = new char[bodySize];
+    _message.body = new unsigned char[bodySize];
     std::memcpy(_message.body, body, bodySize);
 }
 
@@ -53,11 +53,11 @@ void    babel::Message::setBody(const unsigned char *body, unsigned int bodySize
         delete[] _message.body;
     }
     _message.bodySize = bodySize;
-    _message.body = new char[bodySize];
+    _message.body = new unsigned char[bodySize];
     std::memcpy(_message.body, body, bodySize);
 }
 
-char    *babel::Message::data() {
+unsigned char    *babel::Message::data() {
     return _data.data();
 }
 
@@ -73,7 +73,7 @@ bool    babel::Message::decodeHeader() {
     if (_message.body) {
         delete[] _message.body;
     }
-    _message.body = new char[_message.bodySize];
+    _message.body = new unsigned char[_message.bodySize];
     std::memset(_message.body, 0, _message.bodySize);
     return true;
 }

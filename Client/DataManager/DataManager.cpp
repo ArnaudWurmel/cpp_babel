@@ -27,6 +27,7 @@ babel::DataManager::DataManager(Window& win, std::string const& host, unsigned s
     _eventPtrs.insert(std::make_pair("disc", &babel::DataManager::handleDisc));
     _eventPtrs.insert(std::make_pair("Join", &babel::DataManager::handleUserJoin));
     _eventPtrs.insert(std::make_pair("Leave", &babel::DataManager::handleUserLeave));
+    _eventPtrs.insert(std::make_pair("JoinMe", &babel::DataManager::handleJoinMe));
     say("Using : " + host + ":" + std::to_string(port));
     _socket = std::unique_ptr<ISocket>(new babel::QtSocket(_socketReading, _socketWaiter));
     if (!_socket->connectSocket(host, port)) {
@@ -128,7 +129,7 @@ void    babel::DataManager::setCurrentChannelName(std::string const& channelName
 
 void    babel::DataManager::handleConnect(babel::Message const& message) {
     if (message.getBodySize() > 0) {
-        _username = std::string(message.getBody(), message.getBodySize());
+        _username = std::string((char *)message.getBody(), message.getBodySize());
         say("Username : " + _username);
         emit _window.userConnected(_username);
     }
@@ -136,28 +137,28 @@ void    babel::DataManager::handleConnect(babel::Message const& message) {
 
 void    babel::DataManager::handleError(babel::Message const& message) {
     if (message.getBodySize() > 0) {
-        _lastError = std::string(message.getBody(), message.getBodySize());
+        _lastError = std::string((char *)message.getBody(), message.getBodySize());
     }
-    emit _window.errored(std::string(message.getBody(), message.getBodySize()));
+    emit _window.errored(std::string((char *)message.getBody(), message.getBodySize()));
 }
 
 void    babel::DataManager::handleUserList(babel::Message const& message) {
-    std::string body(message.getBody(), message.getBodySize());
+    std::string body((char *)message.getBody(), message.getBodySize());
     std::vector<std::string>    tokenList = getTokenFrom(body, ";");
 
     emit _window.updateUList(tokenList);
 }
 
 void    babel::DataManager::handleChannelList(babel::Message const& message) {
-    std::string body(message.getBody(), message.getBodySize());
+    std::string body((char *)message.getBody(), message.getBodySize());
     std::vector<std::string>    tokenList = getTokenFrom(body, ";");
 
     emit _window.updateChanList(tokenList);
 }
 
 void    babel::DataManager::handleJoin(babel::Message const& message) {
-    std::vector<std::string>    body = getTokenFrom(std::string(message.getBody(), message.getBodySize()), ";");
-    say(std::string(message.getBody(), message.getBodySize()));
+    std::vector<std::string>    body = getTokenFrom(std::string((char *)message.getBody(), message.getBodySize()), ";");
+    say(std::string((char *)message.getBody(), message.getBodySize()));
     emit _window.joinSuccess(body);
 }
 
@@ -167,7 +168,7 @@ void    babel::DataManager::clearEventList() {
         _eventList.pop();
 
         if (message.getType() == babel::Message::MessageType::Event && message.getBodySize() > 0) {
-            std::vector<std::string>    tokenList = getTokenFrom(std::string(message.getBody(), message.getBodySize()), " ");
+            std::vector<std::string>    tokenList = getTokenFrom(std::string((char *)message.getBody(), message.getBodySize()), " ");
 
             if (tokenList.size() > 0) {
                 if (_eventPtrs.find(tokenList[0]) != _eventPtrs.end()) {
@@ -225,6 +226,15 @@ void    babel::DataManager::handleUserLeave(std::vector<std::string> const& data
         std::string username = data[1];
 
         emit _window.leaveEvent(username, channelName);
+    }
+}
+
+void    babel::DataManager::handleJoinMe(std::vector<std::string> const& uInfo) {
+    if (uInfo.size() == 3) {
+        std::string username = uInfo[1];
+        std::string ip = uInfo[2];
+
+        emit _window.joinMeEvent(username, ip);
     }
 }
 

@@ -47,6 +47,7 @@ namespace babel {
         void    handleDisc(std::vector<std::string> const&);
         void    handleUserJoin(std::vector<std::string> const&);
         void    handleUserLeave(std::vector<std::string> const&);
+        void    handleJoinMe(std::vector<std::string> const&);
 
     public:
         static std::vector<std::string>    getTokenFrom(std::string const&, std::string const& sep);

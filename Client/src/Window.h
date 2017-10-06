@@ -36,6 +36,7 @@ signals:
     void    errored(std::string const&);
     void    joinEvent(std::string const&, std::string const&);
     void    leaveEvent(std::string const&, std::string const&);
+    void    joinMeEvent(std::string const&, std::string const&);
 
 public:
     void    closeEvent(QCloseEvent *);
@@ -56,6 +57,7 @@ public slots:
     void    userQuitChannel(std::string const& username);
     void    userJoinAChannel(std::string const&, std::string const&);
     void    userLeaveAChannel(std::string const&, std::string const&);
+    void    userJoinMe(std::string const&, std::string const&);
 
 private:
     void    keepWriting();

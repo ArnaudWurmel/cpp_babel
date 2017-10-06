@@ -16,7 +16,6 @@ Record::Record() {
 Record::~Record() {
   if (this->stream && Pa_IsStreamActive(this->stream) == 1)
     Pa_CloseStream(this->stream);
-  Pa_Terminate();
 }
 
 int Record::callBackFunction(const void *&inputBuffer, void *&outputBuffer,

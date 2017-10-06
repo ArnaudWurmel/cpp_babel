@@ -28,6 +28,7 @@ Window::Window() : Logger("Window")
     connect(this, SIGNAL(errored(std::string const&)), SLOT(printError(std::string const&)));
     connect(this, SIGNAL(joinEvent(std::string const&, std::string const&)), SLOT(userJoinAChannel(std::string const&, std::string const&)));
     connect(this, SIGNAL(leaveEvent(std::string const&, std::string const&)), SLOT(userLeaveAChannel(std::string const&, std::string const&)));
+    connect(this, SIGNAL(joinMeEvent(std::string const&, std::string const&)), SLOT(userJoinMe(std::string const&, std::string const&)));
     _soundManager = std::unique_ptr<SoundManager>(new SoundManager());
 }
 
@@ -185,7 +186,6 @@ void    Window::joinThisChannel(std::vector<std::string> const& userList) {
                     std::vector<std::string>::const_iterator itUList = userList.begin();
 
                     while (itUList != userList.end()) {
-                        std::cout << "User added" << std::endl;
                         _soundManager->addUser(*itUList);
                         ++itUList;
                     }
@@ -238,11 +238,16 @@ void    Window::userLeaveAChannel(std::string const& username, std::string const
 
     while (it != _chanList.end()) {
         if ((*it)->getName().compare(channelName) == 0) {
+            _soundManager->stopPlayingAUser(username);
             (*it)->removeUser(username);
             return ;
         }
         ++it;
     }
+}
+
+void    Window::userJoinMe(std::string const& username, std::string const& ipAddr) {
+    _soundManager->addUser(username + " " + ipAddr);
 }
 
 void    Window::haveSomethingToClear() {

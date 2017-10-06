@@ -15,7 +15,6 @@ Play::Play() {
 Play::~Play() {
   if ((this->err = Pa_IsStreamActive(this->stream)) == 1)
     Pa_CloseStream(this->stream);
-  Pa_Terminate();
 }
 
 bool Play::PlayFrames(DecodedFrame frame) {
