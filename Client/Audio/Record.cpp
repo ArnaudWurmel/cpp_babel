@@ -58,11 +58,13 @@ DecodedFrame Record::RecordedFrames() {
 }
 
 bool Record::startAudio() {
-  Pa_OpenStream(&this->stream, &this->inputParameters, NULL, SAMPLE_RATE,
-                FRAMES_PER_BUFFER, paClipOff, Pa_callBack, this);
-  Pa_StartStream(this->stream);
-  this->state = PA_ON;
-  return (true);
+	if (Pa_OpenStream(&this->stream, &this->inputParameters, NULL, SAMPLE_RATE,
+		FRAMES_PER_BUFFER, paClipOff, Pa_callBack, this) != paNoError) {
+		Pa_StartStream(this->stream);
+		this->state = PA_ON;
+		return (true);
+	}
+	return (false);
 }
 bool Record::stopAudio() {
   this->state = PA_OFF;

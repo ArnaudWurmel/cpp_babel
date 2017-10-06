@@ -5,7 +5,7 @@
 #include "IAudio.hpp"
 #include <iostream>
 #include <list>
-#include <portaudio.h>
+#include "portaudio.h"
 
 class Play : public IAudio {
 private:

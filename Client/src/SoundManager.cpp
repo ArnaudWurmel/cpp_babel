@@ -17,7 +17,6 @@ SoundManager::User::User(std::string const &name, std::string const& ip, Play *p
     _name = name;
     _ip = ip;
     _play = std::unique_ptr<Play>(play);
-    _play->startAudio();
 }
 
 SoundManager::User::~User() {
@@ -63,6 +62,8 @@ void    SoundManager::addUser(std::string const& uInfo) {
 
     if (userInfoVec.size() == 2) {
         _userList.push_back(std::unique_ptr<SoundManager::User>(new SoundManager::User(userInfoVec[0], userInfoVec[1], new Play())));
+		if (!_userList.back()->_play->startAudio())
+			_userList.pop_back();
     }
 }
 
