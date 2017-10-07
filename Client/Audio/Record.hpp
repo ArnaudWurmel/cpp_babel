@@ -6,9 +6,11 @@
 #include <iostream>
 #include <list>
 #include <portaudio.h>
+#include <mutex>
 
 class Record : public IAudio {
 private:
+    std::mutex  _lock;
   PaStreamParameters inputParameters;
   int state;
   int err;

@@ -21,8 +21,10 @@ Play::~Play() {
 }
 
 bool Play::PlayFrames(DecodedFrame frame) {
+  _lock.lock();
   if (frame.size > 0)
     this->Fbuffer.push_back(frame);
+  _lock.unlock();
   return (true);
 }
 
@@ -31,10 +33,10 @@ int Play::callBackFunction(const void *&inputBuffer, void *&outputBuffer,
                            const PaStreamCallbackTimeInfo *&timeInfo,
                            PaStreamCallbackFlags &statusFlags) {
 
+  _lock.lock();
   DecodedFrame frame;
   SAMPLE *wptr = (SAMPLE *)outputBuffer;
   int i = 0;
-
   if (this->Fbuffer.size() == 0) {
     wptr = NULL;
     return (paContinue);
@@ -45,6 +47,7 @@ int Play::callBackFunction(const void *&inputBuffer, void *&outputBuffer,
     i++;
   }
   this->Fbuffer.pop_front();
+  _lock.unlock();
   if (this->state == PA_ON)
     return paContinue;
   else

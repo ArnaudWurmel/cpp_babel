@@ -5,6 +5,7 @@
 #include "IAudio.hpp"
 #include <iostream>
 #include <list>
+#include <mutex>
 #include "portaudio.h"
 
 class Play : public IAudio {
@@ -12,6 +13,7 @@ private:
   PaStreamParameters outputParameters;
   int state;
   int err;
+    std::mutex  _lock;
   SAMPLE *outputSamples;
 
 public:
