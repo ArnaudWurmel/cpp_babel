@@ -9,7 +9,6 @@
 babel::QtUdpServer::QtUdpServer() {}
 
 void babel::QtUdpServer::bind(std::string const& host, unsigned short port) {
-    _readHeader = true;
     _socket.bind(QHostAddress(host.c_str()), port);
     connect(&_socket, SIGNAL(readyRead()), this, SLOT(readReady()));
 }
@@ -40,7 +39,7 @@ void    babel::QtUdpServer::readReady() {
 void    babel::QtUdpServer::sendFrameTo(std::string const& addr, babel::Message& frame) {
     frame.encodeHeader();
     frame.encodeData();
-    std::cout << _socket.writeDatagram(reinterpret_cast<char *>(frame.data()), frame.totalSize(), QHostAddress(addr.c_str()), 8887) << std::endl;
+    std::cout << _socket.writeDatagram(reinterpret_cast<char *>(frame.data()), frame.totalSize(), QHostAddress(addr.c_str()), 8888) << std::endl;
 }
 
 bool    babel::QtUdpServer::haveAvailableData() {

@@ -38,7 +38,7 @@ public:
 
 private:
     void    sendLoop(Record *);
-    void    getLoop(Play *);
+    void    getLoop();
 
 private:
     std::unique_ptr<std::thread>    _thread;

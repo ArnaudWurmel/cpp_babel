@@ -32,11 +32,10 @@ SoundManager::SoundManager() : Logger("SoundManager") {
 bool    SoundManager::openServer(std::string const& channelName) {
     _channelName = channelName;
     _server = std::unique_ptr<babel::IServer>(new babel::QtUdpServer());
-    _server->bind("127.0.0.1", 8888);
+    _server->bind("0.0.0.0", 8888);
     _running = true;
-    Play    *play = new Play();
     Record  *rec = new Record;
-    _threadRead = std::unique_ptr<std::thread>(new std::thread(&SoundManager::getLoop, this, play));
+    _threadRead = std::unique_ptr<std::thread>(new std::thread(&SoundManager::getLoop, this));
     _thread = std::unique_ptr<std::thread>(new std::thread(&SoundManager::sendLoop, this, rec));
     say("Server runned");
     return true;
@@ -78,7 +77,7 @@ void    SoundManager::stopPlayingAUser(std::string const& uName) {
     }
 }
 
-void    SoundManager::getLoop(Play *playPtr) {
+void    SoundManager::getLoop() {
     std::unique_ptr<IAudioCodec>    codec(new OpusCodec());
 
     while (_running) {
