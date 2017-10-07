@@ -6,7 +6,7 @@ Play::Play() {
     std::cout << "Error : " << Pa_GetErrorText(err) << '\n';
   this->outputParameters.device = Pa_GetDefaultOutputDevice();
   if (this->outputParameters.device == paNoDevice)
-	  throw (std::exception("yoyo"));
+    return ;
   this->outputParameters.channelCount = 2;
   this->outputParameters.sampleFormat = paFloat32;
   this->outputParameters.suggestedLatency =

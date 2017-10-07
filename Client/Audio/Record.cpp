@@ -7,7 +7,7 @@ Record::Record() {
   this->state = PA_OFF;
   this->inputParameters.device = Pa_GetDefaultInputDevice();
   if (this->inputParameters.device == paNoDevice)
-	  throw (std::exception("yoyo"));
+    return ;
   this->inputParameters.channelCount = 2;
   this->inputParameters.sampleFormat = paFloat32;
   this->inputParameters.suggestedLatency =
