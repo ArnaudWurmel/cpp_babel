@@ -5,8 +5,13 @@
 #include <iostream>
 #include "BoostAcceptor.h"
 
-babel::BoostAcceptor::BoostAcceptor(unsigned int port, std::mutex& haveAction, std::condition_variable& cv) : Logger("BoostAcceptor"), _endpoint(boost::asio::ip::tcp::v4(), port), _acceptor(_ioService, _endpoint), _haveAction(haveAction), _cv(cv) {
-    say("All initialized");
+babel::BoostAcceptor::BoostAcceptor(unsigned int port, std::mutex& haveAction, std::condition_variable& cv) : Logger("BoostAcceptor"), _endpoint(boost::asio::ip::tcp::v4(), port), _acceptor(_ioService), _haveAction(haveAction), _cv(cv) {
+    _acceptor.open(_endpoint.protocol());
+    _acceptor.set_option(boost::asio::ip::tcp::acceptor::reuse_address(true));
+    _acceptor.bind(_endpoint);
+    _acceptor.listen();
+  say("All initialized");
+
     startAccept();
 }
 

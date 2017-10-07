@@ -5,7 +5,7 @@
 // Login   <victorien.fischer@epitech.eu>
 // 
 // Started on  Mon Sep 25 06:33:17 2017 Victorien Fischer
-// Last update Mon Sep 25 13:21:06 2017 Victorien Fischer
+// Last update Sat Oct  7 22:23:00 2017 Arnaud WURMEL
 //
 
 #include "Serveur/Server.h"
@@ -48,6 +48,7 @@ int	printUsage(std::string binary)
 */
 int			main(int ac, char **av)
 {
+  std::cout << sizeof(babel::Message) << std::endl;
   unsigned short	port;
 
     if (ac == 2) {

@@ -23,15 +23,25 @@ namespace babel {
             Audio = 9
         };
 
-#include "packed.h"
-        struct AMessage {
+#ifdef __linux__
+	
+	struct __attribute__((packed)) AMessage {
+            unsigned short magicNumber;
+            MessageType type;
+            unsigned int bodySize;
+            unsigned char    *body;
+        };
+
+#else
+	#include "packed.h"
+	struct AMessage {
             unsigned short magicNumber;
             MessageType type;
             unsigned int bodySize;
             unsigned char    *body;
         } PACKED;
-#include "endpacked.h"
-
+	#include "endpacked.h"
+#endif
         enum { headerSize = sizeof(unsigned short) + sizeof(MessageType) + sizeof(unsigned int) };
         enum { maxBodySize = 512 };
         enum { magic_number = 0x424D };

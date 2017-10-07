@@ -33,8 +33,6 @@ namespace babel {
     private:
         std::mutex  _queueLocker;
         QUdpSocket  _socket;
-        babel::Message  _inMess;
-        bool    _readHeader;
         std::queue<std::pair<std::string, babel::Message> >    _frameList;
     };
 }

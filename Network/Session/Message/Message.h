@@ -22,14 +22,25 @@ namespace babel {
             CreateChannel = 8
         };
 
-#include "packed.h"
-        struct AMessage {
+
+#ifdef __linux__	
+	struct __attribute__((packed)) AMessage {
+            unsigned short magicNumber;
+            MessageType type;
+            unsigned int bodySize;
+            char    *body;
+        };
+
+#else
+	#include "packed.h"
+	struct AMessage {
             unsigned short magicNumber;
             MessageType type;
             unsigned int bodySize;
             char    *body;
         } PACKED;
-#include "endpacked.h"
+	#include "endpacked.h"
+#endif
 
         enum { headerSize = sizeof(unsigned short) + sizeof(MessageType) + sizeof(unsigned int) };
         enum { maxBodySize = 512 };

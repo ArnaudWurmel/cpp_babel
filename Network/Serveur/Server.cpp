@@ -47,6 +47,7 @@ void    babel::Server::threadLoop() {
 void    babel::Server::connectUser(babel::User& user, babel::Message& message) {
     std::string pseudo;
 
+    std::cout << "In connect" << std::endl;
     if (message.getBodySize() == 0) {
         pseudo = "Invité#" + std::to_string(user.getId());
     }

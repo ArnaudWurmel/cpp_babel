@@ -51,12 +51,10 @@ void    babel::DataManager::startData() {
 }
 
 void    babel::DataManager::senderLoop() {
-    //_synchroniser.lock();
     while (_continue) {
         std::unique_lock<std::mutex> lck(_lockInput);
         std::unique_lock<std::mutex>    socketData(_socketReading);
 
-        //_synchroniser.unlock();
         if (_haveInput || _inputWaiter.wait_for(lck, std::chrono::milliseconds(200)) == std::cv_status::no_timeout) {
             if (!_continue)
                 return ;
