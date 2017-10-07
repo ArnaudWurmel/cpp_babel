@@ -82,6 +82,7 @@ void    SoundManager::getLoop() {
     std::unique_ptr<IAudioCodec>    codec(new OpusCodec());
 
     while (_running) {
+        std::cout << "Get" << std::endl;
         if (isRunning() && _server->haveAvailableData()) {
             std::pair<std::string, babel::Message>  frameMessage = _server->getAvailableData();
 
@@ -113,6 +114,7 @@ void    SoundManager::sendLoop(Record *recPtr) {
     rec->startAudio();
 
     while (_running) {
+        std::cout << "Send " << std::endl;
         if (!rec->isActive()) {
             rec->stopAudio();
             rec->startAudio();

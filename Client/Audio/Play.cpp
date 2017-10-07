@@ -33,7 +33,6 @@ int Play::callBackFunction(const void *&inputBuffer, void *&outputBuffer,
                            const PaStreamCallbackTimeInfo *&timeInfo,
                            PaStreamCallbackFlags &statusFlags) {
 
-  _lock.lock();
   DecodedFrame frame;
   SAMPLE *wptr = (SAMPLE *)outputBuffer;
   int i = 0;
@@ -46,6 +45,7 @@ int Play::callBackFunction(const void *&inputBuffer, void *&outputBuffer,
     *wptr++ = frame.frame[i];
     i++;
   }
+  _lock.lock();
   this->Fbuffer.pop_front();
   _lock.unlock();
   if (this->state == PA_ON)
