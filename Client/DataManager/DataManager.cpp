@@ -71,6 +71,7 @@ void    babel::DataManager::senderLoop() {
                 bool    found = false;
                 Message::MessageType mType = _sender.getType();
 
+                _sender.setType(Message::MessageType::Unknown);
                 while (!found && _continue) {
                     if (_socket->haveAvailableData()) {
                         babel::Message  respond = _socket->getAvailableMessage();
