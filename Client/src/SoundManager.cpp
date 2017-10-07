@@ -60,9 +60,11 @@ void    SoundManager::addUser(std::string const& uInfo) {
     std::vector<std::string>    userInfoVec = babel::DataManager::getTokenFrom(uInfo, " ");
 
     if (userInfoVec.size() == 2) {
+        _lock.lock();
         _userList.push_back(std::unique_ptr<SoundManager::User>(new SoundManager::User(userInfoVec[0], userInfoVec[1], new Play())));
 		if (!_userList.back()->_play->startAudio())
 			_userList.pop_back();
+        _lock.unlock();
     }
 }
 
@@ -82,7 +84,6 @@ void    SoundManager::getLoop() {
     std::unique_ptr<IAudioCodec>    codec(new OpusCodec());
 
     while (_running) {
-        std::cout << "Get" << std::endl;
         if (isRunning() && _server->haveAvailableData()) {
             std::pair<std::string, babel::Message>  frameMessage = _server->getAvailableData();
 
@@ -91,16 +92,16 @@ void    SoundManager::getLoop() {
                 frame.frame = std::vector<unsigned char>(frameMessage.second.getBody(), frameMessage.second.getBody() + frameMessage.second.getBodySize());
                 frame.size = frameMessage.second.getBodySize();
                 DecodedFrame toPlay = codec->AudioDecode(frame);
+                _lock.lock();
                 std::vector<std::unique_ptr<User> >::iterator   it = _userList.begin();
 
                 while (it != _userList.end()) {
-                    std::cout << (*it)->_name << " " << frameMessage.first << std::endl;
                     if ((*it)->_ip.compare(frameMessage.first) == 0) {
-                        std::cout << "Played" << std::endl;
                         (*it)->_play->PlayFrames(toPlay);
                     }
                     ++it;
                 }
+                _lock.unlock();
                 Pa_Sleep(5);
             }
         }
@@ -114,7 +115,6 @@ void    SoundManager::sendLoop(Record *recPtr) {
     rec->startAudio();
 
     while (_running) {
-        std::cout << "Send " << std::endl;
         if (!rec->isActive()) {
             rec->stopAudio();
             rec->startAudio();

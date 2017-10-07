@@ -50,11 +50,14 @@ bool    babel::QtUdpServer::haveAvailableData() {
 }
 
 std::pair<std::string, babel::Message>  babel::QtUdpServer::getAvailableData() {
-    _queueLocker.lock();
-    std::pair<std::string, babel::Message>  message = _frameList.front();
-    _frameList.pop();
-    _queueLocker.unlock();
-    return message;
+    if (haveAvailableData()) {
+        _queueLocker.lock();
+        std::pair<std::string, babel::Message>  message = _frameList.front();
+        _frameList.pop();
+        _queueLocker.unlock();
+        return message;
+    }
+    return std::pair<std::string, babel::Message>();
 }
 
 babel::QtUdpServer::~QtUdpServer() {}

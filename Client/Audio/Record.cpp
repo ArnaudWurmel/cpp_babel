@@ -25,17 +25,12 @@ int Record::callBackFunction(const void *&inputBuffer, void *&outputBuffer,
                              unsigned long &framesPerBuffer,
                              const PaStreamCallbackTimeInfo *&timeInfo,
                              PaStreamCallbackFlags &statusFlags) {
-  // const SAMPLE *rptr = (const SAMPLE *)inputBuffer;
-  // SAMPLE *wptr = this->inputSamples;
-
-  _lock.lock();
   DecodedFrame frames;
   frames.size = FRAMES_PER_BUFFER * NUM_CHANNELS;
   frames.frame.assign(reinterpret_cast<const float *>(inputBuffer),
                       reinterpret_cast<const float *>(inputBuffer) +
                           framesPerBuffer * NUM_CHANNELS);
   this->Fbuffer.push_back(frames);
-  _lock.unlock();
   if (this->state == PA_ON)
     return paContinue;
   else
@@ -55,12 +50,10 @@ DecodedFrame Record::RecordedFrames() {
   DecodedFrame f;
 
   f.size = 0;
-  _lock.lock();
   if (this->Fbuffer.size()) {
     f = this->Fbuffer.front();
     this->Fbuffer.pop_front();
   }
-  _lock.unlock();
   return (f);
 }
 

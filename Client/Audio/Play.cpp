@@ -37,7 +37,6 @@ int Play::callBackFunction(const void *&inputBuffer, void *&outputBuffer,
   SAMPLE *wptr = (SAMPLE *)outputBuffer;
   int i = 0;
   if (this->Fbuffer.size() == 0) {
-    wptr = NULL;
     return (paContinue);
   }
   frame = this->Fbuffer.front();
@@ -45,9 +44,7 @@ int Play::callBackFunction(const void *&inputBuffer, void *&outputBuffer,
     *wptr++ = frame.frame[i];
     i++;
   }
-  _lock.lock();
   this->Fbuffer.pop_front();
-  _lock.unlock();
   if (this->state == PA_ON)
     return paContinue;
   else
