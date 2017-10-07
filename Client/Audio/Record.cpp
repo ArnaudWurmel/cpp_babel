@@ -1,10 +1,13 @@
 #include "Record.hpp"
 
 Record::Record() {
+	this->stream = NULL;
   if ((this->err = Pa_Initialize()) != paNoError)
     std::cout << "Error : " << Pa_GetErrorText(err) << '\n';
   this->state = PA_OFF;
   this->inputParameters.device = Pa_GetDefaultInputDevice();
+  if (this->inputParameters.device == paNoDevice)
+	  throw (std::exception("yoyo"));
   this->inputParameters.channelCount = 2;
   this->inputParameters.sampleFormat = paFloat32;
   this->inputParameters.suggestedLatency =
@@ -58,11 +61,13 @@ DecodedFrame Record::RecordedFrames() {
 }
 
 bool Record::startAudio() {
-  Pa_OpenStream(&this->stream, &this->inputParameters, NULL, SAMPLE_RATE,
-                FRAMES_PER_BUFFER, paClipOff, Pa_callBack, this);
-  Pa_StartStream(this->stream);
-  this->state = PA_ON;
-  return (true);
+	if (Pa_OpenStream(&this->stream, &this->inputParameters, NULL, SAMPLE_RATE,
+		FRAMES_PER_BUFFER, paClipOff, Pa_callBack, this) == paNoError && Pa_StartStream(this->stream) == paNoError) {
+		this->state = PA_ON;
+		return (true);
+	}
+	this->stream = NULL;
+	return (false);
 }
 bool Record::stopAudio() {
   this->state = PA_OFF;

@@ -6,7 +6,7 @@
 #define CLIENT_SOUNDMANAGER_H
 
 # include <iostream>
-#include <bits/unique_ptr.h>
+#include <memory>
 #include <vector>
 #include <thread>
 #include <Audio/Play.hpp>

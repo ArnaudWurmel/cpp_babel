@@ -1,9 +1,12 @@
 #include "Play.hpp"
 
 Play::Play() {
+	this->stream = NULL;
   if ((this->err = Pa_Initialize()) != paNoError)
     std::cout << "Error : " << Pa_GetErrorText(err) << '\n';
   this->outputParameters.device = Pa_GetDefaultOutputDevice();
+  if (this->outputParameters.device == paNoDevice)
+	  throw (std::exception("yoyo"));
   this->outputParameters.channelCount = 2;
   this->outputParameters.sampleFormat = paFloat32;
   this->outputParameters.suggestedLatency =
@@ -58,11 +61,13 @@ static int Pa_callBack(const void *inputBuffer, void *outputBuffer,
 }
 
 bool Play::startAudio() {
-  Pa_OpenStream(&this->stream, NULL, &this->outputParameters, SAMPLE_RATE,
-                FRAMES_PER_BUFFER, paClipOff, Pa_callBack, this);
-  Pa_StartStream(this->stream);
-  this->state = PA_ON;
-  return (true);
+	if (Pa_OpenStream(&this->stream, NULL, &this->outputParameters, SAMPLE_RATE,
+		FRAMES_PER_BUFFER, paClipOff, Pa_callBack, this) == paNoError && Pa_StartStream(this->stream) == paNoError) {
+		this->state = PA_ON;
+		return (true);
+	}
+	this->stream = NULL;
+	return (false);
 }
 
 bool Play::stopAudio() {
