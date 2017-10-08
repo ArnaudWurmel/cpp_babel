@@ -1,0 +1,10 @@
+Every function client-side is called by Qt's callback.
+Server side, you need to implement the callback in functionPtr of the class "User".
+
+In order to add some functionnalities you need first implement them server side.
+Add a enum value to Message::MessageType (message.h). For example, if I want to create a new entry point for my API, I can add "DeleteChannel" which will delete a channel specified by body.
+After that, I need to call my entry point from my client. I just have to send a AMessage structure into socket, check the response by adding a callback in DataManager and update the window content if needed (removing the channel for example).
+
+Our design is good because we can use "non-ended" function by removing her from the list of callback. The server/client will treat the message as "Unknown function". This model is made for fast implementation of function and coding.
+
+If you need to implement video transfert, you just have to create your VideoManager and send data throught socket (QtUdpServer) to send and receive data through socket. This give you some frame which you need to play.
