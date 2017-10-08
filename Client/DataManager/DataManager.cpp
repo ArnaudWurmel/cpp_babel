@@ -22,6 +22,7 @@ babel::DataManager::DataManager(Window& win, std::string const& host, unsigned s
     _functionPtrs.insert(std::make_pair(Message::MessageType::Userlist, &babel::DataManager::handleUserList));
     _functionPtrs.insert(std::make_pair(Message::MessageType::ChannelList, &babel::DataManager::handleChannelList));
     _functionPtrs.insert(std::make_pair(Message::MessageType::Join, &babel::DataManager::handleJoin));
+    _functionPtrs.insert(std::make_pair(Message::MessageType::Leave, &babel::DataManager::handleLeave));
 
     _eventPtrs.insert(std::make_pair("con", &babel::DataManager::handleCon));
     _eventPtrs.insert(std::make_pair("disc", &babel::DataManager::handleDisc));
@@ -177,6 +178,10 @@ void    babel::DataManager::clearEventList() {
             }
         }
     }
+}
+
+void    babel::DataManager::handleLeave(babel::Message const& message) {
+    emit _window.leaveEvent(this->getUsername(), this->getCurrentChannel());
 }
 
 void    babel::DataManager::handleCon(std::vector<std::string> const& data) {

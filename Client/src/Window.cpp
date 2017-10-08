@@ -13,9 +13,14 @@ Window::Window() : Logger("Window")
 {
     createChannelsList();
     createUsersList();
+    _leaveChannel = std::unique_ptr<QPushButton>(new QPushButton);
+    _leaveChannel->setIcon(QIcon("resources/end.png"));
+    _leaveChannel->setVisible(false);
+    _leaveChannel->setFixedSize(32, 32);
     _grid = std::unique_ptr<QGridLayout>(new QGridLayout);
     _grid->addWidget(_channelList.get(), 0, 0);
     _grid->addWidget(_userList.get(), 0, 1);
+    _grid->addWidget(_leaveChannel.get(), 1, 0);
     setLayout(_grid.get());
     setWindowTitle(tr("cpp_babel"));
     resize(480, 320);
@@ -29,6 +34,7 @@ Window::Window() : Logger("Window")
     connect(this, SIGNAL(joinEvent(std::string const&, std::string const&)), SLOT(userJoinAChannel(std::string const&, std::string const&)));
     connect(this, SIGNAL(leaveEvent(std::string const&, std::string const&)), SLOT(userLeaveAChannel(std::string const&, std::string const&)));
     connect(this, SIGNAL(joinMeEvent(std::string const&, std::string const&)), SLOT(userJoinMe(std::string const&, std::string const&)));
+    connect(_leaveChannel.get(), SIGNAL(clicked()), this, SLOT(quitChannel()));
     _soundManager = std::unique_ptr<SoundManager>(new SoundManager());
 }
 
@@ -36,6 +42,10 @@ void    Window::start() {
     executeAction(babel::Message::MessageType::Connect, "");
     executeAction(babel::Message::MessageType::Userlist, "");
     executeAction(babel::Message::MessageType::ChannelList, "");
+}
+
+void    Window::quitChannel() {
+    executeAction(babel::Message::MessageType::Leave, "");
 }
 
 void    Window::createChannelsList()
@@ -183,6 +193,7 @@ void    Window::joinThisChannel(std::vector<std::string> const& userList) {
                     if (_soundManager->isRunning())
                         _soundManager->closeServer();
                     _soundManager->openServer(channelName);
+                    _leaveChannel->setVisible(true);
                     std::vector<std::string>::const_iterator itUList = userList.begin();
 
                     while (itUList != userList.end()) {
@@ -204,6 +215,7 @@ void    Window::joinThisChannel(std::vector<std::string> const& userList) {
 void    Window::userQuitChannel(std::string const &username) {
     std::vector<std::unique_ptr<User> >::const_iterator it = _uList.begin();
 
+    _leaveChannel->setVisible(false);
     while (it != _uList.end()) {
         if ((*it)->getName().compare(username) == 0) {
             std::vector<std::unique_ptr<Channel> >::iterator    itChan = _chanList.begin();
@@ -240,6 +252,10 @@ void    Window::userLeaveAChannel(std::string const& username, std::string const
         if ((*it)->getName().compare(channelName) == 0) {
             _soundManager->stopPlayingAUser(username);
             (*it)->removeUser(username);
+            if (babel::DataManager::getInstance()->getUsername().compare(username) == 0) {
+                userQuitChannel(username);
+                keepWriting();
+            }
             return ;
         }
         ++it;

@@ -7,6 +7,7 @@
 #include <mutex>
 #include <Socket/Message.h>
 #include <queue>
+#include <QtWidgets/QPushButton>
 #include "../Logger/Logger.h"
 #include "User.h"
 #include "Channel.h"
@@ -24,6 +25,7 @@ public:
 
 public:
     void    start();
+
 
 signals:
     void    WidgetClosed();
@@ -58,6 +60,7 @@ public slots:
     void    userJoinAChannel(std::string const&, std::string const&);
     void    userLeaveAChannel(std::string const&, std::string const&);
     void    userJoinMe(std::string const&, std::string const&);
+    void    quitChannel();
 
 private:
     void    keepWriting();
@@ -67,6 +70,7 @@ private:
     std::unique_ptr<QGroupBox>  _userList;
     std::unique_ptr<QGridLayout>    _grid;
     std::unique_ptr<SoundManager>   _soundManager;
+    std::unique_ptr<QPushButton>    _leaveChannel;
     std::queue<std::pair<babel::Message::MessageType, std::string> > _actionList;
     std::mutex  _commandExecuting;
     std::vector<std::unique_ptr<User> > _uList;

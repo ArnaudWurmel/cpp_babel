@@ -39,6 +39,7 @@ namespace babel {
         void    handleUserList(babel::Message const&);
         void    handleChannelList(babel::Message const&);
         void    handleJoin(babel::Message const&);
+        void    handleLeave(babel::Message const&);
 
         /*
          * Events
