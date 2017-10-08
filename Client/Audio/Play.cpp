@@ -73,7 +73,9 @@ bool Play::startAudio() {
 
 bool Play::stopAudio() {
   this->state = PA_OFF;
-  Pa_CloseStream(this->stream);
+  if (this->stream) {
+    Pa_CloseStream(this->stream);
+  }
   return (true);
 }
 

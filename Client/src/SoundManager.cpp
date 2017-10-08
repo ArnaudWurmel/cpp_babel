@@ -20,7 +20,6 @@ SoundManager::User::User(std::string const &name, std::string const& ip, Play *p
 }
 
 SoundManager::User::~User() {
-    _play->stopAudio();
 }
 
 SoundManager::SoundManager() : Logger("SoundManager") {
@@ -75,6 +74,7 @@ void    SoundManager::stopPlayingAUser(std::string const& uName) {
 
     while (it != _userList.end()) {
         if ((*it)->_name.compare(uName) == 0) {
+            (*it)->_play->stopAudio();
             _lockGet.lock();
             _lockSend.lock();
             _userList.erase(it);
