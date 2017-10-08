@@ -24,7 +24,7 @@ public:
     ~Window();
 
 public:
-    void    start();
+    void    start(std::string const& username = "");
 
 
 signals:

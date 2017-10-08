@@ -38,8 +38,8 @@ Window::Window() : Logger("Window")
     _soundManager = std::unique_ptr<SoundManager>(new SoundManager());
 }
 
-void    Window::start() {
-    executeAction(babel::Message::MessageType::Connect, "");
+void    Window::start(std::string const& username) {
+    executeAction(babel::Message::MessageType::Connect, username);
     executeAction(babel::Message::MessageType::Userlist, "");
     executeAction(babel::Message::MessageType::ChannelList, "");
 }
