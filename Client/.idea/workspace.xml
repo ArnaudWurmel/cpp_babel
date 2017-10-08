@@ -35,11 +35,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SoundManager.cpp" pinned="false" current-in-tab="true">
+      <file leaf-file-name="SoundManager.cpp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/SoundManager.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="408">
-              <caret line="80" column="30" lean-forward="true" selection-start-line="80" selection-start-column="30" selection-end-line="80" selection-end-column="30" />
+            <state relative-caret-position="336">
+              <caret line="76" column="32" lean-forward="false" selection-start-line="76" selection-start-column="32" selection-end-line="76" selection-end-column="32" />
               <folding>
                 <element signature="e#43#79#0" expanded="true" />
               </folding>
@@ -121,11 +121,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="QtUdpServer.cpp" pinned="false" current-in-tab="false">
+      <file leaf-file-name="QtUdpServer.cpp" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Socket/QtUdpServer.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="342">
-              <caret line="39" column="5" lean-forward="true" selection-start-line="39" selection-start-column="5" selection-end-line="39" selection-end-column="5" />
+            <state relative-caret-position="406">
+              <caret line="35" column="82" lean-forward="false" selection-start-line="35" selection-start-column="82" selection-end-line="35" selection-end-column="82" />
               <folding>
                 <element signature="e#43#61#0" expanded="true" />
               </folding>
@@ -136,8 +136,8 @@
       <file leaf-file-name="Play.cpp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Audio/Play.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="558">
-              <caret line="31" column="26" lean-forward="false" selection-start-line="31" selection-start-column="26" selection-end-line="31" selection-end-column="26" />
+            <state relative-caret-position="316">
+              <caret line="74" column="23" lean-forward="true" selection-start-line="74" selection-start-column="23" selection-end-line="74" selection-end-column="23" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -209,7 +209,6 @@
         <option value="$PROJECT_DIR$/Audio/Record.hpp" />
         <option value="$PROJECT_DIR$/Audio/Play.hpp" />
         <option value="$PROJECT_DIR$/Audio/Record.cpp" />
-        <option value="$PROJECT_DIR$/Socket/QtUdpServer.cpp" />
         <option value="$PROJECT_DIR$/DataManager/DataManager.h" />
         <option value="$PROJECT_DIR$/DataManager/DataManager.cpp" />
         <option value="$PROJECT_DIR$/src/Window.h" />
@@ -218,6 +217,7 @@
         <option value="$PROJECT_DIR$/src/SoundManager.h" />
         <option value="$PROJECT_DIR$/Audio/Play.cpp" />
         <option value="$PROJECT_DIR$/src/SoundManager.cpp" />
+        <option value="$PROJECT_DIR$/Socket/QtUdpServer.cpp" />
       </list>
     </option>
   </component>
@@ -610,12 +610,12 @@
       <workItem from="1507403574816" duration="5000" />
       <workItem from="1507404047680" duration="2072000" />
       <workItem from="1507415505296" duration="2896000" />
-      <workItem from="1507419570565" duration="7152000" />
+      <workItem from="1507419570565" duration="8495000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="134686000" />
+    <option name="totallyTimeSpent" value="136029000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-3" y="-1" width="1926" height="1058" extended-state="6" />
@@ -1016,16 +1016,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Socket/QtUdpServer.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="39" column="5" lean-forward="true" selection-start-line="39" selection-start-column="5" selection-end-line="39" selection-end-column="5" />
-          <folding>
-            <element signature="e#43#61#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/SoundManager.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="478">
@@ -1052,22 +1042,32 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/SoundManager.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="336">
+          <caret line="76" column="32" lean-forward="false" selection-start-line="76" selection-start-column="32" selection-end-line="76" selection-end-column="32" />
+          <folding>
+            <element signature="e#43#79#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Audio/Play.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="558">
-          <caret line="31" column="26" lean-forward="false" selection-start-line="31" selection-start-column="26" selection-end-line="31" selection-end-column="26" />
+        <state relative-caret-position="316">
+          <caret line="74" column="23" lean-forward="true" selection-start-line="74" selection-start-column="23" selection-end-line="74" selection-end-column="23" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/SoundManager.cpp">
+    <entry file="file://$PROJECT_DIR$/Socket/QtUdpServer.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="80" column="30" lean-forward="true" selection-start-line="80" selection-start-column="30" selection-end-line="80" selection-end-column="30" />
+        <state relative-caret-position="406">
+          <caret line="35" column="82" lean-forward="false" selection-start-line="35" selection-start-column="82" selection-end-line="35" selection-end-column="82" />
           <folding>
-            <element signature="e#43#79#0" expanded="true" />
+            <element signature="e#43#61#0" expanded="true" />
           </folding>
         </state>
       </provider>

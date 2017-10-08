@@ -28,14 +28,19 @@ void    babel::QtUdpServer::readReady() {
         _socket.readDatagram(buffer.data(), buffer.size(), &sender, &port);
         babel::Message  res;
 
-        std::cout << "New frame" << std::endl;
-        std::memcpy(res.data(), buffer.data(), buffer.size());
-        if (res.decodeHeader()) {
-            std::memcpy(res.getBody(), buffer.data() + babel::Message::headerSize, buffer.size() - babel::Message::headerSize);
-            _queueLocker.lock();
-            _frameList.push(std::make_pair(sender.toString().toStdString(), res));
-            _queueLocker.unlock();
-            std::cout << "Decoded" << std::endl;
+        if (buffer.size() >= babel::Message::headerSize) {
+            std::cout << "New frame" << std::endl;
+            std::memcpy(res.data(), buffer.data(), buffer.size());
+            if (res.decodeHeader()) {
+                std::memcpy(res.getBody(), buffer.data() + babel::Message::headerSize, buffer.size() - babel::Message::headerSize);
+                std::cout << res.totalSize() << " " << buffer.size() << std::endl;
+                if (res.totalSize() == buffer.size()) {
+                    _queueLocker.lock();
+                    _frameList.push(std::make_pair(sender.toString().toStdString(), res));
+                    _queueLocker.unlock();
+                }
+                std::cout << "Decoded" << std::endl;
+            }
         }
     }
 }
