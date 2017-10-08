@@ -3,6 +3,7 @@
 
 class IAudio {
 public:
+    virtual ~IAudio() {}
   virtual bool startAudio() = 0;
   virtual bool stopAudio() = 0;
     virtual bool isActive() const = 0;

@@ -9,3 +9,11 @@ Network/Makefile
 server/CMakeFiles/
 *~
 *cmake_install.cmake
+Client/.idea/
+Client/CMakeFiles/
+Client/Client_automoc.cpp
+Client/Client_automoc.dir/
+Client/moc_QtSocket.cpp
+Client/moc_QtUdpServer.cpp
+Client/moc_User.cpp
+Client/moc_Window.cpp
