@@ -9,10 +9,8 @@ set(CMAKE_AUTOMOC ON)
 # Definitions
 add_definitions(-DQT_PATH=${QT_PATH})
 add_definitions(-DOPUS_LIB=${OPUS_LIB})
-add_definitions(-DOPUS_DLL=${OPUS_DLL})
 add_definitions(-DOPUS_INCLUDE=${OPUS_INCLUDE})
 add_definitions(-DPORTAUDIO_LIB=${PORTAUDIO_LIB})
-add_definitions(-DPORTAUDIO_DLL=${PORTAUDIO_DLL})
 add_definitions(-DPORTAUDIO_INCLUDE=$PORTAUDIO_INCLUDE})
 
 # Sources
@@ -23,6 +21,7 @@ target_link_libraries(Client Qt5::Widgets Qt5::Network)
 # Finding libraries
 find_package(Qt5 COMPONENTS Core Widgets Network Gui REQUIRED)
 if (WIN32)
+	message(STATUS "Don't forget to indicate -DOPUS_LIB=path_to_opus.lib  -DOPUS_INCLUDE=path_to_opus_include   -DPORTAUDIO_LIB=path_to_pa.lib   -DPORTAUDIO_INCLUDE=path_to_pa_include")
 	target_link_libraries(Client ${PORTAUDIO_LIB})
 	target_link_libraries(Client ${OPUS_LIB})
 	set (OPUS_HEADERS
@@ -41,6 +40,10 @@ if (WIN32)
 		TARGET Client POST_BUILD
 	        COMMAND ${CMAKE_COMMAND} -E remove_directory
                		${CMAKE_CURRENT_SOURCE_DIR}/opus)
+	add_custom_command(
+		TARGET Client PRE_BUILD
+		COMMAND ${CMAKE_COMMAND} -E copy_directory
+		${CMAKE_SOURCE_DIR}/resources $<TARGET_FILE_DIR:Client>/resources)
 	include_directories(${PORTAUDIO_INCLUDE})
 else(WIN32)
 	target_link_libraries(Client portaudio opus)
