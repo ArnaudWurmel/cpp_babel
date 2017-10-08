@@ -47,7 +47,8 @@ private:
     std::unique_ptr<babel::IServer> _server;
     std::string _channelName;
     std::vector<std::unique_ptr<SoundManager::User> >   _userList;
-    std::mutex  _lock;
+    std::mutex  _lockGet;
+    std::mutex  _lockSend;
 };
 
 

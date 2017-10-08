@@ -60,11 +60,13 @@ void    SoundManager::addUser(std::string const& uInfo) {
     std::vector<std::string>    userInfoVec = babel::DataManager::getTokenFrom(uInfo, " ");
 
     if (userInfoVec.size() == 2) {
-        _lock.lock();
+        _lockGet.lock();
+        _lockSend.lock();
         _userList.push_back(std::unique_ptr<SoundManager::User>(new SoundManager::User(userInfoVec[0], userInfoVec[1], new Play())));
 		if (!_userList.back()->_play->startAudio())
 			_userList.pop_back();
-        _lock.unlock();
+        _lockGet.unlock();
+        _lockSend.unlock();
     }
 }
 
@@ -73,7 +75,11 @@ void    SoundManager::stopPlayingAUser(std::string const& uName) {
 
     while (it != _userList.end()) {
         if ((*it)->_name.compare(uName) == 0) {
+            _lockGet.lock();
+            _lockSend.lock();
             _userList.erase(it);
+            _lockGet.unlock();
+            _lockSend.unlock();
             return ;
         }
         ++it;
@@ -93,7 +99,7 @@ void    SoundManager::getLoop() {
                 frame.frame = std::vector<unsigned char>(frameMessage.second.getBody(), frameMessage.second.getBody() + frameMessage.second.getBodySize());
                 frame.size = frameMessage.second.getBodySize();
                 DecodedFrame toPlay = codec->AudioDecode(frame);
-                _lock.lock();
+                _lockGet.lock();
                 std::vector<std::unique_ptr<User> >::iterator   it = _userList.begin();
 
                 while (it != _userList.end()) {
@@ -102,7 +108,7 @@ void    SoundManager::getLoop() {
                     }
                     ++it;
                 }
-                _lock.unlock();
+                _lockGet.unlock();
                 Pa_Sleep(5);
             }
         }
@@ -120,16 +126,18 @@ void    SoundManager::sendLoop(Record *recPtr) {
             rec->stopAudio();
             rec->startAudio();
         }
-        std::vector<std::unique_ptr<SoundManager::User> >::const_iterator   it = _userList.begin();
         EncodedFrame toSend = codec->AudioEncode(rec->RecordedFrames());
         if (toSend.size > 0) {
             babel::Message  message;
             message.setType(babel::Message::MessageType::Audio);
             message.setBody(toSend.frame.data(), toSend.size);
+            _lockSend.lock();
+            std::vector<std::unique_ptr<SoundManager::User> >::const_iterator   it = _userList.begin();
             while (it != _userList.end()) {
                 _server->sendFrameTo((*it)->_ip, message);
                 ++it;
             }
+            _lockSend.unlock();
         }
     }
 }
