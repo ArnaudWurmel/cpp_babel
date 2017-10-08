@@ -17,3 +17,5 @@ Client/moc_QtSocket.cpp
 Client/moc_QtUdpServer.cpp
 Client/moc_User.cpp
 Client/moc_Window.cpp
+Client/cmake-build-debug/
+Client/CMakeFiles/

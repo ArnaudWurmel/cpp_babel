@@ -17,12 +17,12 @@
 class SoundManager : public babel::Logger {
 public:
     struct User {
-        User(std::string const&, std::string const&, Play *);
+        User(std::string const&, std::string const&, IPlay *);
         ~User();
 
         std::string _name;
         std::string _ip;
-        std::unique_ptr<Play>   _play;
+        std::unique_ptr<IPlay>   _play;
     };
 
 public:
@@ -37,7 +37,7 @@ public:
     void    stopPlayingAUser(std::string const&);
 
 private:
-    void    sendLoop(Record *);
+    void    sendLoop(IRecorder *);
     void    getLoop();
 
 private:

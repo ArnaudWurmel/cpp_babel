@@ -3,12 +3,13 @@
 
 #include "AudioSettings.h"
 #include "IAudio.hpp"
+#include "IRecorder.h"
 #include <iostream>
 #include <list>
 #include <portaudio.h>
 #include <mutex>
 
-class Record : public IAudio {
+class Record : public IRecorder {
 private:
     std::mutex  _lock;
   PaStreamParameters inputParameters;
@@ -25,6 +26,8 @@ public:
   std::list<DecodedFrame> Fbuffer;
   Record();
   ~Record();
+
+
   DecodedFrame RecordedFrames();
   bool startAudio();
   bool stopAudio();

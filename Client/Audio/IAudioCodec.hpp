@@ -6,6 +6,7 @@
 class IAudioCodec {
 
 public:
+    virtual ~IAudioCodec() {}
   virtual DecodedFrame AudioDecode(EncodedFrame) = 0;
   virtual EncodedFrame AudioEncode(DecodedFrame) = 0;
 };

@@ -7,8 +7,9 @@
 #include <list>
 #include <mutex>
 #include "portaudio.h"
+#include "IPlay.h"
 
-class Play : public IAudio {
+class Play : public IPlay {
 private:
   PaStreamParameters outputParameters;
   int state;
@@ -22,6 +23,8 @@ public:
                        PaStreamCallbackFlags &);
   PaStream *stream;
   std::list<DecodedFrame> Fbuffer;
+
+
   Play();
   ~Play();
   bool PlayFrames(DecodedFrame);

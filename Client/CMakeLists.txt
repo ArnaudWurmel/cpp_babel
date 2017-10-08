@@ -16,7 +16,7 @@ add_definitions(-DPORTAUDIO_DLL=${PORTAUDIO_DLL})
 add_definitions(-DPORTAUDIO_INCLUDE=$PORTAUDIO_INCLUDE})
 
 # Sources
-set(SOURCE_FILES main.cpp Socket/ISocket.h Socket/ISocket.cpp Socket/endpacked.h Socket/packed.h Socket/Message.h Socket/Message.cpp Socket/QtSocket.cpp Socket/QtSocket.h DataManager/DataManager.cpp DataManager/DataManager.h Exceptions/Exception.cpp Exceptions/Exception.h Logger/Logger.cpp src/Window.h src/Window.cpp src/Channel.cpp src/Channel.h src/User.cpp src/User.h src/SoundManager.cpp src/SoundManager.h Socket/QtUdpServer.cpp Socket/QtUdpServer.h Socket/IServer.h Audio/AudioCodec.cpp Audio/AudioPA.hpp Audio/AudioPA.cpp Audio/AudioPA.hpp Audio/AudioSettings.h Audio/IAudio.hpp Audio/IAudioCodec.hpp Audio/Play.cpp Audio/Play.hpp Audio/Record.cpp Audio/Record.hpp Audio/IPlay.h)
+set(SOURCE_FILES main.cpp Socket/ISocket.h Socket/ISocket.cpp Socket/endpacked.h Socket/packed.h Socket/Message.h Socket/Message.cpp Socket/QtSocket.cpp Socket/QtSocket.h DataManager/DataManager.cpp DataManager/DataManager.h Exceptions/Exception.cpp Exceptions/Exception.h Logger/Logger.cpp src/Window.h src/Window.cpp src/Channel.cpp src/Channel.h src/User.cpp src/User.h src/SoundManager.cpp src/SoundManager.h Socket/QtUdpServer.cpp Socket/QtUdpServer.h Socket/IServer.h Audio/AudioCodec.cpp Audio/AudioPA.hpp Audio/AudioPA.cpp Audio/AudioPA.hpp Audio/AudioSettings.h Audio/IAudio.hpp Audio/IAudioCodec.hpp Audio/Play.cpp Audio/Play.hpp Audio/Record.cpp Audio/Record.hpp Audio/IPlay.h Audio/IPlay.h Audio/IRecorder.h)
 add_executable(Client ${SOURCE_FILES})
 target_link_libraries(Client Qt5::Widgets Qt5::Network)
 

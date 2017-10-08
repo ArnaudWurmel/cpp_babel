@@ -7,16 +7,17 @@
 #include "SoundManager.h"
 #include "../Audio/IAudioCodec.hpp"
 #include "../Audio/IAudio.hpp"
+#include "../Audio/IPlay.h"
 #include "../Audio/Play.hpp"
 #include "../Audio/Record.hpp"
 #include "../Audio/AudioPA.hpp"
 #include "../Audio/AudioCodec.hpp"
 #include "../Socket/QtUdpServer.h"
 
-SoundManager::User::User(std::string const &name, std::string const& ip, Play *play) {
+SoundManager::User::User(std::string const &name, std::string const& ip, IPlay *play) {
     _name = name;
     _ip = ip;
-    _play = std::unique_ptr<Play>(play);
+    _play = std::unique_ptr<IPlay>(play);
 }
 
 SoundManager::User::~User() {
@@ -114,9 +115,9 @@ void    SoundManager::getLoop() {
     }
 }
 
-void    SoundManager::sendLoop(Record *recPtr) {
+void    SoundManager::sendLoop(IRecorder *recPtr) {
     std::unique_ptr<IAudioCodec>    codec(new OpusCodec());
-    std::unique_ptr<Record> rec(recPtr);
+    std::unique_ptr<IRecorder> rec(recPtr);
 
     rec->startAudio();
 
