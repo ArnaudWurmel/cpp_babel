@@ -82,9 +82,8 @@ void    babel::QtSocket::needFlushing() {
     
     message.encodeHeader();
     message.encodeData();
-    std::cout << "Send : " << message.getType() << " " << std::string(reinterpret_cast<char *>(message.getBody()), message.getBodySize()) << std::endl;
     _socket->write(reinterpret_cast<char *>(message.data()), message.totalSize());
-    std::cout << "Writing : " << _socket->waitForBytesWritten(1000) << std::endl;
+    _socket->waitForBytesWritten(1000);
     _writingList.pop();
 }
 

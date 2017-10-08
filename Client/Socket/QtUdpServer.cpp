@@ -22,24 +22,20 @@ void    babel::QtUdpServer::readReady() {
     quint16 port;
     QByteArray  buffer;
 
-    std::cout << "New frame" << std::endl;
     while (this->_socket.hasPendingDatagrams()) {
         buffer.resize(_socket.pendingDatagramSize());
         _socket.readDatagram(buffer.data(), buffer.size(), &sender, &port);
         babel::Message  res;
 
         if (buffer.size() >= babel::Message::headerSize) {
-            std::cout << "New frame" << std::endl;
             std::memcpy(res.data(), buffer.data(), buffer.size());
             if (res.decodeHeader()) {
                 std::memcpy(res.getBody(), buffer.data() + babel::Message::headerSize, buffer.size() - babel::Message::headerSize);
-                std::cout << res.totalSize() << " " << buffer.size() << std::endl;
                 if (res.totalSize() == buffer.size()) {
                     _queueLocker.lock();
                     _frameList.push(std::make_pair(sender.toString().toStdString(), res));
                     _queueLocker.unlock();
                 }
-                std::cout << "Decoded" << std::endl;
             }
         }
     }
@@ -48,7 +44,7 @@ void    babel::QtUdpServer::readReady() {
 void    babel::QtUdpServer::sendFrameTo(std::string const& addr, babel::Message& frame) {
     frame.encodeHeader();
     frame.encodeData();
-    std::cout << "Write : " << _socket.writeDatagram(reinterpret_cast<char *>(frame.data()), frame.totalSize(), QHostAddress(addr.c_str()), 8888) << std::endl;
+    _socket.writeDatagram(reinterpret_cast<char *>(frame.data()), frame.totalSize(), QHostAddress(addr.c_str()), 8888);
 }
 
 bool    babel::QtUdpServer::haveAvailableData() {

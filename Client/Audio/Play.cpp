@@ -37,6 +37,7 @@ int Play::callBackFunction(const void *&inputBuffer, void *&outputBuffer,
   DecodedFrame frame;
   SAMPLE *wptr = (SAMPLE *)outputBuffer;
   int i = 0;
+  std::memset(outputBuffer, 0, framesPerBuffer * NUM_CHANNELS);
   if (this->Fbuffer.size() == 0) {
     return (paContinue);
   }
