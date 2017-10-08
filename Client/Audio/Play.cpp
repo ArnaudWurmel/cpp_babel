@@ -1,3 +1,4 @@
+#include <cstring>
 #include "Play.hpp"
 
 Play::Play() {
@@ -37,6 +38,7 @@ int Play::callBackFunction(const void *&inputBuffer, void *&outputBuffer,
   SAMPLE *wptr = (SAMPLE *)outputBuffer;
   int i = 0;
   if (this->Fbuffer.size() == 0) {
+      std::memset(outputBuffer, 0, framesPerBuffer);
     return (paContinue);
   }
   frame = this->Fbuffer.front();

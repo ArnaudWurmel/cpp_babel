@@ -87,6 +87,7 @@ void    SoundManager::getLoop() {
         if (isRunning() && _server->haveAvailableData()) {
             std::pair<std::string, babel::Message>  frameMessage = _server->getAvailableData();
 
+            std::cout << "Frame acquired" << std::endl;
             if (frameMessage.second.getBodySize() > 0) {
                 EncodedFrame    frame;
                 frame.frame = std::vector<unsigned char>(frameMessage.second.getBody(), frameMessage.second.getBody() + frameMessage.second.getBodySize());
